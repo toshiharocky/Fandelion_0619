@@ -198,32 +198,58 @@
 
 						<!-- Login -->
 						<div class="tab-content" id="tab1" style="display: none;">
-							<form method="post" class="login">
-
+						<form method="POST" action="{{ route('login') }}">
+                        	@csrf
+                        	<form method="post" class="login">
 								<p class="form-row form-row-wide">
-									<label for="username">Username:
+									<label for="email">{{ __('E-Mail Address') }}
 										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="username" id="username" value="" />
+										<input id="email" type="email" class="input-text form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus/>
+
+		                                @error('email')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
 									</label>
 								</p>
 
 								<p class="form-row form-row-wide">
-									<label for="password">Password:
+									<label for="password">{{ __('Password') }}
 										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="password" id="password"/>
+										<input id="password" type="password" class="input-text form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password"/>
+
+		                                @error('password')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
 									</label>
-									<span class="lost_password">
-										<a href="#" >Lost Your Password?</a>
-									</span>
+
+		                                @if (Route::has('password.request'))
+		                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+		                                        {{ __('Forgot Your Password?') }}
+		                                    </a>
+		                                @endif
+									<!--<span class="lost_password">-->
+									<!--	<a href="#" >Lost Your Password?</a>-->
+									<!--</span>-->
 								</p>
 
-								<div class="form-row">
-									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
-									<div class="checkboxes margin-top-10">
-										<input id="remember-me" type="checkbox" name="check">
-										<label for="remember-me">Remember Me</label>
-									</div>
-								</div>
+								<div class="form-group row">
+		                            <div class="col-md-6 offset-md-4">
+		                                <div class="form-check">
+		                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+		                                    <label class="form-check-label" for="remember">
+		                                        {{ __('Remember Me') }}
+		                                    </label>
+		                                </div>
+		                            </div>
+		                        </div>
+                                <button type="submit" class="button border margin-top-5">
+                                    {{ __('Login') }}
+                                </button>
+									
 								
 							</form>
 						</div>
