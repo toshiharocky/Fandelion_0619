@@ -1768,7 +1768,7 @@ em.mm-counter+a.mm-fullsubopen+span {
 
 /* Mobile Navigation */
 .mobile-nav{
-	width: 100%;
+	width: 100vw;
 	position: fixed;
 	bottom: 0; /*下に固定*/
 	flex-direction: row;
