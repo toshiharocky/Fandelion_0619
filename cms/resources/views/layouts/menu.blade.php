@@ -172,10 +172,54 @@
 
 			<!-- Right Side Content / End -->
 			<div class="right-side">
-				<div class="header-widget">
-					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
-					<!-- <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a> -->
-				</div>
+				<!-- Authentication Links -->
+                @guest
+					<div class="header-widget">
+						<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
+						<!-- <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a> -->
+					</div>
+				@else
+					<div class="header-widget">
+					<!-- User Menu -->
+						<div class="user-menu">
+							<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi, {{ Auth::user()->name }} </div>
+							<ul>
+								<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
+								<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
+								<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
+								<li><a href="{{ route('logout') }}"
+	                                   onclick="event.preventDefault();
+	                                                 document.getElementById('logout-form').submit();">
+	                                    <i class="sl sl-icon-power"></i>{{ __('Logout') }}</a></li>
+	
+	                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+	                                @csrf
+	                            </form>
+							</ul>
+						</div>
+					</div>
+					
+					
+					<!--<div class="header-widget">-->
+					<!--	<li class="nav-item dropdown">-->
+     <!--                       <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>-->
+     <!--                           {{ Auth::user()->name }} <span class="caret"></span>-->
+     <!--                       </a>-->
+
+     <!--                       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">-->
+     <!--                           <a class="dropdown-item" href="{{ route('logout') }}"-->
+     <!--                              onclick="event.preventDefault();-->
+     <!--                                            document.getElementById('logout-form').submit();">-->
+     <!--                               {{ __('Logout') }}-->
+     <!--                           </a>-->
+
+     <!--                           <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">-->
+     <!--                               @csrf-->
+     <!--                           </form>-->
+     <!--                       </div>-->
+     <!--                   </li>-->
+     <!--               </div>-->
+                @endguest
 			</div>
 			<!-- Right Side Content / End -->
 
