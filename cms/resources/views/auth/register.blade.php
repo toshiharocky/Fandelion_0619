@@ -97,7 +97,7 @@
 
                             <div class="col-md-6">
                                 <select id="gender" class="form-control @error('gender') is-invalid @enderror" name="gender">
-                                    <option hidden>選択してください</option>
+                                    <option hidden value=null>選択してください</option>
                                     <option value="1">男性</option>
                                     <option value="2">女性</option>
                                     <option value="3">その他</option>

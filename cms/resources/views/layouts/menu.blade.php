@@ -231,37 +231,105 @@
 						<!-- Register -->
 						<div class="tab-content" id="tab2" style="display: none;">
 
-							<form method="post" class="register">
+							<form method="POST" action="{{ route('register') }}" class="register">
+                        		@csrf
 								
-							<p class="form-row form-row-wide">
-								<label for="username2">Username:
-									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="username" id="username2" value="" />
-								</label>
-							</p>
+								<input id="memstatus_id" type="hidden" name="memstatus_id" value="0">
 								
-							<p class="form-row form-row-wide">
-								<label for="email2">Email Address:
-									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="email2" value="" />
-								</label>
-							</p>
+								<p class="form-row form-row-wide">
+									<label for="name">{{ __('Name') }}
+										<i class="im im-icon-Male"></i>
+										<input id="name" type="text" class="input-text form-control @error('name') is-invalid @enderror" 
+										name="name" value="{{ old('name') }}" required autocomplete="name" autofocus/>
 
-							<p class="form-row form-row-wide">
-								<label for="password1">Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password1" id="password1"/>
-								</label>
-							</p>
+		                                @error('name')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</label>
+								</p>
+									
+								<p class="form-row form-row-wide">
+									<label for="email">{{ __('E-Mail Address') }}
+										<i class="im im-icon-Mail"></i>
+										<input id="email" type="email" class="input-text form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"/>
 
-							<p class="form-row form-row-wide">
-								<label for="password2">Repeat Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="password2"/>
-								</label>
-							</p>
+		                                @error('email')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</label>
+								</p>
+	
+								<p class="form-row form-row-wide">
+									<label for="password">{{ __('Password') }}
+										<i class="im im-icon-Lock-2"></i>
+										<input id="password" type="password" class="input-text form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"/>
 
-							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+		                                @error('password')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</label>
+								</p>
+	
+								<p class="form-row form-row-wide">
+									<label for="password-confirm" >{{ __('Confirm Password') }}
+										<i class="im im-icon-Lock-2"></i>
+										<input id="password-confirm" type="password" class="input-text form-control" name="password_confirmation" required autocomplete="new-password"/>
+									</label>
+								</p>
+	
+								<p class="form-row form-row-wide">
+									<label for="phone_num">{{ __('Phone_num') }}
+										<i class="im im-icon-Lock-2"></i>
+										<input id="phone_num" type="text" class="input-text form-control @error('phone_num') is-invalid @enderror" required name="phone_num" value="{{ old('phone_num') }}"/>
+
+		                                @error('phone_num')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</label>
+								</p>
+	
+								<p class="form-row form-row-wide">
+									<label for="birthday">{{ __('Birthday') }}
+										<i class="im im-icon-Lock-2"></i>
+										<input id="birthday" type="date" class="input-text form-control @error('birthday') is-invalid @enderror" required name="birthday"
+                                       value="2000-01-01" min="1920-01-01" max="2020-12-31"/>
+
+		                                @error('birthday')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</label>
+								</p>
+	
+								<p class="form-row form-row-wide">
+									<label for="gender">{{ __('Gender') }}
+										<!--<i class="im im-icon-Lock-2"></i>-->
+		                                <select id="gender" class="form-control @error('gender') is-invalid @enderror" required name="gender">
+		                                    <option value="" style="display: none;">選択してください</option>
+		                                    <option value="1">男性</option>
+		                                    <option value="2">女性</option>
+		                                    <option value="3">その他</option>
+		                                </select>
+		
+		                                @error('gender')
+		                                    <span class="invalid-feedback" role="alert">
+		                                        <strong>{{ $message }}</strong>
+		                                    </span>
+		                                @enderror
+									</label>
+								</p>
+	
+								
+								<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
 	
 							</form>
 						</div>
