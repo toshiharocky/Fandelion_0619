@@ -12,9 +12,9 @@
 */
 
 // search.blade.phpを表示
-Route::get('/', function () {
-    return view('search');
-});
+Route::get('/',  'HomeController@index');
+
+
 
 // add_listing.blade.phpを表示
 Route::get('/add_listing', function () {

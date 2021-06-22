@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mem_statuses_id', 'phone_num', 'birthday', 'gender',
+        'name', 'email', 'password', 'memstatus_id', 'phone_num', 'birthday', 'gender',
     ];
 
     /**
@@ -39,6 +39,6 @@ class User extends Authenticatable
     
     // MemStatusesテーブルとのリレーション （従テーブル側）
      public function user() {
-        return $this->belongsTo('App\MemStatuses');
+        return $this->belongsTo('App\MemStatus');
     }
 }
