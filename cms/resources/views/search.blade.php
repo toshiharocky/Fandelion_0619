@@ -429,7 +429,7 @@
 	<!-- Mobile Navigation -->
 	<nav class="mobile-nav mmenu-trigger">
 		<div class="mmenu_icon">
-			<a href="#" class="mmenus">
+			<a href="/" class="mmenus">
 				<span class="material-icons-outlined " style="font-size: 42px; margin: auto; color: black; font-weight: bold;">
 					search
 				</span>
@@ -534,10 +534,3 @@
 	</div>
 	<!-- Style Switcher / End -->
 @endpush
-
-
-</body>
-</html>
-
-
-
