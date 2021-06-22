@@ -186,7 +186,7 @@
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
-								<li><a href="/addlisting"><i class="fa fa-calendar-check-o"></i> Add Listing</a></li>
+								<li><a href="/add_listing"><i class="fa fa-calendar-check-o"></i> Add Listing</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">

@@ -12646,7 +12646,7 @@ span.like-icon {
 	position: relative;
 	z-index: 10;
 	height: 100%;
-	margin-left: 260px;
+	/*margin-left: 260px;*/
 }
 
 .dashboard-nav,

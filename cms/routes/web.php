@@ -11,8 +11,14 @@
 |
 */
 
+// search.blade.phpを表示
 Route::get('/', function () {
     return view('search');
+});
+
+// add_listing.blade.phpを表示
+Route::get('/add_listing', function () {
+    return view('add_listing');
 });
 
 Auth::routes();
@@ -21,3 +27,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // ユーザー登録
 Route::post('auth/register','Auth\RegisterController@create');
+
+// ジム登録
+Route::post('/add_gym','GymController@store');
