@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class GymStatuses extends Model
+class GymStatus extends Model
 {
     //
 }

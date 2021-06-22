@@ -28,12 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $user_memstatus_id = Auth::user()->memstatus_id;
-        $status_name = MemStatus::find($user_memstatus_id)->status_name;
-        // dd($status_name);
         
-        return view('search',[
-            'status_name'=>$status_name
-            ]);
+        //
     }
 }

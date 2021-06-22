@@ -14,7 +14,7 @@ class CreateGymStatusesTable extends Migration
     public function up()
     {
         Schema::create('gym_statuses', function (Blueprint $table) {
-            $table->integer('id');
+            $table->bigIncrements('id');
             $table->string('status_name');
             $table->timestamps();
         });

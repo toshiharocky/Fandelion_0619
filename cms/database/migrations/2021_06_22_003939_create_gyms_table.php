@@ -16,7 +16,7 @@ class CreateGymsTable extends Migration
         Schema::create('gyms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('gymStatus_id');
+            $table->integer('gymstatus_id');
             $table->string('title');
             $table->text('gym_desc');
             $table->integer('gymType_id');

@@ -12,7 +12,7 @@
 */
 
 // search.blade.phpを表示
-Route::get('/',  'HomeController@index');
+Route::get('/', 'MemStatusController@index');
 
 
 
