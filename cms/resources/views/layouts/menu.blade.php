@@ -304,7 +304,7 @@
 							<form method="POST" action="{{ route('register') }}" class="register">
                         		@csrf
 								
-								<input id="memstatus_id" type="hidden" name="memstatus_id" value="0">
+								<input id="mem_statuses_id" type="hidden" name="mem_statuses_id" value="1">
 								
 								<p class="form-row form-row-wide">
 									<label for="name">{{ __('Name') }}

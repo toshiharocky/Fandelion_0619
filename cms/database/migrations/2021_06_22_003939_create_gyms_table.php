@@ -22,7 +22,7 @@ class CreateGymsTable extends Migration
             $table->integer('gymType_id');
             $table->integer('superHost_flg');
             $table->integer('review_amount');
-            $table->integer('review_average');
+            $table->float('review_average');
             $table->integer('guest_limit');
             $table->timestamps();
         });
