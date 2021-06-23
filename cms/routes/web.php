@@ -16,10 +16,13 @@ Route::get('/', 'MainController@index');
 
 
 
-// add_listing.blade.phpを表示
-Route::get('/add_listing', function () {
-    return view('add_listing');
+// ログインユーザーのみadd_gym.blade.phpを表示
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/add_gym', 'AddGymController@index');
 });
+
+        
+// 
 
 Auth::routes();
 

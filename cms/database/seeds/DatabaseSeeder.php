@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GymStatusTableSeeder::class);
         $this->call(MemStatusTableSeeder::class);
         $this->call(GymTableSeeder::class);
+        $this->call(UserTableSeeder::class);
     }
 }

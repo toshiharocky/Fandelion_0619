@@ -37,13 +37,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    // MemStatusesテーブルとのリレーション （従テーブル側）
-     public function user() {
-        return $this->belongsTo('App\MemStatus');
-    }
     
-    // Gymテーブルとのリレーション （主テーブル側）
-     public function user_gym() {
-        return $this->hasMany('App\Gym');
-    }
+    
 }

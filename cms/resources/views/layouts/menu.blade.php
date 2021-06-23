@@ -36,7 +36,7 @@
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="/index" style="color: #2B4393; font-size:52px;">Fandelion</a>
+					<a href="/" style="color: #2B4393; font-size:52px;">Fandelion</a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -177,7 +177,6 @@
                 @guest
 					<div class="header-widget">
 						<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
-						<!-- <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a> -->
 					</div>
 				@else
 					<div class="header-widget">
@@ -187,7 +186,7 @@
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
-								<li><a href="/add_listing"><i class="fa fa-calendar-check-o"></i> Add Listing</a></li>
+								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i> Add Gym</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">
