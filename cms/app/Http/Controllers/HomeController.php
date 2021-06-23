@@ -9,6 +9,7 @@ use Auth;//この行を上に追加
 use Validator;//この行を上に追加
 
 
+
 class HomeController extends Controller
 {
     /**
@@ -29,6 +30,6 @@ class HomeController extends Controller
     public function index()
     {
         
-        //
+        
     }
 }

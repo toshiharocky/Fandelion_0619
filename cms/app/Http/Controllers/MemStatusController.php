@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\User;//この行を上に追加
 use Auth;//この行を上に追加
 use Validator;//この行を上に追加
+use App\GymStatus;
+use App\Gym;
 
 class MemStatusController extends Controller
 {
@@ -20,12 +22,21 @@ class MemStatusController extends Controller
         //
         
         if (Auth::check()){
+            $user_name =  Auth::user()->name;
             $user_memstatus_id = Auth::user()->memstatus_id;
             $status_name = MemStatus::find($user_memstatus_id)->status_name;
+            
+            //ここからがテスト
+            // $gym_id = Gym::find(3)->gymstatus_id;
+            // $gym_status_name = GymStatus::find($gym_id)->status_name;
+            // dd($gym_status_name);
+            //ここまでがテスト
             // dd($status_name);
             
             return view('search',[
-                'status_name'=>$status_name
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                // 'gym_status_name'=>$gym_status_name,
                 ]);
             } else{
             return view('search');
