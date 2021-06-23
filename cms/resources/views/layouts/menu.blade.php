@@ -183,7 +183,7 @@
 					<div class="header-widget">
 					<!-- User Menu -->
 						<div class="user-menu">
-							<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>Hi, {{$user_name}} ({{$gym_title}}) </div>
+							<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>{{$user_name}}  </div>
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
@@ -305,7 +305,7 @@
 							<form method="POST" action="{{ route('register') }}" class="register">
                         		@csrf
 								
-								<input id="memstatus_id" type="hidden" name="memstatus_id" value="1">
+								<!--<input id="memstatus_id" type="hidden" name="memstatus_id" value="1">-->
 								
 								<p class="form-row form-row-wide">
 									<label for="name">{{ __('Name') }}
