@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\MemStatus;
 use Illuminate\Http\Request;
 use App\User;//この行を上に追加
@@ -23,11 +24,19 @@ class MainController extends Controller
         if (Auth::check()){
             $user = Auth::user()->id;
             // dd($user);
-            $gym_title = Gym::where('user_id',$user)->first()->title;
+            // $gym_title = Gym::where('user_id',$user)->first()->title;
+            $gym_title = DB::table('gyms')
+                            ->join('users', 'gyms.user_id', '=', 'users.id')
+                            // ->select('user_id','email','title', 'gym_desc')
+                            ->where('user_id', $user)
+                            ->first()->email;
             // dd($gym_title);
-            $user_name =  Auth::user()->name;
-            $user_memstatus_id = Auth::user()->memstatus_id;
-            $status_name = MemStatus::find($user_memstatus_id)->status_name;
+            // $user_name =  Auth::user()->name;
+            // $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_name = DB::table('users')
+                                ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                ->select('name', 'status_name')
+                                ->get();
             
             //ここからがテスト
             // $gym_id = Gym::find(3)->gymstatus_id;
