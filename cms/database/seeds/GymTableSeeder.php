@@ -15,7 +15,7 @@ class GymTableSeeder extends Seeder
         [
             'user_id' => '1',
             'gymstatus_id' => '1',
-            'title' => 'gymTest',
+            'title' => 'gymTest1',
             'gym_desc' => 'this is a test',
             'gymType_id' => '1',
             'superHost_flg' => '0',
@@ -26,7 +26,7 @@ class GymTableSeeder extends Seeder
         [
             'user_id' => '2',
             'gymstatus_id' => '4',
-            'title' => 'gymTest',
+            'title' => 'gymTest2',
             'gym_desc' => 'this is a test',
             'gymType_id' => '1',
             'superHost_flg' => '0',
@@ -37,7 +37,7 @@ class GymTableSeeder extends Seeder
         [
             'user_id' => '3',
             'gymstatus_id' => '7',
-            'title' => 'gymTest',
+            'title' => 'gymTest3',
             'gym_desc' => 'this is a test',
             'gymType_id' => '1',
             'superHost_flg' => '0',

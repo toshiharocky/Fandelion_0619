@@ -10,4 +10,9 @@ class Gym extends Model
      public function user() {
         return $this->belongsTo('App\GymStatus');
     }
+    
+     // Userテーブルとのリレーション （従テーブル側）
+     public function user_gym() {
+        return $this->belongsTo('App\User');
+    }
 }

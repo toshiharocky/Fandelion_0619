@@ -10,7 +10,7 @@ use Validator;//この行を上に追加
 use App\GymStatus;
 use App\Gym;
 
-class MemStatusController extends Controller
+class MainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +20,31 @@ class MemStatusController extends Controller
     public function index()
     {
         //
+        if (Auth::check()){
+            $user = Auth::user()->id;
+            // dd($user);
+            $gym_title = Gym::where('user_id',$user)->first()->title;
+            // dd($gym_title);
+            $user_name =  Auth::user()->name;
+            $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_name = MemStatus::find($user_memstatus_id)->status_name;
+            
+            //ここからがテスト
+            // $gym_id = Gym::find(3)->gymstatus_id;
+            // $gym_status_name = GymStatus::find($gym_id)->status_name;
+            // dd($gym_status_name);
+            //ここまでがテスト
+            // dd($status_name);
+            
+            return view('search',[
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                'gym_title'=>$gym_title,
+                // 'gym_status_name'=>$gym_status_name,
+                ]);
+            } else{
+            return view('search');
+            }
     }
 
     /**
@@ -46,10 +71,10 @@ class MemStatusController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MemStatus  $memStatus
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MemStatus $memStatus)
+    public function show($id)
     {
         //
     }
@@ -57,10 +82,10 @@ class MemStatusController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MemStatus  $memStatus
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(MemStatus $memStatus)
+    public function edit($id)
     {
         //
     }
@@ -69,10 +94,10 @@ class MemStatusController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MemStatus  $memStatus
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MemStatus $memStatus)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -80,10 +105,10 @@ class MemStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MemStatus  $memStatus
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MemStatus $memStatus)
+    public function destroy($id)
     {
         //
     }
