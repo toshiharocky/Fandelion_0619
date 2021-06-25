@@ -22,7 +22,12 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
         
-// 
+
+// ログインユーザーのみgym登録処理が可能
+Route::group(['middleware' => 'auth'], function() {
+   Route::post('/gym_register', 'GymController@store');
+});
+
 
 Auth::routes();
 

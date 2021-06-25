@@ -16,14 +16,14 @@ class CreateGymsTable extends Migration
         Schema::create('gyms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id');
-            $table->integer('gymstatus_id');
-            $table->string('title');
+            $table->integer('gymstatus_id')->default(1);
+            $table->string('gym_title');
             $table->text('gym_desc');
             $table->integer('gymType_id');
-            $table->integer('superHost_flg');
-            $table->integer('review_amount');
-            $table->float('review_average');
-            $table->integer('guest_limit');
+            $table->integer('superHost_flg')->default(0);
+            $table->integer('review_amount')->default(0);
+            $table->float('review_average')->default(0);
+            $table->integer('guest_limit')->default(1);
             $table->timestamps();
         });
     }

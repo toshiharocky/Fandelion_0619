@@ -43,7 +43,7 @@ class MainController extends Controller
             $gym_status_name = DB::table('users')
                                 ->join('gyms', 'users.id', '=', 'gyms.user_id')
                                 ->where('user_id', $user)
-                                // ->select('name', 'title')
+                                // ->select('name', 'gym_title')
                                 ->first()->gymstatus_id;
             // dd($gym_status_name);
             //ここまでがテスト
