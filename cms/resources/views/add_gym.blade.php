@@ -144,11 +144,15 @@
 									<!--</div>-->
 	
 									<!-- Zip-Code -->
-									<div class="col-md-6">
-										<!--<h5>Zip-Code</h5>-->
-										〒<input type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');"><br>
-										<input type="text" name="pref01" size="20"><br>
-										<input type="text" name="addr01" size="60">
+									<div class="col-md-6" style="display:flex;flex-direction:row;width: 100%;">
+										<div style="width:50%; padding:auto;">
+											<!--<h5>Zip-Code</h5>-->
+											〒<input class="col-md-3" type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');"><br>
+											<input class="col-md-3" type="text" name="pref01" size="20"><br>
+											<input class="col-md-6" id="address" type="text" name="addr01" size="60">
+    										<input id="mapbutton" type="button" value="Encode" onclick="codeAddress()">
+										</div>
+										<div id="map"  style="width:50%; height:300px;"></div>
 									</div>
 	
 								</div>
@@ -1226,7 +1230,50 @@
 	<!-- Content / End -->
 @push('js')
     <script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-    <script src="http://maps.google.com/maps/api/js?key=AIzaSyC7PmDmzo3mhY4fj8-BJKvNtI4eyidWRio&language=ja"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&language=ja"></script>
+    
+    <script>
+		
+		var geocoder;
+		var map;
+		geocoder = new google.maps.Geocoder();
+		
+		var LatLng = new google.maps.LatLng(35.6811673, 139.7670516);
+		var mapOptions = {
+		 zoom: 18,      //地図の縮尺値
+		 center: LatLng,    //地図の中心座標
+		 mapTypeId: 'roadmap'   //地図の種類
+		};
+	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		
+		
+		function codeAddress() {
+		    var address = document.getElementById('address').value;
+		    console.log(address);
+		    geocoder.geocode( { 'address': address}, function(results, status) {
+		      if (status == 'OK') {
+		        map.setCenter(results[0].geometry.location);
+		        var marker = new google.maps.Marker({
+		            map: map,
+		            position: results[0].geometry.location,
+	            	draggable: true,
+		        });
+		        
+		      } else {
+		        alert('Geocode was not successful for the following reason: ' + status);
+		      }
+		      
+		      // Event
+				marker.addListener( "position_changed", function () {
+					var pos = marker.getPosition();
+					
+					console.log( pos ) ;
+					
+				} ) ;
+		  })};
+		  
+		  
+	  </script>
 @endpush
 @endsection
 	
