@@ -40,11 +40,11 @@ class MainController extends Controller
             
             //ここからがテスト
             // $gym_id = Gym::find(3)->gymstatus_id;
-            $gym_status_name = DB::table('users')
-                                ->join('gyms', 'users.id', '=', 'gyms.user_id')
-                                ->where('user_id', $user)
-                                // ->select('name', 'gym_title')
-                                ->first()->gymstatus_id;
+            // $gym_status_name = DB::table('users')
+            //                     ->join('gyms', 'users.id', '=', 'gyms.user_id')
+            //                     ->where('user_id', $user)
+            //                     // ->select('name', 'gym_title')
+            //                     ->first()->gymstatus_id;
             // dd($gym_status_name);
             //ここまでがテスト
             // dd($gym_status_name);

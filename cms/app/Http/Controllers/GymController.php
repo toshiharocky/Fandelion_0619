@@ -43,21 +43,61 @@ class GymController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        // 画像のバリデーション
+    {   
         
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        
+        
+        
+        // dd($user);
+        // dd($request->all());
         
         // ジム登録情報のバリデーション
+        $validator = Validator::make($request->all(), [
+            // 'user_id' => 'required|integer',
+            // 'gymStatus_id' => 'required|integer',
+            'gym_title' => 'required|string|max:255',
+            'gym_desc' => 'required|string',
+            'gymType_id' => 'required|integer',
+            'zip01' => 'required|string',
+            'pref01' => 'required|string',
+            'addr01' => 'required|string',
+            'longitude' => 'required|double',
+            'latitude' => 'required|double',
+            'area' => 'required|integer',
+            'guest_gender' => 'required|integer',
+            'guest_limit' =>  'required|integer|max:255',
+            'images.*' => 'required|file|image|max:2048', 
+            // 'superHost_flg' => 'required|integer',
+            // 'review_amount' =>  'required|integer|max:255',
+            // 'review_average' =>  'required|integer|max:255',
+        ]);
         
+        //バリデーション:エラー
+        if ($validator->fails()) {
+            return redirect('/add_gym')
+                ->withInput()
+                ->withErrors($validator);
+        }
+        // 画像のバリデーション
+        // $validator = $request->validate( [
+        //     'images.*' => 'required|file|image|max:2048', 
+        // ]);
+        
+        // //バリデーション:エラー
+        // if ($validator->fails()) {
+        //     return redirect('/search')
+        //         ->withInput()
+        //         ->withErrors($validator);
+        // }
         
         // 画像ファイル取得
         // $file = $request->all();
         $images = $request->file('images');
         // dd($image);
     
-        // ログインユーザー取得
-        $user = Auth::user()->id;
-        // dd($user);
+        
     
         if ( !empty($images) ) {
     
@@ -67,14 +107,21 @@ class GymController extends Controller
              $gyms->gym_title = $request->gym_title;
              $gyms->gym_desc = $request->gym_desc;
              $gyms->gymType_id = $request->gymType_id;
-            //  $gyms->guest_limit = $request->guest_limit;
+             $gyms->zip_code = $request->zip_code;
+             $gyms->pref = $request->pref01;
+             $gyms->addr = $request->addr01;
+             $gyms->area = $request->area;
+             $gyms->guest_gender = $request->guest_gender;
+             $gyms->guest_limit = $request->guest_limit;
              $gyms->save(); 
              $gym_id = $gyms->id;
-            //  dd($gym_id);
+            //  dd($gyms);
              
             // dd($image);
             
             foreach($images as $image){
+                    
+                    
                     // ファイルの拡張子取得
                     $ext = $image->guessExtension();
                     //ファイル名を生成
@@ -104,7 +151,7 @@ class GymController extends Controller
             return redirect('/home');
         }
     
-        return redirect('/add_gym');
+        return redirect('/');
         }
 
     /**

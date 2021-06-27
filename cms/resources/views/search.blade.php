@@ -471,10 +471,6 @@
 	</nav>
 	<!-- Mobile Navigation End-->
 	<!-- Wrapper / End -->
-@endsection
-	
-	
-	
 	
 @push('js')
 	<!-- Booking Widget - Quantity Buttons -->
@@ -501,7 +497,7 @@
 		}
 	}
 	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?libraries=places&callback=initAutocomplete"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7PmDmzo3mhY4fj8-BJKvNtI4eyidWRio&callback=initAutocomplete"></script>
 	
 	<!-- Style Switcher
 	================================================== -->
@@ -534,3 +530,7 @@
 	</div>
 	<!-- Style Switcher / End -->
 @endpush
+@endsection
+	
+	
+	
