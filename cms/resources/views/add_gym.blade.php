@@ -144,15 +144,19 @@
 									<!--</div>-->
 	
 									<!-- Zip-Code -->
-									<div class="col-md-6" style="display:flex;flex-direction:row;width: 100%;">
-										<div style="width:50%; padding:auto;">
+									<div class="col-md-6 add_gym_map">
+										<div class="add_gym_map_parts" >
 											<!--<h5>Zip-Code</h5>-->
 											〒<input class="col-md-3" type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');"><br>
 											<input class="col-md-3" type="text" name="pref01" size="20"><br>
 											<input class="col-md-6" id="address" type="text" name="addr01" size="60">
     										<input id="mapbutton" type="button" value="Encode" onclick="codeAddress()">
 										</div>
-										<div id="map"  style="width:50%; height:300px;"></div>
+										<div class="add_gym_map_parts">
+											<h5>ジムの所在地へドラッグしてください <i class="tip" ></i></h5>
+											<div id="map"  style="width:100%; height:300px;"></div>
+											<div id="map_place"></div>
+										</div>
 									</div>
 	
 								</div>
@@ -299,7 +303,7 @@
 													<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>
 													<div class="fm-close"><a class="delete" ><i class="fa fa-remove"></i></a></div>
 													<div class="fm-input ">
-														<input list="equipment-list" name="equipment_name" type="text" placeholder="選択肢にない場合は直接入力してください" />
+														<input list="equipment-list" name="equipment_name[]" type="text" placeholder="選択肢にない場合は直接入力してください" />
 														<datalist id="equipment-list">
 															<option value="ダンベル">ダンベル</option>
 															<option value="バーベル">バーベル</option>
@@ -310,14 +314,14 @@
 															<option value="エアロバイク">エアロバイク</option>
 														</datalist>
 													</div>
-													<div class="fm-input "><input name="min_weight" placeholder="Min Weight"/></div>
+													<div class="fm-input "><input name="min_weight[]" placeholder="Min Weight"/></div>
 													<p style="display: inline-block; vertical-align: bottom; margin:auto;">kg ~</p>
-													<div class="fm-input "><input name="max_weight" placeholder="Max Weight"/></div>
+													<div class="fm-input "><input name="max_weight[]" placeholder="Max Weight"/></div>
 													<p style="display: inline-block; vertical-align: bottom; margin:auto;">kg</p>
 													<!--<div class="fm-input "><input type="text" placeholder="Price" data-unit="USD" /></div>-->
 												</td>
 												<td>
-													<div class="fm-input "><input name="note" type="text" placeholder="備考"/></div>
+													<div class="fm-input "><input name="note[]" type="text" placeholder="備考"/></div>
 												</td>
 											</tr>
 										</table>
@@ -1249,7 +1253,10 @@
 		
 		function codeAddress() {
 		    var address = document.getElementById('address').value;
-		    console.log(address);
+		    var pos = "";
+			var lng = "";
+			var lat = "";
+			
 		    geocoder.geocode( { 'address': address}, function(results, status) {
 		      if (status == 'OK') {
 		        map.setCenter(results[0].geometry.location);
@@ -1258,18 +1265,38 @@
 		            position: results[0].geometry.location,
 	            	draggable: true,
 		        });
+				pos = marker.getPosition();
+				lng_str = pos.lng();
+				lng = parseFloat(lng_str);
+				lat_str = pos.lat();
+				lat = parseFloat(lat_str);
+				
+				console.log(lng);
+				console.log(lat);
+				$("#map_place").append(
+					`<input name="longitude" type="hidden" value="${lng}">
+					<input name="latitude" type="hidden" value="${lat}">`
+				);
 		        
 		      } else {
 		        alert('Geocode was not successful for the following reason: ' + status);
 		      }
 		      
-		      // Event
-				marker.addListener( "position_changed", function () {
-					var pos = marker.getPosition();
-					
-					console.log( pos ) ;
-					
-				} ) ;
+	      // Event
+			marker.addListener( "position_changed", function () {
+				pos = marker.getPosition();
+				lng_str = pos.lng();
+				lng = parseFloat(lng_str)
+				lat_str = pos.lat();
+				lat = parseFloat(lat_str);
+				console.log(lng);
+				console.log(lat);
+				$("#map_place").empty();
+				$("#map_place").append(
+					`<input name="longitude" type="hidden" value="${lng}">
+					<input name="latitude" type="hidden" value="${lat}">`
+				);
+			})
 		  })};
 		  
 		  

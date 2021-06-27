@@ -11,6 +11,7 @@ use Validator;//この行を上に追加
 use App\GymStatus;
 use App\Gym;
 use App\GymImage;
+use App\Equipment;
 use Illuminate\Support\Str;
 
 class GymController extends Controller
@@ -51,7 +52,10 @@ class GymController extends Controller
         
         
         // dd($user);
-        // dd($request->all());
+        $all = $request->min_weight;
+        $datatype = gettype($request->longitude);
+        // dd($datatype);
+        // dd($all);
         
         // ジム登録情報のバリデーション
         $validator = Validator::make($request->all(), [
@@ -63,15 +67,16 @@ class GymController extends Controller
             'zip01' => 'required|string',
             'pref01' => 'required|string',
             'addr01' => 'required|string',
-            'longitude' => 'required|double',
-            'latitude' => 'required|double',
+            'longitude' => 'required|numeric',
+            'latitude' => 'required|numeric',
             'area' => 'required|integer',
             'guest_gender' => 'required|integer',
             'guest_limit' =>  'required|integer|max:255',
             'images.*' => 'required|file|image|max:2048', 
-            // 'superHost_flg' => 'required|integer',
-            // 'review_amount' =>  'required|integer|max:255',
-            // 'review_average' =>  'required|integer|max:255',
+            'equipment_name.*' => 'required|string',
+            'min_weight.*' => 'nullable|numeric',
+            'max_weight.*' => 'nullable|numeric',
+            'note.*' => 'nullable|string',
         ]);
         
         //バリデーション:エラー
@@ -96,7 +101,7 @@ class GymController extends Controller
         // $file = $request->all();
         $images = $request->file('images');
         // dd($image);
-    
+        
         
     
         if ( !empty($images) ) {
@@ -107,16 +112,31 @@ class GymController extends Controller
              $gyms->gym_title = $request->gym_title;
              $gyms->gym_desc = $request->gym_desc;
              $gyms->gymType_id = $request->gymType_id;
-             $gyms->zip_code = $request->zip_code;
+             $gyms->zip_code = $request->zip01;
              $gyms->pref = $request->pref01;
              $gyms->addr = $request->addr01;
+             $gyms->longitude = $request->longitude;
+             $gyms->latitude = $request->latitude;
              $gyms->area = $request->area;
              $gyms->guest_gender = $request->guest_gender;
              $gyms->guest_limit = $request->guest_limit;
              $gyms->save(); 
              $gym_id = $gyms->id;
             //  dd($gyms);
-             
+            
+            
+            $equipment_amount = count($request->equipment_name);
+            // Eloquentモデルで設備情報をequipmentテーブルに登録
+            for($i = 0; $i < $equipment_amount; $i++){
+                $equipments = new equipment;
+                $equipments->gym_id = $gym_id;
+                $equipments->equipment_name = $request->equipment_name[$i];
+                $equipments->min_weight = $request->min_weight[$i];
+                $equipments->max_weight = $request->max_weight[$i];
+                $equipments->note = $request->note[$i];
+                $equipments->save();
+            }
+            
             // dd($image);
             
             foreach($images as $image){

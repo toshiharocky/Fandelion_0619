@@ -1795,6 +1795,7 @@ em.mm-counter+a.mm-fullsubopen+span {
 	color: #BFBFBF;
 }
 
+
 @media only screen and (max-width: 1024px) {
 
 	/* Header Responsive Styles */
@@ -1860,8 +1861,36 @@ em.mm-counter+a.mm-fullsubopen+span {
 
 	#header-container.header-style-2 .header-widget { width: calc(100%);  border-top: 1px solid #e0e0e0; padding-top: 30px; }
 
+	
+
 }
 
+
+	
+	
+	@media (min-width: 991px) {
+		.add_gym_map {
+			display:flex;
+			flex-direction:row;
+			width: 100%;
+		}
+		
+		.add_gym_map_parts {
+			width:50%; 
+		}
+	}
+	
+	@media (max-width: 991px) {
+		.add_gym_map {
+			display:flex;
+			flex-direction:column;
+			width: 100%;
+		}
+		
+		.add_gym_map_parts {
+			width:100%; 
+		}
+	}
 
 /* ---------------------------------- */
 /* Highlighted Categories

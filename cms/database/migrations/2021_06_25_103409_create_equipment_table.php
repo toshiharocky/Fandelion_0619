@@ -17,9 +17,9 @@ class CreateEquipmentTable extends Migration
             $table->bigIncrements('id');
             $table->integer('gym_id');
             $table->string('equipment_name');
-            $table->integer('min_weight');
-            $table->integer('max_weight');
-            $table->text('note');
+            $table->float('min_weight')->nullable();
+            $table->float('max_weight')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

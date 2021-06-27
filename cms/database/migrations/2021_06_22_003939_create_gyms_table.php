@@ -23,7 +23,7 @@ class CreateGymsTable extends Migration
             $table->string('zip_code');
             $table->string('pref');
             $table->string('addr');
-            $table->double('longitude'); //緯度
+            $table->double ('longitude'); //緯度
             $table->double('latitude'); //経度
             $table->integer('area');
             $table->integer('guest_gender');
