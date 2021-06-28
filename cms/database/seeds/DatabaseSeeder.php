@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GymTypeTableSeeder::class);
         $this->call(GymAreaTableSeeder::class);
         $this->call(GuestGenderTableSeeder::class);
+        $this->call(CancelPolicyTableSeeder::class);
     }
 }

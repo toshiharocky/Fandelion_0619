@@ -63,6 +63,7 @@ class GymController extends Controller
             // 'gymStatus_id' => 'required|integer',
             'gym_title' => 'required|string|max:255',
             'gym_desc' => 'required|string',
+            'cancel_policy_id' => 'required|string',
             'gymType_id' => 'required|integer',
             'zip01' => 'required|string',
             'pref01' => 'required|string',
@@ -111,6 +112,7 @@ class GymController extends Controller
              $gyms->user_id = $user;
              $gyms->gym_title = $request->gym_title;
              $gyms->gym_desc = $request->gym_desc;
+             $gyms->cancel_policy_id = $request->cancel_policy_id;
              $gyms->gymType_id = $request->gymType_id;
              $gyms->zip_code = $request->zip01;
              $gyms->pref = $request->pref01;

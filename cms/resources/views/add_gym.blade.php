@@ -196,6 +196,15 @@
 							<div class="form">
 								<h5>ジムの説明</h5>
 								<textarea name="gym_desc" class="WYSIWYG" name="summary" cols="40" rows="3" spellcheck="true"></textarea>
+								<h5>キャンセルポリシー</h5>
+								<input type="radio" name="cancel_policy_id" value="1" checked>柔軟
+								<p>チェックイン（確認メールに記載の日時）の1時間前までは無料でキャンセルできます。</p>
+								<input type="radio" name="cancel_policy_id" value="2">普通
+								<p>チェックイン（確認メールに記載の日時）の24時間前までは無料でキャンセルできます。</p>
+								<input type="radio" name="cancel_policy_id" value="3">厳格
+								<p>チェックイン（確認メールに記載の日時）の3日前までは無料でキャンセルできます。</p>
+								<input type="radio" name="cancel_policy_id" value="4">かなり厳格
+								<p>チェックイン（確認メールに記載の日時）の7日前までは無料でキャンセルできます。</p>
 							</div>
 	
 							<!-- Row -->
