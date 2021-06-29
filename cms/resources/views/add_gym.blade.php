@@ -347,697 +347,697 @@
 	
 	
 						<!-- Section -->
-						<div class="add-listing-section margin-top-45">
+						<!--<div class="add-listing-section margin-top-45">-->
 							
 							<!-- Headline -->
-							<div class="add-listing-headline">
-								<h3><i class="fa fa-calendar-check-o"></i> Availability</h3>
+						<!--	<div class="add-listing-headline">-->
+						<!--		<h3><i class="fa fa-calendar-check-o"></i> Availability</h3>-->
 								<!-- Switcher -->
-								<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
-							</div>
+						<!--		<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>-->
+						<!--	</div>-->
 							
 							<!-- Switcher ON-OFF Content -->
-							<div class="switcher-content">
+						<!--	<div class="switcher-content">-->
 									
 									<!-- Availablity Slots -->
 									<!-- Set data-clock-type="24hr" to enable 24 hours clock type -->
-									<div class="availability-slots" data-clock-type="24hr">
+						<!--			<div class="availability-slots" data-clock-type="24hr">-->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Monday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Monday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+												<!--<div class="single-slot-right">-->
+												<!--	<strong>Slots:</strong>-->
+												<!--	<div class="plusminus horiz">-->
+												<!--		<button></button>-->
+												<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+												<!--		<button></button> -->
+												<!--	</div>-->
+												<!--</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
-	
-												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
-	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
+	
+												<!-- Single Slot -->
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
+	
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Tuesday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Tuesday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+												<!--<div class="single-slot-right">-->
+												<!--	<strong>Slots:</strong>-->
+												<!--	<div class="plusminus horiz">-->
+												<!--		<button></button>-->
+												<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+												<!--		<button></button> -->
+												<!--	</div>-->
+												<!--</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
-	
-												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
-	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
+	
+												<!-- Single Slot -->
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
+	
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Wednesday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Wednesday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+												<!--<div class="single-slot-right">-->
+												<!--	<strong>Slots:</strong>-->
+												<!--	<div class="plusminus horiz">-->
+												<!--		<button></button>-->
+												<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+												<!--		<button></button> -->
+												<!--	</div>-->
+												<!--</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
-	
-												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
-	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
+	
+												<!-- Single Slot -->
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
+	
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Thursday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Thursday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+						<!--						<div class="single-slot-right">-->
+						<!--							<strong>Slots:</strong>-->
+						<!--							<div class="plusminus horiz">-->
+						<!--								<button></button>-->
+						<!--								<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+						<!--								<button></button> -->
+						<!--							</div>-->
+						<!--						</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
-	
-												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
-	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
+	
+												<!-- Single Slot -->
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
+	
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Friday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Friday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+												<!--<div class="single-slot-right">-->
+												<!--	<strong>Slots:</strong>-->
+												<!--	<div class="plusminus horiz">-->
+												<!--		<button></button>-->
+												<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+												<!--		<button></button> -->
+												<!--	</div>-->
+												<!--</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">8:30 <i class="am-pm">am</i> - 9:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
-	
-												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
-	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 	
 												<!-- Single Slot -->
-												<div class="single-slot">
-													<div class="single-slot-left">
-														<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>
-														<button class="remove-slot"><i class="fa fa-close"></i></button>
-													</div>
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:00 <i class="am-pm">am</i> - 9:30 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
 	
-													<div class="single-slot-right">
-														<strong>Slots:</strong>
-														<div class="plusminus horiz">
-															<button></button>
-															<input type="number" name="slot-qty" value="1" min="1" max="99">
-															<button></button> 
-														</div>
-													</div>
-												</div>
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
+	
+												<!-- Single Slot -->
+						<!--						<div class="single-slot">-->
+						<!--							<div class="single-slot-left">-->
+						<!--								<div class="single-slot-time">9:30 <i class="am-pm">am</i> - 10:00 <i class="am-pm">am</i></div>-->
+						<!--								<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--							</div>-->
+	
+													<!--<div class="single-slot-right">-->
+													<!--	<strong>Slots:</strong>-->
+													<!--	<div class="plusminus horiz">-->
+													<!--		<button></button>-->
+													<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+													<!--		<button></button> -->
+													<!--	</div>-->
+													<!--</div>-->
+						<!--						</div>-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Saturday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Saturday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+												<!--<div class="single-slot-right">-->
+												<!--	<strong>Slots:</strong>-->
+												<!--	<div class="plusminus horiz">-->
+												<!--		<button></button>-->
+												<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+												<!--		<button></button> -->
+												<!--	</div>-->
+												<!--</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
 										<!-- Single Day Slots -->
-										<div class="day-slots">
-											<div class="day-slot-headline">
-												Sunday
-											</div>
+						<!--				<div class="day-slots">-->
+						<!--					<div class="day-slot-headline">-->
+						<!--						Sunday-->
+						<!--					</div>-->
 											
 											<!-- Slot For Cloning / Do NOT Remove-->
-											<div class="single-slot cloned">
-												<div class="single-slot-left">
-													<div class="single-slot-time"></div>
-													<button class="remove-slot"><i class="fa fa-close"></i></button>
-												</div>
+						<!--					<div class="single-slot cloned">-->
+						<!--						<div class="single-slot-left">-->
+						<!--							<div class="single-slot-time"></div>-->
+						<!--							<button class="remove-slot"><i class="fa fa-close"></i></button>-->
+						<!--						</div>-->
 	
-												<div class="single-slot-right">
-													<strong>Slots:</strong>
-													<div class="plusminus horiz">
-														<button></button>
-														<input type="number" name="slot-qty" value="1" min="1" max="99">
-														<button></button> 
-													</div>
-												</div>
-											</div>		
+												<!--<div class="single-slot-right">-->
+												<!--	<strong>Slots:</strong>-->
+												<!--	<div class="plusminus horiz">-->
+												<!--		<button></button>-->
+												<!--		<input type="number" name="slot-qty" value="1" min="1" max="99">-->
+												<!--		<button></button> -->
+												<!--	</div>-->
+												<!--</div>-->
+						<!--					</div>		-->
 											<!-- Slot For Cloning / Do NOT Remove-->
 	
 	
 											<!-- No slots -->
-											<div class="no-slots">No slots added</div>
+						<!--					<div class="no-slots">No slots added</div>-->
 	
 											<!-- Slots Container -->
-											<div class="slots-container">
+						<!--					<div class="slots-container">-->
 												
-											</div>
+						<!--					</div>-->
 											<!-- Slots Container / End -->
 	
 	
 											<!-- Add Slot -->
-											<div class="add-slot">
-												<div class="add-slot-inputs">
-	        										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>
-													<select class="time-slot-start twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-	        										<span>-</span>
+						<!--					<div class="add-slot">-->
+						<!--						<div class="add-slot-inputs">-->
+	     <!--   										<input type="time" class="time-slot-start" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-start twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+	     <!--   										<span>-</span>-->
 	
-	   												<input type="time" class="time-slot-end" min="00:00" max="12:00"/>
-													<select class="time-slot-end twelve-hr" id="">
-														<option>am</option>
-														<option>pm</option>
-													</select>
-												</div>
-												<div class="add-slot-btn">
-													<button>Add</button>
-												</div>
-											</div>
+	   		<!--										<input type="time" class="time-slot-end" min="00:00" max="12:00"/>-->
+						<!--							<select class="time-slot-end twelve-hr" id="">-->
+						<!--								<option>am</option>-->
+						<!--								<option>pm</option>-->
+						<!--							</select>-->
+						<!--						</div>-->
+						<!--						<div class="add-slot-btn">-->
+						<!--							<button>Add</button>-->
+						<!--						</div>-->
+						<!--					</div>-->
 	
-										</div>
+						<!--				</div>-->
 										<!-- Single Day Slots / End -->
 	
-									</div>
+						<!--			</div>-->
 									<!-- Availablity Slots / End -->
 	
-							</div>
+						<!--	</div>-->
 							<!-- Switcher ON-OFF Content / End -->
 	
-						</div>
+						<!--</div>-->
 						<!-- Section / End -->
 	
 	
@@ -1045,174 +1045,550 @@
 						<div class="add-listing-section margin-top-45">
 							
 							<!-- Headline -->
-							<div class="add-listing-headline">
+							<div class="add-listing-headline" style="display:flex; flex-direction:row;">
 								<h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>
+								<!-- Date Range Picker - docs: http://www.daterangepicker.com/ -->
+								<p>開始日</p>
+								<div class="col-lg-3">	
+									<input type="text" id="date-picker" name="start_date" placeholder="Date" readonly="readonly">
+								</div>
+								<!--  Initial Duration -->
+								<p>適用期間</p>
+								<div class="col-lg-3">	
+									<select type="integer" name="initial_duration" placeholder="Date" readonly="readonly">
+										<option value="30"> 30日</option>
+										<option value="90">90日</option>
+										<option value="180">180日</option>
+									</select>
+								</div>
+								
 								<!-- Switcher -->
-								<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>
+								<!--<label class="switch"><input type="checkbox" checked><span class="slider round"></span></label>-->
+								<!-- Switcher ON-OFF Content -->
+								<!--<div class="switcher-content">-->
 							</div>
 							
-							<!-- Switcher ON-OFF Content -->
-							<div class="switcher-content">
+							
+							
+		
+
+							
 	
 								<!-- Day -->
 								<div class="row opening-day">
+									<div class="col-md-2"></div>
+									<div class="col-md-3" style="text-align:center;"><h5>開始時間</h5></div>
+									<div class="col-md-1"></div>
+									<div class="col-md-3" style="text-align:center;"><h5>終了時間</h5></div>
+									<div class="col-md-2" style="text-align:center;"><h5>15分あたりの価格</h5></div>
+								</div>
+								<div class="row opening-day">
 									<div class="col-md-2"><h5>Monday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<option label="Opening Time"></option>
+									<div class="col-md-3">
+										<select type="text" name="monday_start_time" data-placeholder="Opening Time">
+											
 											<option>Closed</option>
-											<option>1 AM</option>
-											<option>2 AM</option>
-											<option>3 AM</option>
-											<option>4 AM</option>
-											<option>5 AM</option>
-											<option>6 AM</option>
-											<option>7 AM</option>
-											<option>8 AM</option>
-											<option>9 AM</option>
-											<option>10 AM</option>
-											<option>11 AM</option>
-											<option>12 AM</option>	
-											<option>1 PM</option>
-											<option>2 PM</option>
-											<option>3 PM</option>
-											<option>4 PM</option>
-											<option>5 PM</option>
-											<option>6 PM</option>
-											<option>7 PM</option>
-											<option>8 PM</option>
-											<option>9 PM</option>
-											<option>10 PM</option>
-											<option>11 PM</option>
-											<option>12 PM</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<option label="Closing Time"></option>
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="monday_end_time" data-placeholder="Closing Time">
+											
 											<option>Closed</option>
-											<option>1 AM</option>
-											<option>2 AM</option>
-											<option>3 AM</option>
-											<option>4 AM</option>
-											<option>5 AM</option>
-											<option>6 AM</option>
-											<option>7 AM</option>
-											<option>8 AM</option>
-											<option>9 AM</option>
-											<option>10 AM</option>
-											<option>11 AM</option>
-											<option>12 AM</option>	
-											<option>1 PM</option>
-											<option>2 PM</option>
-											<option>3 PM</option>
-											<option>4 PM</option>
-											<option>5 PM</option>
-											<option>6 PM</option>
-											<option>7 PM</option>
-											<option>8 PM</option>
-											<option>9 PM</option>
-											<option>10 PM</option>
-											<option>11 PM</option>
-											<option>12 PM</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="monday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
-	
+								
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
 									<div class="col-md-2"><h5>Tuesday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-3">
+										<select type="text" name="tuesday_start_time" data-placeholder="Opening Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="tuesday_end_time" data-placeholder="Closing Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="tuesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
 									<div class="col-md-2"><h5>Wednesday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-3">
+										<select type="text" name="wednesday_start_time" data-placeholder="Opening Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="wednesday_end_time" data-placeholder="Closing Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="wednesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
 									<div class="col-md-2"><h5>Thursday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-3">
+										<select type="text" name="thursday_start_time" data-placeholder="Opening Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="thursday_end_time" data-placeholder="Closing Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="thursday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
 									<div class="col-md-2"><h5>Friday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-3">
+										<select type="text" name="friday_start_time" data-placeholder="Opening Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="friday_end_time" data-placeholder="Closing Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="friday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
 									<div class="col-md-2"><h5>Saturday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-3">
+										<select type="text" name="saturday_start_time" data-placeholder="Opening Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="saturday_end_time" data-placeholder="Closing Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="saturday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
 									<div class="col-md-2"><h5>Sunday</h5></div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Opening Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-3">
+										<select type="text" name="sunday_start_time" data-placeholder="Opening Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
-									<div class="col-md-5">
-										<select class="chosen-select" data-placeholder="Closing Time">
-											<!-- Hours added via JS (this is only for demo purpose) -->
+									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+									<div class="col-md-3">
+										<select name="sunday_end_time" data-placeholder="Closing Time">
+											
+											<option>Closed</option>
+											<option value="00:00">00:00</option>
+											<option value="01:00">01:00</option>
+											<option value="02:00">02:00</option>
+											<option value="03:00">03:00</option>
+											<option value="04:00">04:00</option>
+											<option value="05:00">05:00</option>
+											<option value="06:00">06:00</option>
+											<option value="07:00">07:00</option>
+											<option value="08:00">08:00</option>
+											<option value="09:00">09:00</option>
+											<option value="10:00" selected>10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>	
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+											<option value="19:00">19:00</option>
+											<option value="20:00">20:00</option>
+											<option value="21:00">21:00</option>
+											<option value="22:00">22:00</option>
+											<option value="23:00">23:00</option>
+											<option value="24:00">24:00</option>
 										</select>
 									</div>
+									<div class="col-md-2">
+										<input name="sunday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+									</div>
+									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
@@ -1309,6 +1685,41 @@
 		  })};
 		  
 		  
+	  </script>
+	  <script>
+	  	// Calendar Init
+			$(function() {
+				$('#date-picker').daterangepicker({
+					"opens": "left",
+					singleDatePicker: true,
+			
+					// Disabling Date Ranges
+					isInvalidDate: function(date) {
+					// Disabling Date Range
+					var disabled_start = moment('09/02/2018', 'MM/DD/YYYY');
+					var disabled_end = moment('09/06/2018', 'MM/DD/YYYY');
+					return date.isAfter(disabled_start) && date.isBefore(disabled_end);
+			
+					// Disabling Single Day
+					// if (date.format('MM/DD/YYYY') == '08/08/2018') {
+					//     return true; 
+					// }
+					}
+				});
+			});
+			
+			// Calendar animation
+			$('#date-picker').on('showCalendar.daterangepicker', function(ev, picker) {
+				$('.daterangepicker').addClass('calendar-animated');
+			});
+			$('#date-picker').on('show.daterangepicker', function(ev, picker) {
+				$('.daterangepicker').addClass('calendar-visible');
+				$('.daterangepicker').removeClass('calendar-hidden');
+			});
+			$('#date-picker').on('hide.daterangepicker', function(ev, picker) {
+				$('.daterangepicker').removeClass('calendar-visible');
+				$('.daterangepicker').addClass('calendar-hidden');
+			});
 	  </script>
 @endpush
 @endsection

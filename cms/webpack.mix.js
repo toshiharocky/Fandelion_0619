@@ -25,6 +25,8 @@ mix.js('resources/js/app.js', 'public/js')
          'resources/js/jquery-ui.min.js',
          'resources/js/tooltips.min.js',
          'resources/js/custom.js',
+         'resources/js/moment.min.js',
+         'resources/js/daterangepicker.js',
          ]
          , 'public/js/all.js')
     .scripts('resources/js/quantityButtons.js', 'public/js/quantityButtons.js')

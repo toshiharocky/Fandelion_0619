@@ -12,7 +12,9 @@ use App\GymStatus;
 use App\Gym;
 use App\GymImage;
 use App\Equipment;
+use App\GymSchedule;
 use Illuminate\Support\Str;
+use DateTime;
 
 class GymController extends Controller
 {
@@ -51,11 +53,24 @@ class GymController extends Controller
         
         
         
-        // dd($user);
-        $all = $request->min_weight;
-        $datatype = gettype($request->longitude);
+        // $all = $request->all();
+        // $i = $request->start_date;
+        // $s = $request->monday_start_time;
+        
+        // $day = date('N', strtotime($i)); //start_dateの曜日取得
+        // $d = $i." ".$s;
+        // $d2 = new DateTime($i);
+        // // $e = '2021-10-04 15:25:07';
+        // $c = date('Y-m-d H:i',strtotime($d));
+        
+        // // $d2 -> modify("+15 minute");
+        
+        
+        
+        // $t = gettype($c);
+        // $datatype = gettype($request->longitude);
         // dd($datatype);
-        // dd($all);
+        // dd($d2);
         
         // ジム登録情報のバリデーション
         $validator = Validator::make($request->all(), [
@@ -128,6 +143,7 @@ class GymController extends Controller
             
             
             $equipment_amount = count($request->equipment_name);
+            
             // Eloquentモデルで設備情報をequipmentテーブルに登録
             for($i = 0; $i < $equipment_amount; $i++){
                 $equipments = new equipment;
@@ -164,9 +180,46 @@ class GymController extends Controller
                     
                     // $image->move('image',$name);
                     // $images[]=$name;
-                    
                 }
               
+              
+            //   Elloquentモデルで、start_dateからinitial_duration日間のGymSchedulesテーブルを登録
+                $initial_duration = $request->initial_duration;
+                $start_date = $request->start_date;
+                $monday_start_time = $request->monday_start_time;
+                
+                $day = date('N', strtotime($start_date)); //start_dateの曜日取得
+                $d = $start_date." ".$monday_start_time;
+                $start_datetime = new DateTime($start_date);
+                $end_datetime = $start_datetime -> modify("+15 minute");
+                // $e = '2021-10-04 15:25:07';
+                // $start_date_datetime = date('Y-m-d H:i',strtotime($d));
+                $start_datetime = new DateTime($start_date);
+                // dd($end_datetime);
+                
+                // $d2 -> modify("+15 minute");
+                // $d2 -> modify("+15 minute");
+                // $c = strtotime($d);
+                
+                for($i=0; $i<$initial_duration; $i++){
+                    for($j=0; $j<96; $j++){
+                        $gym_schedule = new GymSchedule;
+                        $gym_schedule->gym_id = $gym_id;
+                        if($day<7){
+                            $gym_schedule->day = $day;
+                        }else{
+                            $day = 1;
+                            $gym_schedule->day = $day;
+                        }
+                        $gym_schedule->from_time = $start_datetime;
+                        $gym_schedule->to_time = $end_datetime;
+                        $gym_schedule->save();
+                        $start_datetime -> modify("+15 minute");
+                        $end_datetime -> modify("+15 minute");
+                    }
+                        $day++;
+                    
+                }
     
         }else{
     
