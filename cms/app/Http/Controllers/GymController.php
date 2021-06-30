@@ -53,7 +53,7 @@ class GymController extends Controller
         
         
         
-        // $all = $request->all();
+        $all = $request->all();
         // $i = $request->start_date;
         // $s = $request->monday_start_time;
         
@@ -70,7 +70,7 @@ class GymController extends Controller
         // $t = gettype($c);
         // $datatype = gettype($request->longitude);
         // dd($datatype);
-        // dd($d2);
+        // dd($all);
         
         // ジム登録情報のバリデーション
         $validator = Validator::make($request->all(), [
@@ -186,40 +186,178 @@ class GymController extends Controller
             //   Elloquentモデルで、start_dateからinitial_duration日間のGymSchedulesテーブルを登録
                 $initial_duration = $request->initial_duration;
                 $start_date = $request->start_date;
-                $monday_start_time = $request->monday_start_time;
-                
                 $day = date('N', strtotime($start_date)); //start_dateの曜日取得
-                $d = $start_date." ".$monday_start_time;
-                $start_datetime = new DateTime($start_date);
-                $end_datetime = $start_datetime -> modify("+15 minute");
+                
+                switch($day){
+                    case 1:
+                        $monday_start_time = $start_date." ".$request->monday_start_time;
+                        $monday_end_time = $start_date." ".$request->monday_end_time;
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime($monday_start_time));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime($monday_end_time));
+                        $monday_from_datetime = new DateTime($monday_start_time);
+                        // $monday_from_time -> modify("-15 minute");
+                        for($i=0; $i<$initial_duration; $i+=7){
+                            $monday_from_datetime = $monday_start_datetime;
+                            $monday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_from_datetime)));
+                            
+                            
+                            while($monday_from_datetime < $monday_end_datetime){
+                            $gym_schedule = new GymSchedule;
+                            $gym_schedule->gym_id = $gym_id;
+                            $gym_schedule->from_time = $monday_from_datetime;
+                            $gym_schedule->to_time = $monday_to_datetime;
+                            $gym_schedule->day = 1;
+                            $gym_schedule->status = 1;
+                            $gym_schedule->price = $request->monday_price;
+                            $gym_schedule->save();
+                            $monday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_from_datetime)));
+                            $monday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_to_datetime)));
+                        // }
+                        }
+                            $monday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($monday_start_datetime)));
+                            $monday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($monday_end_datetime)));
+                            
+                        }
+                        
+                        break;
+                        
+                    case 2:
+                        $tuesday_start_time = $start_date." ".$request->tuesday_start_time;
+                        $tuesday_end_time = $start_date." ".$request->tuesday_end_time;
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime($tuesday_start_time));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime($tuesday_end_time));
+                        $tuesday_from_datetime = new DateTime($tuesday_start_time);
+                        
+                        for($i=0; $i<$initial_duration; $i+=7){
+                            $tuesday_from_datetime = $tuesday_start_datetime;
+                            $tuesday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_from_datetime)));
+                            
+                            
+                            while($tuesday_from_datetime < $tuesday_end_datetime){
+                            $gym_schedule = new GymSchedule;
+                            $gym_schedule->gym_id = $gym_id;
+                            $gym_schedule->from_time = $tuesday_from_datetime;
+                            $gym_schedule->to_time = $tuesday_to_datetime;
+                            $gym_schedule->day = 2;
+                            $gym_schedule->status = 1;
+                            $gym_schedule->price = $request->tuesday_price;
+                            $gym_schedule->save();
+                            $tuesday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_from_datetime)));
+                            $tuesday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_to_datetime)));
+                            // }
+                            }
+                            
+                            $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($tuesday_start_datetime)));
+                            $tuesday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($tuesday_end_datetime)));
+                                
+                        }
+                        break;
+                    // case 3:
+                        
+                    //     break;
+                    // case 4:
+                        
+                    //     break;
+                    // case 5:
+                        
+                    //     break;
+                    // case 6:
+                        
+                    //     break;
+                    // case 7:
+                        
+                    //     break;
+                }
+                
+                
+                // Monday info
+                // if($request->monday_start_time != "Closed"){
+                //     // $monday = $start_date." ".$request->monday_start_time;
+                //     $monday_start_datetime = $request->monday_start_time;
+                //     $monday_start_datetime = new DateTime($start_date." ".$request->monday_start_time);
+                //     $monday_end_datetime = new DateTime($request->monday_end_time);
+                //     $monday_price = $request->monday_price;
+                // }
+                
+                // // Tuesday info
+                // if($request->tuesday_start_time != "Closed"){
+                //     $tuesday_start_datetime = new DateTime($request->tuesday_start_time);
+                //     $tuesday_end_datetime = new DateTime($request->tuesday_end_time);
+                //     $tuesday_price = $request->tuesday_price;
+                // }
+                
+                // // Wednesday info
+                // if($request->wednesday_start_time != "Closed"){
+                //     $wednesday_start_datetime = new DateTime($request->wednesday_start_time);
+                //     $wednesday_end_datetime = new DateTime($request->wednesday_end_time);
+                //     $wednesday_price = $request->wednesday_price;
+                // }
+                
+                // // Thursday info
+                // if($request->thursday_start_time != "Closed"){
+                //     $thursday_start_datetime = new DateTime($request->thursday_start_time);
+                //     $thursday_end_datetime = new DateTime($request->thursday_end_time);
+                //     $thursday_price = $request->thursday_price;
+                // }
+                
+                // // Friday info
+                // if($request->friday_start_time != "Closed"){
+                //     $friday_start_datetime = new DateTime($request->friday_start_time);
+                //     $friday_end_datetime = new DateTime($request->friday_end_time);
+                //     $friday_price = $request->friday_price;
+                // }
+                
+                // // Saturday info
+                // if($request->saturday_start_time != "Closed"){
+                //     $saturday_start_datetime = new DateTime($request->saturday_start_time);
+                //     $saturday_end_datetime = new DateTime($request->saturday_end_time);
+                //     $saturday_price = $request->saturday_price;
+                // }
+                
+                // // Sunday info
+                // if($request->sunday_start_time != "Closed"){
+                //     $sunday_start_datetime = new DateTime($request->sunday_start_time);
+                //     $sunday_end_datetime = new DateTime($request->sunday_end_time);
+                //     $sunday_price = $request->sunday_price;
+                // }
+                
+                
+                
+                // $d = $start_date." ".$monday_start_datetime;
+                // $start_datetime = new DateTime($d);
+                // dd($monday_start_datetime);
+                // $end_datetime = $start_datetime -> modify("+15 minute");
                 // $e = '2021-10-04 15:25:07';
                 // $start_date_datetime = date('Y-m-d H:i',strtotime($d));
-                $start_datetime = new DateTime($start_date);
+                // $start_datetime = new DateTime($start_date);
                 // dd($end_datetime);
                 
                 // $d2 -> modify("+15 minute");
                 // $d2 -> modify("+15 minute");
                 // $c = strtotime($d);
                 
-                for($i=0; $i<$initial_duration; $i++){
-                    for($j=0; $j<96; $j++){
-                        $gym_schedule = new GymSchedule;
-                        $gym_schedule->gym_id = $gym_id;
-                        if($day<7){
-                            $gym_schedule->day = $day;
-                        }else{
-                            $day = 1;
-                            $gym_schedule->day = $day;
-                        }
-                        $gym_schedule->from_time = $start_datetime;
-                        $gym_schedule->to_time = $end_datetime;
-                        $gym_schedule->save();
-                        $start_datetime -> modify("+15 minute");
-                        $end_datetime -> modify("+15 minute");
-                    }
-                        $day++;
+                // 全ての時間帯をstatus0(使用不可)で登録
+                // for($i=0; $i<$initial_duration; $i++){
+                //     for($j=0; $j<96; $j++){
+                //         $gym_schedule = new GymSchedule;
+                //         $gym_schedule->gym_id = $gym_id;
+                //         if($day<7){
+                //             $gym_schedule->day = $day;
+                //         }else{
+                //             $day = 1;
+                //             $gym_schedule->day = $day;
+                //         }
+                //         $gym_schedule->from_time = $start_datetime;
+                //         $gym_schedule->to_time = $end_datetime;
+                //         $gym_schedule->save();
+                //         $start_datetime -> modify("+15 minute");
+                //         $end_datetime -> modify("+15 minute");
+                //     }
+                //         $day++;
                     
-                }
+                // }
+                
+                // 選択した時間帯をstatus1(予約可能)で登録
     
         }else{
     

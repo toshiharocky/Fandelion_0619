@@ -21,7 +21,7 @@ class CreateGymSchedulesTable extends Migration
             $table->datetime('from_time');
             $table->datetime('to_time');
             $table->integer('price') ->nullable();
-            $table->string('status') ->default(0); //0:使用不可, 1:予約可能, 2:予約済
+            $table->string('status'); //0:使用不可, 1:予約可能, 2:予約済
             $table->timestamps();
         });
     }
