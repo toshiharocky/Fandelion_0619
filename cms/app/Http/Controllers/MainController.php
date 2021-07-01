@@ -21,6 +21,39 @@ class MainController extends Controller
     public function index()
     {
         //
+        
+        // $gym_images = DB::table('gyms')
+        //                     ->join('gym_images', 'gyms.id', '=', 'gym_id')
+        //                     ->select('gym_id','img_url')
+        //                     ->get();
+        // dd($gym_images);
+        
+        //ジム情報の入手
+            // $gyms_all = Gym::all();
+            $gyms = Gym::orderBy('user_id', 'DESC')->take(4)->get();
+            $gyms_count = count($gyms);
+                    // ->where('pref', "群馬県");
+            // $gyms = $gyms_all->sortBy('id', 'DESC');
+            // dd($gyms_count);
+            
+            foreach($gyms as $gym){
+                $gym_id[] = $gym->id;
+                $gym_titles[] = $gym->gym_title;
+                $gym_descs[] = $gym->gym_desc;
+                $gym_addr[] = $gym->addr;
+                $review_average[] = $gym->review_average;
+                $gym_image_url[] = DB::table('gyms')
+                            ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                            ->select('img_url')
+                            ->where('gym_id',$gym->id)
+                            ->get()[0]->img_url;
+                
+            }
+            
+            // dd($review_average[0]);
+            // dd($gym_image_url[0]);
+            
+        
         if (Auth::check()){
             $user = Auth::user()->id;
             // dd($user);
@@ -33,31 +66,44 @@ class MainController extends Controller
             // dd($gym_title);
             $user_name =  Auth::user()->name;
             // $user_memstatus_id = Auth::user()->memstatus_id;
-            $status_name = DB::table('users')
+            $status_names = DB::table('users')
                                 ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
                                 ->select('name', 'status_name')
                                 ->get();
+            $status_name = $status_names[1]->status_name;
             
-            //ここからがテスト
-            // $gym_id = Gym::find(3)->gymstatus_id;
-            // $gym_status_name = DB::table('users')
-            //                     ->join('gyms', 'users.id', '=', 'gyms.user_id')
-            //                     ->where('user_id', $user)
-            //                     // ->select('name', 'gym_title')
-            //                     ->first()->gymstatus_id;
-            // dd($gym_status_name);
-            //ここまでがテスト
-            // dd($gym_status_name);
+            // dd($status_name);
+            
             
             return view('search',[
                 'user_name'=>$user_name,
                 'status_name'=>$status_name,
+                'gym_id'=>$gym_id,
+                'gym_titles'=>$gym_titles,
+                'gym_descs'=>$gym_descs,
+                'gym_addr'=>$gym_addr,
+                'review_average'=>$review_average,
+                'gym_image_url'=>$gym_image_url,
+                'gyms_count' => $gyms_count,
                 // 'gym_title'=>$gym_title,
                 // 'gym_status_name'=>$gym_status_name,
                 ]);
             } else{
-            return view('search');
+            return view('search',[
+                'gym_id'=>$gym_id,
+                'gym_titles'=>$gym_titles,
+                'gym_descs'=>$gym_descs,
+                'gym_addr'=>$gym_addr,
+                'review_average'=>$review_average,
+                'gym_image_url'=>$gym_image_url,
+                'gyms_count' => $gyms_count,
+                // 'gym_title'=>$gym_title,
+                // 'gym_status_name'=>$gym_status_name,
+                ]);
             }
+            
+            
+        
     }
 
     /**

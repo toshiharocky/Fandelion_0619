@@ -1,5 +1,10 @@
 @extends('layouts.menu')
 
+
+@push('css')
+    <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+@endpush
+
 @section('content')
 <div class="dashboard-content">
 
@@ -147,9 +152,10 @@
 									<div class="col-md-6 add_gym_map">
 										<div class="add_gym_map_parts" >
 											<!--<h5>Zip-Code</h5>-->
-											〒<input class="col-md-3" type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01');"><br>
+											〒<input class="col-md-3" type="text" name="zip01" size="10" maxlength="8" onKeyUp="AjaxZip3.zip2addr(this,'','pref01','addr01','strt01');"><br>
 											<input class="col-md-3" type="text" name="pref01" size="20"><br>
-											<input class="col-md-6" id="address" type="text" name="addr01" size="60">
+											<input class="col-md-6" id="address" type="text" name="addr01" size="60"><br>
+											<input class="col-md-6" id="street" type="text" name="strt01" size="60">
     										<input id="mapbutton" type="button" value="Encode" onclick="codeAddress()">
 										</div>
 										<div class="add_gym_map_parts">
@@ -312,7 +318,7 @@
 													<div class="fm-move"><i class="sl sl-icon-cursor-move"></i></div>
 													<div class="fm-close"><a class="delete" ><i class="fa fa-remove"></i></a></div>
 													<div class="fm-input ">
-														<input list="equipment-list" name="equipment_name[]" type="text" placeholder="選択肢にない場合は直接入力してください" />
+														<input list="equipment-list" name="equipment_name[]" type="text" placeholder="選択肢から選択 or 直接入力してください" />
 														<datalist id="equipment-list">
 															<option value="ダンベル">ダンベル</option>
 															<option value="バーベル">バーベル</option>
@@ -1042,7 +1048,7 @@
 	
 	
 						<!-- Section -->
-						<div class="add-listing-section margin-top-45">
+						<div class=" margin-top-45">
 							
 							<!-- Headline -->
 							<div class="add-listing-headline" style="display:flex; flex-direction:row;">
@@ -1083,512 +1089,568 @@
 									<div class="col-md-2" style="text-align:center;"><h5>15分あたりの価格</h5></div>
 								</div>
 								<div class="row opening-day">
-									<div class="col-md-2"><h5>Monday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="monday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Monday</h5>
+										<input id="mon_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="monday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									
+	
+							<!-- Switcher ON-OFF Content -->
+									<div id="mon_detail">
+										<div class="col-md-3">
+											<select type="text" name="monday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="monday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_mon">
+											<div class="col-md-2">
+												<input name="monday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="monday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
-								<!-- Day / End -->
+							<!-- Day / End -->
 								
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
-									<div class="col-md-2"><h5>Tuesday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="tuesday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Tuesday</h5>
+										<input id="tue_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="tuesday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<!-- Switcher ON-OFF Content -->
+									<div id="tue_detail">
+										<div class="col-md-3">
+											<select type="text" name="tuesday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="tuesday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_tue">
+											<div class="col-md-2">
+												<input name="tuesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="tuesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
-									<div class="col-md-2"><h5>Wednesday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="wednesday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Wednesday</h5>
+										<input id="wed_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="wednesday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<!-- Switcher ON-OFF Content -->
+									<div id="wed_detail">
+										<div class="col-md-3">
+											<select type="text" name="wednesday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="wednesday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_wed">
+											<div class="col-md-2">
+												<input name="wednesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="wednesday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
-									<div class="col-md-2"><h5>Thursday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="thursday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Thursday</h5>
+										<input id="thur_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="thursday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<!-- Switcher ON-OFF Content -->
+									<div id="thur_detail">
+										<div class="col-md-3">
+											<select type="text" name="thursday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="thursday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_thur">
+											<div class="col-md-2">
+												<input name="thursday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="thursday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
-									<div class="col-md-2"><h5>Friday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="friday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Friday</h5>
+										<input id="fri_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="friday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<!-- Switcher ON-OFF Content -->
+									<div id="fri_detail">
+										<div class="col-md-3">
+											<select type="text" name="friday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="friday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_fri">
+											<div class="col-md-2">
+												<input name="friday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="friday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
-									<div class="col-md-2"><h5>Saturday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="saturday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Saturday</h5>
+										<input id="sat_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="saturday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<!-- Switcher ON-OFF Content -->
+									<div id="sat_detail">
+										<div class="col-md-3">
+											<select type="text" name="saturday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="saturday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_sat">
+											<div class="col-md-2">
+												<input name="saturday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
+											</div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="saturday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
 								<!-- Day -->
 								<div class="row opening-day js-demo-hours">
-									<div class="col-md-2"><h5>Sunday</h5></div>
-									<div class="col-md-3">
-										<select type="text" name="sunday_start_time" data-placeholder="Opening Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<div class="col-md-2" style="display:flex; flex-direction:row; align-items:center;">
+										<h5>Sunday</h5>
+										<input id="sun_check" class="day_check" type="checkbox" checked style="width:20px; height:20px;">
 									</div>
-									<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
-									<div class="col-md-3">
-										<select name="sunday_end_time" data-placeholder="Closing Time">
-											
-											<option>Closed</option>
-											<option value="00:00">00:00</option>
-											<option value="01:00">01:00</option>
-											<option value="02:00">02:00</option>
-											<option value="03:00">03:00</option>
-											<option value="04:00">04:00</option>
-											<option value="05:00">05:00</option>
-											<option value="06:00">06:00</option>
-											<option value="07:00">07:00</option>
-											<option value="08:00">08:00</option>
-											<option value="09:00">09:00</option>
-											<option value="10:00" selected>10:00</option>
-											<option value="11:00">11:00</option>
-											<option value="12:00">12:00</option>	
-											<option value="13:00">13:00</option>
-											<option value="14:00">14:00</option>
-											<option value="15:00">15:00</option>
-											<option value="16:00">16:00</option>
-											<option value="17:00">17:00</option>
-											<option value="18:00">18:00</option>
-											<option value="19:00">19:00</option>
-											<option value="20:00">20:00</option>
-											<option value="21:00">21:00</option>
-											<option value="22:00">22:00</option>
-											<option value="23:00">23:00</option>
-											<option value="24:00">24:00</option>
-										</select>
+									<!-- Switcher ON-OFF Content -->
+									<div id="sun_detail">
+										<div class="col-md-3">
+											<select type="text" name="sunday_start_time" data-placeholder="Opening Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div class="col-md-1" style="text-align:center;"><h5> 〜 </h5></div>
+										<div class="col-md-3">
+											<select name="sunday_end_time" data-placeholder="Closing Time">
+												
+												<option>Closed</option>
+												<option value="00:00">00:00</option>
+												<option value="01:00">01:00</option>
+												<option value="02:00">02:00</option>
+												<option value="03:00">03:00</option>
+												<option value="04:00">04:00</option>
+												<option value="05:00">05:00</option>
+												<option value="06:00">06:00</option>
+												<option value="07:00">07:00</option>
+												<option value="08:00">08:00</option>
+												<option value="09:00">09:00</option>
+												<option value="10:00" selected>10:00</option>
+												<option value="11:00">11:00</option>
+												<option value="12:00">12:00</option>	
+												<option value="13:00">13:00</option>
+												<option value="14:00">14:00</option>
+												<option value="15:00">15:00</option>
+												<option value="16:00">16:00</option>
+												<option value="17:00">17:00</option>
+												<option value="18:00">18:00</option>
+												<option value="19:00">19:00</option>
+												<option value="20:00">20:00</option>
+												<option value="21:00">21:00</option>
+												<option value="22:00">22:00</option>
+												<option value="23:00">23:00</option>
+												<option value="24:00">24:00</option>
+											</select>
+										</div>
+										<div id="price_sun">
+											<div class="col-md-2"><input name="sunday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>
+											<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
+										</div>
 									</div>
-									<div class="col-md-2">
-										<input name="sunday_price" style="text-align:right;" placeholder="15分あたりの価格" required>
-									</div>
-									<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>
 								</div>
 								<!-- Day / End -->
 	
@@ -1610,7 +1672,7 @@
 
 			<!-- Copyrights -->
 			<div class="col-md-12">
-				<div class="copyrights">© 2021 Listeo. All Rights Reserved.</div>
+				<div class="copyrights">© 2021 Fandelion. All Rights Reserved.</div>
 			</div>
 
 		</div>
@@ -1636,8 +1698,10 @@
 	    map = new google.maps.Map(document.getElementById('map'), mapOptions);
 		
 		
+		
 		function codeAddress() {
-		    var address = document.getElementById('address').value;
+			
+		    var address = document.getElementById('address').value + document.getElementById('street').value;
 		    var pos = "";
 			var lng = "";
 			var lat = "";
@@ -1720,6 +1784,110 @@
 				$('.daterangepicker').removeClass('calendar-visible');
 				$('.daterangepicker').addClass('calendar-hidden');
 			});
+	  </script>
+	  <script>
+	  
+	 $('#mon_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#mon_check').prop('checked')){
+    		$('#mon_detail').show();
+    		$('#price_mon').append(
+    		'<div class="col-md-2"><input name="monday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#mon_detail').hide();
+    		$('#price_mon').empty();
+    	}
+	 });
+	 
+	 $('#tue_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#tue_check').prop('checked')){
+    		$('#tue_detail').show();
+    		$('#price_tue').append(
+    		'<div class="col-md-2"><input name="tuesday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#tue_detail').hide();
+    		$('#price_tue').empty();
+    	}
+	 });
+	 
+	 $('#wed_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#wed_check').prop('checked')){
+    		$('#wed_detail').show();
+    		$('#price_wed').append(
+    		'<div class="col-md-2"><input name="wednesday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#wed_detail').hide();
+    		$('#price_wed').empty();
+    	}
+	 });
+	 
+	 $('#thur_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#thur_check').prop('checked')){
+    		$('#thur_detail').show();
+    		$('#price_thur').append(
+    		'<div class="col-md-2"><input name="thursday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#thur_detail').hide();
+    		$('#price_thur').empty();
+    	}
+	 });
+	 
+	 $('#fri_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#fri_check').prop('checked')){
+    		$('#fri_detail').show();
+    		$('#price_fri').append(
+    		'<div class="col-md-2"><input name="friday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#fri_detail').hide();
+    		$('#price_fri').empty();
+    	}
+	 });
+	 
+	 $('#sat_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#sat_check').prop('checked')){
+    		$('#sat_detail').show();
+    		$('#price_sat').append(
+    		'<div class="col-md-2"><input name="saturday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#sat_detail').hide();
+    		$('#price_sat').empty();
+    	}
+	 });
+	 
+	 $('#sun_check').on("click",function(){
+    	
+	 	// prop()でチェックの状態を取得
+    	if($('#sun_check').prop('checked')){
+    		$('#sun_detail').show();
+    		$('#price_sun').append(
+    		'<div class="col-md-2"><input name="sunday_price" style="text-align:right;" placeholder="15分あたりの価格" required></div>',
+			'<div class="col-md-1" style="padding-left:0;"><h5> 円 </h5></div>');
+    	}else{
+    		$('#sun_detail').hide();
+    		$('#price_sun').empty();
+    	}
+	 });
+	 
+	 
+		  
+									
 	  </script>
 @endpush
 @endsection

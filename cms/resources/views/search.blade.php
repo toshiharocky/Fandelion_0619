@@ -1,6 +1,13 @@
 @extends('layouts.menu')
 
+
+@push('css')
+    <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+@endpush
+
 @section('content')
+	
+	
 	<!-- Banner
 	================================================== -->
 	<div class="main-search-container dark-overlay">
@@ -9,8 +16,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h2>Find Nearby Attractions</h2>
-						<h4>Expolore top-rated attractions, activities and more</h4>
+						<h2>ジムを探す</h2>
+						<h4>あなたに合ったフィットネス環境をみつけましょう</h4>
 	
 						<div class="main-search-input">
 	
@@ -95,35 +102,35 @@
 	<!--					<i class="im im-icon-Hamburger"></i>-->
 	<!--					<h4>Eat & Drink</h4>-->
 	<!--					<span class="category-box-counter">12</span>-->
-	<!--				</a> -->-->
+	<!--				</a> -->
 	
 					<!-- Box -->
 					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
 	<!--					<i class="im  im-icon-Sleeping"></i>-->
 	<!--					<h4>Hotels</h4>-->
 	<!--					<span class="category-box-counter">32</span>-->
-	<!--				</a> -->-->
+	<!--				</a> -->
 	
 					<!-- Box -->
 					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
 	<!--					<i class="im im-icon-Shopping-Bag"></i>-->
 	<!--					<h4>Shops</h4>-->
 	<!--					<span class="category-box-counter">11</span>-->
-	<!--				</a> -->-->
+	<!--				</a> -->
 	
 					<!-- Box -->
 					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
 	<!--					<i class="im im-icon-Cocktail"></i>-->
 	<!--					<h4>Nightlife</h4>-->
 	<!--					<span class="category-box-counter">15</span>-->
-	<!--				</a> -->-->
+	<!--				</a> -->
 	
 					<!-- Box -->
 					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
 	<!--					<i class="im im-icon-Electric-Guitar"></i>-->
 	<!--					<h4>Events</h4>-->
 	<!--					<span class="category-box-counter">21</span>-->
-	<!--				</a> -->-->
+	<!--				</a> -->
 	
 					<!-- Box -->
 					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
@@ -156,122 +163,40 @@
 	
 		<!-- Carousel / Start -->
 		<div class="simple-fw-slick-carousel dots-nav">
-	
+			@for ($i = 0; $i < $gyms_count; $i++)
+			    
 			<!-- Listing Item -->
 			<div class="fw-carousel-item">
-				<a href="listings-single-page.html" class="listing-item-container compact">
-					<div class="listing-item">
-						<img src="images/listing-item-01.jpg" alt="">
-	
-						<div class="listing-badge now-open">Now Open</div>
-	
-						<div class="listing-item-content">
-							<div class="numerical-rating" data-rating="3.5"></div>
-							<h3>Tom's Restaurant</h3>
-							<span>964 School Street, New York</span>
+				<form method="post" name="gym_select" action="gym_introduction">
+				@csrf
+					
+					<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact">
+						<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
+						<div class="listing-item">
+							<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
+							<!--<div class="listing-item-details">-->
+							<!--	<ul>-->
+							<!--		<li>Friday, August 10</li>-->
+							<!--	</ul>-->
+							<!--</div>-->
+		
+							<!--<div class="listing-badge now-open">Now Open</div>-->
+		
+							<div class="listing-item-content">
+								<div class="numerical-rating" data-rating={{$review_average[$i]}}></div>
+								<h3>{{$gym_titles[$i]}}</h3>
+								<span>{{$gym_addr[$i]}}</span>
+							</div>
+							<span class="like-icon"></span>
 						</div>
-						<span class="like-icon"></span>
-					</div>
-				</a>
+					</a>
+				</form>
 			</div>
-			<!-- Listing Item / End -->
+			 <!--Listing Item / End -->
+			
+			@endfor
 	
-			<!-- Listing Item -->
-			<div class="fw-carousel-item">
-				<a href="listings-single-page.html" class="listing-item-container compact">
-					<div class="listing-item">
-						<img src="images/listing-item-02.jpg" alt="">
-						<div class="listing-item-details">
-							<ul>
-								<li>Friday, August 10</li>
-							</ul>
-						</div>
-						<div class="listing-item-content">
-							<div class="numerical-rating" data-rating="5.0"></div>
-							<h3>Sticky Band</h3>
-							<span>Bishop Avenue, New York</span>
-						</div>
-						<span class="like-icon"></span>
-					</div>
-				</a>
-			</div>
-			<!-- Listing Item / End -->		
-	
-			<!-- Listing Item -->
-			<div class="fw-carousel-item">
-				<a href="listings-single-page.html" class="listing-item-container compact">
-					<div class="listing-item">
-						<img src="images/listing-item-03.jpg" alt="">
-						<div class="listing-item-details">
-							<ul>
-								<li>Starting from $59 per night</li>
-							</ul>
-						</div>
-						<div class="listing-item-content">
-							<div class="numerical-rating" data-rating="2.0"></div>
-							<h3>Hotel Govendor</h3>
-							<span>778 Country Street, New York</span>
-						</div>
-						<span class="like-icon"></span>
-					</div>
-	
-				</a>
-			</div>
-			<!-- Listing Item / End -->
-	
-			<!-- Listing Item -->
-			<div class="fw-carousel-item">
-				<a href="listings-single-page.html" class="listing-item-container compact">
-					<div class="listing-item">
-						<img src="images/listing-item-04.jpg" alt="">
-	
-						<div class="listing-badge now-open">Now Open</div>
-	
-						<div class="listing-item-content">
-							<div class="numerical-rating" data-rating="5.0"></div>
-							<h3>Burger House</h3>
-							<span>2726 Shinn Street, New York</span>
-						</div>
-						<span class="like-icon"></span>
-					</div>
-				</a>
-			</div>
-			<!-- Listing Item / End -->
-	
-			<!-- Listing Item -->
-			<div class="fw-carousel-item">
-				<a href="listings-single-page.html" class="listing-item-container compact">
-					<div class="listing-item">
-						<img src="images/listing-item-05.jpg" alt="">
-						<div class="listing-item-content">
-							<div class="numerical-rating" data-rating="3.5"></div>
-							<h3>Airport</h3>
-							<span>1512 Duncan Avenue, New York</span>
-						</div>
-						<span class="like-icon"></span>
-					</div>
-				</a>
-			</div>
-			<!-- Listing Item / End -->
-	
-			<!-- Listing Item -->
-			<div class="fw-carousel-item">
-				<a href="listings-single-page.html" class="listing-item-container compact">
-					<div class="listing-item">
-						<img src="images/listing-item-06.jpg" alt="">
-	
-						<div class="listing-badge now-closed">Now Closed</div>
-	
-						<div class="listing-item-content">
-							<div class="numerical-rating" data-rating="4.5"></div>
-							<h3>Think Coffee</h3>
-							<span>215 Terry Lane, New York</span>
-						</div>
-						<span class="like-icon"></span>
-					</div>
-				</a>
-			</div>
-			<!-- Listing Item / End -->
+			
 	
 		</div>
 		<!-- Carousel / End -->
@@ -343,12 +268,12 @@
 	
 	
 	<!-- Flip banner -->
-	<a href="listings-half-screen-map-list.html" class="flip-banner parallax margin-top-65" data-background="images/slider-bg-02.jpg" data-color="#f91942" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">
-		<div class="flip-banner-content">
-			<h2 class="flip-visible">Expolore top-rated attractions nearby</h2>
-			<h2 class="flip-hidden">Browse Listings <i class="sl sl-icon-arrow-right"></i></h2>
-		</div>
-	</a>
+	<!--<a href="listings-half-screen-map-list.html" class="flip-banner parallax margin-top-65" data-background="images/slider-bg-02.jpg" data-color="#f91942" data-color-opacity="0.85" data-img-width="2500" data-img-height="1666">-->
+	<!--	<div class="flip-banner-content">-->
+	<!--		<h2 class="flip-visible">Expolore top-rated attractions nearby</h2>-->
+	<!--		<h2 class="flip-hidden">Browse Listings <i class="sl sl-icon-arrow-right"></i></h2>-->
+	<!--	</div>-->
+	<!--</a>-->
 	<!-- Flip banner / End -->
 	
 	

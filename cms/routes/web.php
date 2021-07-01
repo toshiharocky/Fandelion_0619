@@ -31,10 +31,13 @@ Route::group(['middleware' => 'auth'], function() {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 // ユーザー登録
 Route::post('auth/register','Auth\RegisterController@create');
 
 // ジム登録
 Route::post('/add_gym','GymController@store');
+
+// ジム情報表示
+Route::post('/gym_introduction','GymController@index');

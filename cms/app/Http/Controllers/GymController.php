@@ -23,10 +23,44 @@ class GymController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
         // inner joinで写真を呼び出す
+        $gym_id = $request->gym_id;
+        
+        
+        if (Auth::check()){
+            $user = Auth::user()->id;
+            // dd($user);
+            // $gym_title = Gym::where('user_id',$user)->first()->title;
+            // $gym_title = DB::table('gyms')
+            //                 ->join('users', 'gyms.user_id', '=', 'users.id')
+            //                 // ->select('user_id','email','title', 'gym_desc')
+            //                 ->where('user_id', $user)
+            //                 ->first()->email;
+            // dd($gym_title);
+            $user_name =  Auth::user()->name;
+            // $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_names = DB::table('users')
+                                ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                ->select('name', 'status_name')
+                                ->get();
+            $status_name = $status_names[1]->status_name;
+            
+            // dd($status_name);
+            
+            return view('gym_introduction',[
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                'gym_id'=>$gym_id,
+                ]);
+            } else{
+            
+            return view('gym_introduction',[
+                'gym_id'=>$gym_id,
+                ]);
+            }
     }
 
     /**
@@ -34,9 +68,13 @@ class GymController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        
+        
     }
 
     /**
@@ -83,6 +121,7 @@ class GymController extends Controller
             'zip01' => 'required|string',
             'pref01' => 'required|string',
             'addr01' => 'required|string',
+            'strt01' => 'required|string',
             'longitude' => 'required|numeric',
             'latitude' => 'required|numeric',
             'area' => 'required|integer',
@@ -132,6 +171,7 @@ class GymController extends Controller
              $gyms->zip_code = $request->zip01;
              $gyms->pref = $request->pref01;
              $gyms->addr = $request->addr01;
+             $gyms->strt = $request->strt01;
              $gyms->longitude = $request->longitude;
              $gyms->latitude = $request->latitude;
              $gyms->area = $request->area;
@@ -186,87 +226,362 @@ class GymController extends Controller
             //   Elloquentモデルで、start_dateからinitial_duration日間のGymSchedulesテーブルを登録
                 $initial_duration = $request->initial_duration;
                 $start_date = $request->start_date;
+                $start_datetime = date("Y-m-d", strtotime($start_date));
+                $end_datetime = date("Y-m-d", strtotime('+'.$initial_duration.'days',strtotime($start_datetime)));
                 $day = date('N', strtotime($start_date)); //start_dateの曜日取得
+                
+                // $monday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->monday_start_time)));
+                // $monday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->monday_end_time)));
+                // $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                // $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                // $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                // $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                // $thursday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->thursday_start_time)));
+                // $thursday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->thursday_end_time)));
+                // $friday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->friday_start_time)));
+                // $friday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->friday_end_time)));
+                // $saturday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->saturday_start_time)));
+                // $saturday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->saturday_end_time)));
+                // $sunday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->sunday_start_time)));
+                // $sunday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->sunday_end_time)));
+                
                 
                 switch($day){
                     case 1:
-                        $monday_start_time = $start_date." ".$request->monday_start_time;
-                        $monday_end_time = $start_date." ".$request->monday_end_time;
-                        $monday_start_datetime = date("Y-m-d H:i", strtotime($monday_start_time));
-                        $monday_end_datetime = date("Y-m-d H:i", strtotime($monday_end_time));
-                        $monday_from_datetime = new DateTime($monday_start_time);
-                        // $monday_from_time -> modify("-15 minute");
-                        for($i=0; $i<$initial_duration; $i+=7){
-                            $monday_from_datetime = $monday_start_datetime;
-                            $monday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_from_datetime)));
-                            
-                            
-                            while($monday_from_datetime < $monday_end_datetime){
-                            $gym_schedule = new GymSchedule;
-                            $gym_schedule->gym_id = $gym_id;
-                            $gym_schedule->from_time = $monday_from_datetime;
-                            $gym_schedule->to_time = $monday_to_datetime;
-                            $gym_schedule->day = 1;
-                            $gym_schedule->status = 1;
-                            $gym_schedule->price = $request->monday_price;
-                            $gym_schedule->save();
-                            $monday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_from_datetime)));
-                            $monday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_to_datetime)));
-                        // }
-                        }
-                            $monday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($monday_start_datetime)));
-                            $monday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($monday_end_datetime)));
-                            
-                        }
-                        
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->monday_start_time));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->monday_end_time));
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->thursday_start_time)));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->thursday_end_time)));
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->friday_start_time)));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->friday_end_time)));
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->saturday_start_time)));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->saturday_end_time)));
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->sunday_start_time)));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->sunday_end_time)));
                         break;
+                        
                         
                     case 2:
-                        $tuesday_start_time = $start_date." ".$request->tuesday_start_time;
-                        $tuesday_end_time = $start_date." ".$request->tuesday_end_time;
-                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime($tuesday_start_time));
-                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime($tuesday_end_time));
-                        $tuesday_from_datetime = new DateTime($tuesday_start_time);
-                        
-                        for($i=0; $i<$initial_duration; $i+=7){
-                            $tuesday_from_datetime = $tuesday_start_datetime;
-                            $tuesday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_from_datetime)));
-                            
-                            
-                            while($tuesday_from_datetime < $tuesday_end_datetime){
-                            $gym_schedule = new GymSchedule;
-                            $gym_schedule->gym_id = $gym_id;
-                            $gym_schedule->from_time = $tuesday_from_datetime;
-                            $gym_schedule->to_time = $tuesday_to_datetime;
-                            $gym_schedule->day = 2;
-                            $gym_schedule->status = 1;
-                            $gym_schedule->price = $request->tuesday_price;
-                            $gym_schedule->save();
-                            $tuesday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_from_datetime)));
-                            $tuesday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_to_datetime)));
-                            // }
-                            }
-                            
-                            $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($tuesday_start_datetime)));
-                            $tuesday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($tuesday_end_datetime)));
-                                
-                        }
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->tuesday_start_time));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->tuesday_end_time));
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->thursday_start_time)));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->thursday_end_time)));
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->friday_start_time)));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->friday_end_time)));
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->saturday_start_time)));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->saturday_end_time)));
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->sunday_start_time)));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->sunday_end_time)));
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->monday_start_time)));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->monday_end_time)));
                         break;
-                    // case 3:
                         
-                    //     break;
-                    // case 4:
+                    case 3:
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->wednesday_start_time));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->wednesday_end_time));
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->thursday_start_time)));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->thursday_end_time)));
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->friday_start_time)));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->friday_end_time)));
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->saturday_start_time)));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->saturday_end_time)));
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->sunday_start_time)));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->sunday_end_time)));
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->monday_start_time)));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->monday_end_time)));
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                
+                        break;
                         
-                    //     break;
-                    // case 5:
+                    case 4:
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->thursday_start_time));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->thursday_end_time));
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->friday_start_time)));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->friday_end_time)));
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->saturday_start_time)));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->saturday_end_time)));
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->sunday_start_time)));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->sunday_end_time)));
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->monday_start_time)));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->monday_end_time)));
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                        break;
                         
-                    //     break;
-                    // case 6:
+                    case 5:
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->friday_start_time));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->friday_end_time));
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->saturday_start_time)));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->saturday_end_time)));
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->sunday_start_time)));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->sunday_end_time)));
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->monday_start_time)));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->monday_end_time)));
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->thursday_start_time)));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->thursday_end_time)));
+
                         
-                    //     break;
-                    // case 7:
+                        break;
                         
-                    //     break;
+                    case 6:
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->saturday_start_time));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->saturday_end_time));
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->sunday_start_time)));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->sunday_end_time)));
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->monday_start_time)));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->monday_end_time)));
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->thursday_start_time)));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->thursday_end_time)));
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->friday_start_time)));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->friday_end_time)));
+                        break;
+                        
+                    case 7:
+                        $sunday_start_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->sunday_start_time));
+                        $sunday_end_datetime = date("Y-m-d H:i", strtotime($start_date." ".$request->sunday_end_time));
+                        $monday_start_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->monday_start_time)));
+                        $monday_end_datetime = date("Y-m-d H:i", strtotime('+1 days',strtotime($start_date." ".$request->monday_end_time)));
+                        $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->tuesday_start_time)));
+                        $tuesday_end_datetime = date("Y-m-d H:i", strtotime('+2 days',strtotime($start_date." ".$request->tuesday_end_time)));
+                        $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->wednesday_start_time)));
+                        $wednesday_end_datetime = date("Y-m-d H:i", strtotime('+3 days',strtotime($start_date." ".$request->wednesday_end_time)));
+                        $thursday_start_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->thursday_start_time)));
+                        $thursday_end_datetime = date("Y-m-d H:i", strtotime('+4 days',strtotime($start_date." ".$request->thursday_end_time)));
+                        $friday_start_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->friday_start_time)));
+                        $friday_end_datetime = date("Y-m-d H:i", strtotime('+5 days',strtotime($start_date." ".$request->friday_end_time)));
+                        $saturday_start_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->saturday_start_time)));
+                        $saturday_end_datetime = date("Y-m-d H:i", strtotime('+6 days',strtotime($start_date." ".$request->saturday_end_time)));
+
+                        
+                        break;
+                        
+                }
+                
+                
+                
+                
+                // $datetimes = array(
+                // $monday_start_datetime,
+                // $monday_end_datetime,
+                // $tuesday_start_datetime,
+                // $tuesday_end_datetime,
+                // $wednesday_start_datetime,
+                // $wednesday_end_datetime,
+                // $thursday_start_datetime,
+                // $thursday_end_datetime,
+                // $friday_start_datetime,
+                // $friday_end_datetime,
+                // $saturday_start_datetime,
+                // $saturday_end_datetime,
+                // $sunday_start_datetime,
+                // $sunday_end_datetime,);
+                
+                
+                $monday_price = $request->monday_price;
+                $tuesday_price = $request->tuesday_price;
+                $wednesday_price = $request->wednesday_price;
+                $thursday_price = $request->thursday_price;
+                $friday_price = $request->friday_price;
+                $saturday_price = $request->saturday_price;
+                $sunday_price = $request->sunday_price;
+                
+                
+                
+                // monday
+                while($monday_start_datetime<$end_datetime){
+                    $monday_from_datetime = $monday_start_datetime;
+                    $monday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_from_datetime)));
+                    
+                    
+                    while($monday_from_datetime < $monday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $monday_from_datetime;
+                    $gym_schedule->to_time = $monday_to_datetime;
+                    $gym_schedule->day = 1;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->monday_price;
+                    $gym_schedule->save();
+                    $monday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_from_datetime)));
+                    $monday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($monday_to_datetime)));
+                // }
+                }
+                    $monday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($monday_start_datetime)));
+                    $monday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($monday_end_datetime)));
+                }
+                
+                // dd($tuesday_start_datetime<$end_datetime);
+                // dd($tuesday_start_datetime);
+                // dd($end_datetime);
+                        
+                
+                // tuesday
+                while($tuesday_start_datetime<$end_datetime){
+                    $tuesday_from_datetime = $tuesday_start_datetime;
+                    $tuesday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_from_datetime)));
+                    
+                    
+                    while($tuesday_from_datetime < $tuesday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $tuesday_from_datetime;
+                    $gym_schedule->to_time = $tuesday_to_datetime;
+                    $gym_schedule->day = 2;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->tuesday_price;
+                    $gym_schedule->save();
+                    $tuesday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_from_datetime)));
+                    $tuesday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($tuesday_to_datetime)));
+                // }
+                }
+                    $tuesday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($tuesday_start_datetime)));
+                    $tuesday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($tuesday_end_datetime)));
+                }
+                            
+                
+                
+                // wednesday
+                while($wednesday_start_datetime<$end_datetime){
+                    $wednesday_from_datetime = $wednesday_start_datetime;
+                    $wednesday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($wednesday_from_datetime)));
+                    
+                    
+                    while($wednesday_from_datetime < $wednesday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $wednesday_from_datetime;
+                    $gym_schedule->to_time = $wednesday_to_datetime;
+                    $gym_schedule->day = 3;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->wednesday_price;
+                    $gym_schedule->save();
+                    $wednesday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($wednesday_from_datetime)));
+                    $wednesday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($wednesday_to_datetime)));
+                // }
+                }
+                    $wednesday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($wednesday_start_datetime)));
+                    $wednesday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($wednesday_end_datetime)));
+                }
+                
+                
+                
+                
+                
+                // thursday
+                while($thursday_start_datetime<$end_datetime){
+                    $thursday_from_datetime = $thursday_start_datetime;
+                    $thursday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($thursday_from_datetime)));
+                    
+                    
+                    while($thursday_from_datetime < $thursday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $thursday_from_datetime;
+                    $gym_schedule->to_time = $thursday_to_datetime;
+                    $gym_schedule->day = 4;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->thursday_price;
+                    $gym_schedule->save();
+                    $thursday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($thursday_from_datetime)));
+                    $thursday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($thursday_to_datetime)));
+                // }
+                }
+                    $thursday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($thursday_start_datetime)));
+                    $thursday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($thursday_end_datetime)));
+                }
+                
+                
+                
+                // friday
+                while($friday_start_datetime<$end_datetime){
+                    $friday_from_datetime = $friday_start_datetime;
+                    $friday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($friday_from_datetime)));
+                    
+                    
+                    while($friday_from_datetime < $friday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $friday_from_datetime;
+                    $gym_schedule->to_time = $friday_to_datetime;
+                    $gym_schedule->day = 5;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->friday_price;
+                    $gym_schedule->save();
+                    $friday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($friday_from_datetime)));
+                    $friday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($friday_to_datetime)));
+                // }
+                }
+                    $friday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($friday_start_datetime)));
+                    $friday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($friday_end_datetime)));
+                }
+                
+                
+                
+                
+                // saturday
+                while($saturday_start_datetime<$end_datetime){
+                    $saturday_from_datetime = $saturday_start_datetime;
+                    $saturday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($saturday_from_datetime)));
+                    
+                    
+                    while($saturday_from_datetime < $saturday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $saturday_from_datetime;
+                    $gym_schedule->to_time = $saturday_to_datetime;
+                    $gym_schedule->day = 6;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->saturday_price;
+                    $gym_schedule->save();
+                    $saturday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($saturday_from_datetime)));
+                    $saturday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($saturday_to_datetime)));
+                // }
+                }
+                    $saturday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($saturday_start_datetime)));
+                    $saturday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($saturday_end_datetime)));
+                }
+                
+                
+                
+                
+                // sunday
+                while($sunday_start_datetime<$end_datetime){
+                    $sunday_from_datetime = $sunday_start_datetime;
+                    $sunday_to_datetime  = date("Y-m-d H:i", strtotime('+15 minute',strtotime($sunday_from_datetime)));
+                    
+                    
+                    while($sunday_from_datetime < $sunday_end_datetime){
+                    $gym_schedule = new GymSchedule;
+                    $gym_schedule->gym_id = $gym_id;
+                    $gym_schedule->from_time = $sunday_from_datetime;
+                    $gym_schedule->to_time = $sunday_to_datetime;
+                    $gym_schedule->day = 7;
+                    $gym_schedule->status = 1;
+                    $gym_schedule->price = $request->sunday_price;
+                    $gym_schedule->save();
+                    $sunday_from_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($sunday_from_datetime)));
+                    $sunday_to_datetime = date("Y-m-d H:i", strtotime('+15 minute',strtotime($sunday_to_datetime)));
+                // }
+                }
+                    $sunday_start_datetime = date("Y-m-d H:i", strtotime('+7 days',strtotime($sunday_start_datetime)));
+                    $sunday_end_datetime  = date("Y-m-d H:i", strtotime('+7 days',strtotime($sunday_end_datetime)));
                 }
                 
                 
@@ -290,35 +605,39 @@ class GymController extends Controller
                 // if($request->wednesday_start_time != "Closed"){
                 //     $wednesday_start_datetime = new DateTime($request->wednesday_start_time);
                 //     $wednesday_end_datetime = new DateTime($request->wednesday_end_time);
-                //     $wednesday_price = $request->wednesday_price;
+                //     
                 // }
                 
                 // // Thursday info
                 // if($request->thursday_start_time != "Closed"){
                 //     $thursday_start_datetime = new DateTime($request->thursday_start_time);
                 //     $thursday_end_datetime = new DateTime($request->thursday_end_time);
-                //     $thursday_price = $request->thursday_price;
+                //     
+                
                 // }
                 
                 // // Friday info
                 // if($request->friday_start_time != "Closed"){
                 //     $friday_start_datetime = new DateTime($request->friday_start_time);
                 //     $friday_end_datetime = new DateTime($request->friday_end_time);
-                //     $friday_price = $request->friday_price;
+                //     
+                
                 // }
                 
                 // // Saturday info
                 // if($request->saturday_start_time != "Closed"){
                 //     $saturday_start_datetime = new DateTime($request->saturday_start_time);
                 //     $saturday_end_datetime = new DateTime($request->saturday_end_time);
-                //     $saturday_price = $request->saturday_price;
+                //     
+                
                 // }
                 
                 // // Sunday info
                 // if($request->sunday_start_time != "Closed"){
                 //     $sunday_start_datetime = new DateTime($request->sunday_start_time);
                 //     $sunday_end_datetime = new DateTime($request->sunday_end_time);
-                //     $sunday_price = $request->sunday_price;
+                //     
+                
                 // }
                 
                 
