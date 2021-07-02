@@ -28,6 +28,42 @@ class GymController extends Controller
         //
         // inner joinで写真を呼び出す
         $gym_id = $request->gym_id;
+        $gym_infos = Gym::where('id', $gym_id)->get();
+        $gym_title = $gym_infos[0]->gym_title;
+        $host_user_id  = $gym_infos[0]->user_id;
+        $cancel_policy_id  = $gym_infos[0]->cancel_policy_id;
+        $gymstatus_id  = $gym_infos[0]->gymstatus_id;
+        $gym_desc  = $gym_infos[0]->gym_desc;
+        $gymType_id  = $gym_infos[0]->gymType_id;
+        $addr  = $gym_infos[0]->addr;
+        $longitude  = $gym_infos[0]->longitude; //緯度
+        $random_lon = rand(-100000, 100000);
+        $random_lon_float = $random_lon / 1000000;
+        $longitude_privacy = $longitude + $random_lon_float; //表示する緯度
+        $latitude  = $gym_infos[0]->latitude; //緯度
+        $random_lat = rand(-100000, 100000);
+        $random_lat_float = $random_lat / 1000000;
+        $area  = $gym_infos[0]->area;
+        $latitude_privacy = $latitude + $random_lat_float;//表示する緯度
+        $guest_gender  = $gym_infos[0]->guest_gender;
+        $superHost_flg  = $gym_infos[0]->superHost_flg;
+        $review_amount  = $gym_infos[0]->review_amount;
+        $review_average  = $gym_infos[0]->review_average;
+        $guest_limit  = $gym_infos[0]->guest_limit;
+        $gym_image_url = DB::table('gyms')
+                    ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                    ->select('img_url')
+                    ->where('gym_id',$gym_id)
+                    ->get();
+        $gym_images_count = count($gym_image_url);
+        // dd($gym_image_url[0]->img_url);
+        
+        $gym_schedule_all = DB::table('gyms')
+                    ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
+                    ->select('from_time', 'to_time', 'price', 'status', 'day')
+                    ->where('gym_id',$gym_id)
+                    ->get();
+        dd($gym_schedule_all);
         
         
         if (Auth::check()){
@@ -54,11 +90,51 @@ class GymController extends Controller
                 'user_name'=>$user_name,
                 'status_name'=>$status_name,
                 'gym_id'=>$gym_id,
+                'gym_infos'=>$gym_infos,
+                'gym_title' => $gym_title,
+                'host_user_id,' => $host_user_id,
+                'cancel_policy_id' => $cancel_policy_id,
+                'gymstatus_id' => $gymstatus_id,
+                'gym_desc' => $gym_desc,
+                'gymType_id' => $gymType_id,
+                'addr' => $addr,
+                'longitude' =>$longitude, //緯度
+                'longitude' => $longitude_privacy,
+                'latitude' => $latitude, //緯度
+                'latitude_privacy' => $latitude_privacy, //表示する緯度
+                'area' => $area,
+                'guest_gender' => $guest_gender,
+                'superHost_flg' => $superHost_flg,
+                'review_amount' => $review_amount,
+                'review_average' => $review_average,
+                'guest_limit' => $guest_limit,
+                'gym_image_url' => $gym_image_url,
+                'gym_images_count' => $gym_images_count,
                 ]);
             } else{
             
             return view('gym_introduction',[
                 'gym_id'=>$gym_id,
+                'gym_infos'=>$gym_infos,
+                'gym_title' => $gym_title,
+                'host_user_id,' => $host_user_id,
+                'cancel_policy_id' => $cancel_policy_id,
+                'gymstatus_id' => $gymstatus_id,
+                'gym_desc' => $gym_desc,
+                'gymType_id' => $gymType_id,
+                'addr' => $addr,
+                'longitude' =>$longitude, //緯度
+                'longitude' => $longitude_privacy,
+                'latitude' => $latitude, //緯度
+                'latitude_privacy' => $latitude_privacy, //表示する緯度
+                'area' => $area,
+                'guest_gender' => $guest_gender,
+                'superHost_flg' => $superHost_flg,
+                'review_amount' => $review_amount,
+                'review_average' => $review_average,
+                'guest_limit' => $guest_limit,
+                'gym_image_url' => $gym_image_url,
+                'gym_images_count' => $gym_images_count,
                 ]);
             }
     }
