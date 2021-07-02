@@ -58,13 +58,19 @@ class GymController extends Controller
         $gym_images_count = count($gym_image_url);
         // dd($gym_image_url[0]->img_url);
         
-        $gym_schedule_all = DB::table('gyms')
+        $gym_schedule = DB::table('gyms')
                     ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
                     ->select('from_time', 'to_time', 'price', 'status', 'day')
                     ->where('gym_id',$gym_id)
                     ->get();
-        dd($gym_schedule_all);
+        // dd($gym_schedule);
         
+        $gym_type = DB::table('gym_types')
+                    ->join('gyms', 'gym_types.id', '=', 'gyms.gymType_id')
+                    ->select('gym_type')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        // dd($gym_type[0]->gym_type);
         
         if (Auth::check()){
             $user = Auth::user()->id;
@@ -110,6 +116,8 @@ class GymController extends Controller
                 'guest_limit' => $guest_limit,
                 'gym_image_url' => $gym_image_url,
                 'gym_images_count' => $gym_images_count,
+                'gym_type' => $gym_type,
+                'gym_schedule' => $gym_schedule,
                 ]);
             } else{
             
@@ -135,6 +143,8 @@ class GymController extends Controller
                 'guest_limit' => $guest_limit,
                 'gym_image_url' => $gym_image_url,
                 'gym_images_count' => $gym_images_count,
+                'gym_type' => $gym_type,
+                'gym_schedule' => $gym_schedule,
                 ]);
             }
     }
