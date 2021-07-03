@@ -53,6 +53,7 @@ class GymController extends Controller
         
         $latitude_privacy = $latitude + $random_lat_float;//表示する緯度
         
+        // guest_genderの希望を表示
         $guest_gender_flg  = $gym_infos[0]->guest_gender;
         if($guest_gender_flg == "1"){
            $guest_gender = ""; 
@@ -72,6 +73,7 @@ class GymController extends Controller
         $review_amount  = $gym_infos[0]->review_amount;
         $review_average  = $gym_infos[0]->review_average;
         $guest_limit  = $gym_infos[0]->guest_limit;
+        
         // inner joinで写真のURLを呼び出す
         $gym_image_url = DB::table('gyms')
                     ->join('gym_images', 'gyms.id', '=', 'gym_id')
@@ -111,6 +113,17 @@ class GymController extends Controller
                     ->get();
         
         // dd($gym_type[0]->gym_type);
+        
+        
+        // inner joinで写真のURLを呼び出す
+        $gym_equipment = DB::table('gyms')
+                    ->join('equipment', 'gyms.id', '=', 'gym_id')
+                    ->select('equipment_name', 'min_weight', 'max_weight', 'note')
+                    ->where('gym_id',$gym_id)
+                    ->get();
+        // 写真数をカウントする
+        $gym_equipment_count = count($gym_equipment);
+        // dd($gym_equipment[0]->equipment_name);
         
         if (Auth::check()){
             $user = Auth::user()->id;
@@ -159,6 +172,8 @@ class GymController extends Controller
                 'gym_type' => $gym_type,
                 'gym_schedule' => $gym_schedule,
                 'price_range' => $price_range,
+                'gym_equipment' => $gym_equipment,
+                'gym_equipment_count' => $gym_equipment_count
                 ]);
             } else{
             
@@ -187,6 +202,8 @@ class GymController extends Controller
                 'gym_type' => $gym_type,
                 'gym_schedule' => $gym_schedule,
                 'price_range' => $price_range,
+                'gym_equipment' => $gym_equipment,
+                'gym_equipment_count' => $gym_equipment_count
                 ]);
             }
     }
