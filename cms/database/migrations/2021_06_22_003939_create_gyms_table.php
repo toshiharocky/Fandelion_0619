@@ -19,7 +19,7 @@ class CreateGymsTable extends Migration
             $table->string('cancel_policy_id');
             $table->integer('gymstatus_id')->default(1);
             $table->string('gym_title');
-            $table->string('gym_desc');
+            $table->text('gym_desc');
             $table->integer('gymType_id');
             $table->string('zip_code');
             $table->string('pref');

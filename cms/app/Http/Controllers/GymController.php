@@ -26,7 +26,6 @@ class GymController extends Controller
     public function index(Request $request)
     {
         //
-        // inner joinで写真を呼び出す
         $gym_id = $request->gym_id;
         $gym_infos = Gym::where('id', $gym_id)->get();
         $gym_title = $gym_infos[0]->gym_title;
@@ -43,21 +42,47 @@ class GymController extends Controller
         $latitude  = $gym_infos[0]->latitude; //緯度
         $random_lat = rand(-100000, 100000);
         $random_lat_float = $random_lat / 1000000;
-        $area  = $gym_infos[0]->area;
+        
+        // inner joinでarea情報を取得
+        $area = DB::table('gym_areas')
+                    ->join('gyms', 'gym_areas.id', '=', 'gyms.area')
+                    ->select('gym_area')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        
+        
         $latitude_privacy = $latitude + $random_lat_float;//表示する緯度
-        $guest_gender  = $gym_infos[0]->guest_gender;
+        
+        $guest_gender_flg  = $gym_infos[0]->guest_gender;
+        if($guest_gender_flg == "1"){
+           $guest_gender = ""; 
+        } else {
+           
+            $guest_gender_title = DB::table('guest_genders')
+                        ->join('gyms', 'guest_genders.id', '=', 'gyms.guest_gender')
+                        ->select('guest_genders.guest_gender')
+                        ->where('gyms.id',$gym_id)
+                        ->get();
+            $guest_gender = $guest_gender_title[0]->guest_gender;
+            // dd($guest_gender);
+        }
+        
+        
         $superHost_flg  = $gym_infos[0]->superHost_flg;
         $review_amount  = $gym_infos[0]->review_amount;
         $review_average  = $gym_infos[0]->review_average;
         $guest_limit  = $gym_infos[0]->guest_limit;
+        // inner joinで写真のURLを呼び出す
         $gym_image_url = DB::table('gyms')
                     ->join('gym_images', 'gyms.id', '=', 'gym_id')
                     ->select('img_url')
                     ->where('gym_id',$gym_id)
                     ->get();
+        // 写真数をカウントする
         $gym_images_count = count($gym_image_url);
         // dd($gym_image_url[0]->img_url);
         
+        // ジムのスケジュールを取得する
         $gym_schedule = DB::table('gyms')
                     ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
                     ->select('from_time', 'to_time', 'price', 'status', 'day')
@@ -65,11 +90,26 @@ class GymController extends Controller
                     ->get();
         // dd($gym_schedule);
         
+        // ジムの最低価格と最高価格を取得する
+        $max_price = $gym_schedule -> max('price');
+        $min_price = $gym_schedule -> min('price');
+        
+        //画面上に表示する価格レンジを定義する 
+        if($max_price == $min_price){
+            $price_range = $min_price . "円";
+        } else {
+            $price_range = $min_price . "円〜" . $max_price. "円";
+        }
+        // dd($min_price);
+        // dd($price_range);
+        
+        // ジムタイプを取得する
         $gym_type = DB::table('gym_types')
                     ->join('gyms', 'gym_types.id', '=', 'gyms.gymType_id')
                     ->select('gym_type')
                     ->where('gyms.id',$gym_id)
                     ->get();
+        
         // dd($gym_type[0]->gym_type);
         
         if (Auth::check()){
@@ -118,6 +158,7 @@ class GymController extends Controller
                 'gym_images_count' => $gym_images_count,
                 'gym_type' => $gym_type,
                 'gym_schedule' => $gym_schedule,
+                'price_range' => $price_range,
                 ]);
             } else{
             
@@ -145,6 +186,7 @@ class GymController extends Controller
                 'gym_images_count' => $gym_images_count,
                 'gym_type' => $gym_type,
                 'gym_schedule' => $gym_schedule,
+                'price_range' => $price_range,
                 ]);
             }
     }
@@ -201,7 +243,7 @@ class GymController extends Controller
             // 'user_id' => 'required|integer',
             // 'gymStatus_id' => 'required|integer',
             'gym_title' => 'required|string|max:255',
-            'gym_desc' => 'required|string',
+            'gym_desc' => 'required',
             'cancel_policy_id' => 'required|string',
             'gymType_id' => 'required|integer',
             'zip01' => 'required|string',

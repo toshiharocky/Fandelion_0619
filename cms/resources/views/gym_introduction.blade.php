@@ -6,9 +6,7 @@
 
 @section('content')
 
-<?php
-echo $gym_id;
-?>
+
 
 
 
@@ -28,29 +26,41 @@ echo $gym_id;
 		<div class="col-lg-8 col-md-8 padding-right-30">
 
 			<!-- Titlebar -->
-			<div id="titlebar" class="listing-titlebar">
-				<div class="listing-titlebar-title">
-					<h2>Burger House <span class="listing-tag">Eat & Drink</span></h2>
+			<div id="titlebar" class="listing-titlebar" style="display:flex; flex-direction:row; justify-content:space-between;">
+				<div class="listing-titlebar-title" style="max-width:70%;">
+					<h2>{{$gym_title}} 
+						<div id=gym_tags></div>
+					</h2>
 					<span>
 						<a href="#listing-location" class="listing-address">
 							<i class="fa fa-map-marker"></i>
-							2726 Shinn Street, New York
+							{{$addr}}
 						</a>
 					</span>
 					<div class="star-rating" data-rating="5">
-						<div class="rating-counter"><a href="#listing-reviews">(31 reviews)</a></div>
+						<div class="rating-counter"><a href="#listing-reviews">({{$review_amount}} reviews)</a></div>
 					</div>
+				</div>
+				<div class="listing-titlebar-title" style="text-align:right;">
+					<h2>{{$price_range}} 
+						<!--<span class="listing-tag">Eat & Drink</span>-->
+					</h2>
+					<span>
+						<a href="#listing-location" class="listing-address">
+							(15分あたり)
+						</a>
+					</span>
 				</div>
 			</div>
 
 			<!-- Listing Nav -->
 			<div id="listing-nav" class="listing-nav-container">
 				<ul class="listing-nav">
-					<li><a href="#listing-overview" class="active">Overview</a></li>
-					<li><a href="#listing-pricing-list">Pricing</a></li>
-					<li><a href="#listing-location">Location</a></li>
-					<li><a href="#listing-reviews">Reviews</a></li>
-					<li><a href="#add-review">Add Review</a></li>
+					<li><a href="#listing-overview" class="active">ジムの概要</a></li>
+					<li><a href="#listing-pricing-list">設備</a></li>
+					<li><a href="#listing-location">場所</a></li>
+					<li><a href="#listing-reviews">レビュー</a></li>
+					<!--<li><a href="#add-review">Add Review</a></li>-->
 				</ul>
 			</div>
 			
@@ -60,60 +70,61 @@ echo $gym_id;
 				<!-- Description -->
 
 				<p>
-					Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.
+					{{$gym_desc}}
 				</p>
 
-				<p>
-					 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.
-				</p>
+				
 				
 				
 				<!-- Listing Contacts -->
-				<div class="listing-links-container">
+				<!--<div class="listing-links-container">-->
 
-					<ul class="listing-links contact-links">
-						<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> +12 345 6578</a></li>
-						<li><a href="mailto:mail@example.com" class="listing-links"><i class="fa fa-envelope-o"></i> mail@example.com</a>
-						</li>
-						<li><a href="#" target="_blank"  class="listing-links"><i class="fa fa-link"></i> www.example.com</a></li>
-					</ul>
-					<div class="clearfix"></div>
+				<!--	<ul class="listing-links contact-links">-->
+				<!--		<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> +12 345 6578</a></li>-->
+				<!--		<li><a href="mailto:mail@example.com" class="listing-links"><i class="fa fa-envelope-o"></i> mail@example.com</a>-->
+				<!--		</li>-->
+				<!--		<li><a href="#" target="_blank"  class="listing-links"><i class="fa fa-link"></i> www.example.com</a></li>-->
+				<!--	</ul>-->
+				<!--	<div class="clearfix"></div>-->
 
-					<ul class="listing-links">
-						<li><a href="#" target="_blank" class="listing-links-fb"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-						<li><a href="#" target="_blank" class="listing-links-yt"><i class="fa fa-youtube-play"></i> YouTube</a></li>
-						<li><a href="#" target="_blank" class="listing-links-ig"><i class="fa fa-instagram"></i> Instagram</a></li>
-						<li><a href="#" target="_blank" class="listing-links-tt"><i class="fa fa-twitter"></i> Twitter</a></li>
-					</ul>
-					<div class="clearfix"></div>
+				<!--	<ul class="listing-links">-->
+				<!--		<li><a href="#" target="_blank" class="listing-links-fb"><i class="fa fa-facebook-square"></i> Facebook</a></li>-->
+				<!--		<li><a href="#" target="_blank" class="listing-links-yt"><i class="fa fa-youtube-play"></i> YouTube</a></li>-->
+				<!--		<li><a href="#" target="_blank" class="listing-links-ig"><i class="fa fa-instagram"></i> Instagram</a></li>-->
+				<!--		<li><a href="#" target="_blank" class="listing-links-tt"><i class="fa fa-twitter"></i> Twitter</a></li>-->
+				<!--	</ul>-->
+				<!--	<div class="clearfix"></div>-->
 
-				</div>
-				<div class="clearfix"></div>
+				<!--</div>-->
+				<!--<div class="clearfix"></div>-->
 
 
 				<!-- Amenities -->
-				<h3 class="listing-desc-headline">Amenities</h3>
-				<ul class="listing-features checkboxes margin-top-0">
-					<li>Elevator in building</li>
-					<li>Friendly workspace</li>
-					<li>Instant Book</li>
-					<li>Wireless Internet</li>
-					<li>Free parking on premises</li>
-					<li>Free parking on street</li>
-				</ul>
+				<!--<h3 class="listing-desc-headline">Amenities</h3>-->
+				<!--<ul class="listing-features checkboxes margin-top-0">-->
+				<!--	<li>Elevator in building</li>-->
+				<!--	<li>Friendly workspace</li>-->
+				<!--	<li>Instant Book</li>-->
+				<!--	<li>Wireless Internet</li>-->
+				<!--	<li>Free parking on premises</li>-->
+				<!--	<li>Free parking on street</li>-->
+				<!--</ul>-->
 			</div>
 
 
 			<!-- Food Menu -->
 			<div id="listing-pricing-list" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">Pricing</h3>
+				<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">設備</h3>
 
 				<div class="show-more">
 					<div class="pricing-list-container">
 						
-						<!-- Food List -->
-						<h4>Burgers</h4>
+						<!-- 設備リスト -->
+						<h4>設備</h4>
 						<ul>
+							@for ($i = 0; $i < $gym_equipmentss_count; $i++)
+							
+							@endfor
 							<li>
 								<h5>Classic Burger</h5>
 								<p>Beef, salad, mayonnaise, spicey relish, cheese</p>
@@ -317,7 +328,7 @@ echo $gym_id;
 
 
 		<!-- Sidebar-->
-		<!--================================================== -->-->
+		<!--================================================== -->
 		<div class="col-lg-4 col-md-4 margin-top-75 sticky">
 
 				
@@ -625,6 +636,27 @@ echo $gym_id;
 <!-- Content / End -->
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
+
+<script>
+	const guest_gender = '{{$guest_gender}}';
+	if(guest_gender != ""){
+		$(document).ready(function(){
+			$('#gym_tags').append(
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">{{$gym_type[0]->gym_type}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">{{$area[0]->gym_area}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">〜{{$guest_limit}}名</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">${guest_gender}</span>`)
+		})
+		} else {
+		$(document).ready(function(){
+			$('#gym_tags').append(
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">{{$gym_type[0]->gym_type}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">{{$area[0]->gym_area}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0;">〜{{$guest_limit}}名</span>`)
+		});
+		
+	}
+</script>
 
 <!-- Maps -->
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&language=ja"></script>

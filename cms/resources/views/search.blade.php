@@ -3,6 +3,13 @@
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+    <style>
+    .gym_title_select{
+    	overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+    }	
+    </style>
 @endpush
 
 @section('content')
@@ -184,7 +191,7 @@
 		
 							<div class="listing-item-content">
 								<div class="numerical-rating" data-rating={{$review_average[$i]}}></div>
-								<h3>{{$gym_titles[$i]}}</h3>
+								<h3 class="gym_title_select">{{$gym_titles[$i]}}</h3>
 								<span>{{$gym_addr[$i]}}</span>
 							</div>
 							<span class="like-icon"></span>
