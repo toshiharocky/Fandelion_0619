@@ -30,6 +30,15 @@ class GymController extends Controller
         $gym_infos = Gym::where('id', $gym_id)->get();
         $gym_title = $gym_infos[0]->gym_title;
         $host_user_id  = $gym_infos[0]->user_id;
+        // inner joinでホスト名を取得
+        $host_name_array = DB::table('gyms')
+                    ->join('users', 'gyms.user_id', '=', 'users.id')
+                    ->select('users.name')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        $host_name = $host_name_array[0]->name;
+        
+        
         $cancel_policy_id  = $gym_infos[0]->cancel_policy_id;
         $gymstatus_id  = $gym_infos[0]->gymstatus_id;
         $gym_desc  = $gym_infos[0]->gym_desc;
@@ -37,11 +46,11 @@ class GymController extends Controller
         $addr  = $gym_infos[0]->addr;
         $longitude  = $gym_infos[0]->longitude; //緯度
         $random_lon = rand(-100000, 100000);
-        $random_lon_float = $random_lon / 1000000;
+        $random_lon_float = $random_lon / 100000000;
         $longitude_privacy = $longitude + $random_lon_float; //表示する緯度
         $latitude  = $gym_infos[0]->latitude; //緯度
         $random_lat = rand(-100000, 100000);
-        $random_lat_float = $random_lat / 1000000;
+        $random_lat_float = $random_lat / 100000000;
         
         // inner joinでarea情報を取得
         $area = DB::table('gym_areas')
@@ -87,9 +96,20 @@ class GymController extends Controller
         // ジムのスケジュールを取得する
         $gym_schedule = DB::table('gyms')
                     ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
-                    ->select('from_time', 'to_time', 'price', 'status', 'day')
-                    ->where('gym_id',$gym_id)
+                    ->select('gym_id','from_time', 'to_time', 'price', 'status', 'day')
+                    ->where('gym_id',$gym_id AND 'status',"1")
                     ->get();
+        $gym_schedule_count = count($gym_schedule);
+        
+        for($i=0; $i<$gym_schedule_count; $i++){
+            $gym_from_times_str = [$gym_schedule[$i]->from_time][0];
+            $gym_to_times_str = [$gym_schedule[$i]->to_time][0];
+            $gym_open_times[] = array('date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("H:i", strtotime($gym_from_times_str))
+            , 'to_time' => date("H:i", strtotime($gym_to_times_str)));
+        }
+        // dd($gym_open_times);
+        
+        
         // dd($gym_schedule);
         
         // ジムの最低価格と最高価格を取得する
@@ -152,6 +172,7 @@ class GymController extends Controller
                 'gym_infos'=>$gym_infos,
                 'gym_title' => $gym_title,
                 'host_user_id,' => $host_user_id,
+                'host_name' => $host_name,
                 'cancel_policy_id' => $cancel_policy_id,
                 'gymstatus_id' => $gymstatus_id,
                 'gym_desc' => $gym_desc,
@@ -173,7 +194,8 @@ class GymController extends Controller
                 'gym_schedule' => $gym_schedule,
                 'price_range' => $price_range,
                 'gym_equipment' => $gym_equipment,
-                'gym_equipment_count' => $gym_equipment_count
+                'gym_equipment_count' => $gym_equipment_count,
+                'gym_open_times' => $gym_open_times,
                 ]);
             } else{
             
@@ -182,6 +204,7 @@ class GymController extends Controller
                 'gym_infos'=>$gym_infos,
                 'gym_title' => $gym_title,
                 'host_user_id,' => $host_user_id,
+                'host_name' => $host_name,
                 'cancel_policy_id' => $cancel_policy_id,
                 'gymstatus_id' => $gymstatus_id,
                 'gym_desc' => $gym_desc,
@@ -203,7 +226,8 @@ class GymController extends Controller
                 'gym_schedule' => $gym_schedule,
                 'price_range' => $price_range,
                 'gym_equipment' => $gym_equipment,
-                'gym_equipment_count' => $gym_equipment_count
+                'gym_equipment_count' => $gym_equipment_count,
+                'gym_open_times' => $gym_open_times,
                 ]);
             }
     }

@@ -24,7 +24,7 @@
 <div class="container">
 	<div class="row sticky-wrapper">
 		<div class="col-lg-8 col-md-8 padding-right-30">
-
+		
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar" style="display:flex; flex-direction:row; justify-content:space-between;">
 				<div class="listing-titlebar-title" style="max-width:70%;">
@@ -66,6 +66,7 @@
 			
 			<!-- Overview -->
 			<div id="listing-overview" class="listing-section">
+			<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">ジムの概要</h3>
 
 				<!-- Description -->
 
@@ -116,7 +117,7 @@
 			<div id="listing-pricing-list" class="listing-section">
 				<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">設備</h3>
 
-				<div class="show-more">
+				<!--<div class="show-more">-->
 					<div class="pricing-list-container">
 						
 						<!-- 設備リスト -->
@@ -135,25 +136,26 @@
 							@endfor
 						</ul>
 					</div>
-				</div>
-				<a href="#" class="show-more-button" data-more-title="Show More" data-less-title="Show Less"><i class="fa fa-angle-down"></i></a>
+				<!--</div>-->
+				<!--<a href="#" class="show-more-button" data-more-title="Show More" data-less-title="Show Less"><i class="fa fa-angle-down"></i></a>-->
 			</div>
 			<!-- Food Menu / End -->
 
 		
 			<!-- Location -->
 			<div id="listing-location" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">Location</h3>
+				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">場所</h3>
 
 				<div id="singleListingMap-container">
-					<div id="singleListingMap" data-latitude="40.70437865245596" data-longitude="-73.98674011230469" data-map-icon="im im-icon-Hamburger"></div>
-					<a href="#" id="streetView">Street View</a>
+					<div id="singleListingMap" data-latitude="{{$latitude}}" data-longitude="{{$longitude}}" data-map-icon="im im-icon-Home"></div>
+					<!--<a href="#" id="streetView">Street View</a>-->
 				</div>
+				<h5>具体的な所在地は予約後に表示されます。</h5>
 			</div>
 				
 			<!-- Reviews -->
 			<div id="listing-reviews" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>(12)</span></h3>
+				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>({{$review_amount}})</span></h3>
 
 				<!-- Rating Overview -->
 				<div class="rating-overview">
@@ -305,7 +307,7 @@
 
 			<!-- Book Now -->
 			<div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35">
-				<h3><i class="fa fa-calendar-check-o "></i> Booking</h3>
+				<h3><i class="fa fa-calendar-check-o "></i>予約状況の確認</h3>
 				<div class="row with-forms  margin-top-0">
 
 					<!-- Date Range Picker - docs: https://www.daterangepicker.com/ -->
@@ -320,68 +322,16 @@
 							<div class="panel-dropdown-content padding-reset">
 								<div class="panel-dropdown-scrollable">
 									
+									<div id="opening-time-slot"></div>
+									
 									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-1">
-										<label for="time-slot-1">
-											<strong>8:30 am - 9:00 am</strong>
-											<span>1 slot available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-2">
-										<label for="time-slot-2">
-											<strong>9:00 am - 9:30 am</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-3">
-										<label for="time-slot-3">
-											<strong>9:30 am - 10:00 am</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-4">
-										<label for="time-slot-4">
-											<strong>10:00 am - 10:30 am</strong>
-											<span>3 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-5">
-										<label for="time-slot-5">
-											<strong>13:00 pm - 13:30 pm</strong>
-											<span>2 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-6">
-										<label for="time-slot-6">
-											<strong>13:30 pm - 14:00 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
-
-									<!-- Time Slot -->
-									<div class="time-slot">
-										<input type="radio" name="time-slot" id="time-slot-7">
-										<label for="time-slot-7">
-											<strong>14:00 pm - 14:30 pm</strong>
-											<span>1 slots available</span>
-										</label>
-									</div>
+									<!--<div class="time-slot">-->
+									<!--	<input type="radio" name="time-slot" id="time-slot-7">-->
+									<!--	<label for="time-slot-7">-->
+									<!--		<strong>14:00 pm - 14:30 pm</strong>-->
+									<!--		<span>1 slots available</span>-->
+									<!--	</label>-->
+									<!--</div>-->
 
 								</div>
 							</div>
@@ -390,25 +340,25 @@
 					<!-- Panel Dropdown / End -->
 
 					<!-- Panel Dropdown -->
-					<div class="col-lg-12">
-						<div class="panel-dropdown">
-							<a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>
-							<div class="panel-dropdown-content">
+					<!--<div class="col-lg-12">-->
+					<!--	<div class="panel-dropdown">-->
+					<!--		<a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>-->
+					<!--		<div class="panel-dropdown-content">-->
 
 								<!-- Quantity Buttons -->
-								<div class="qtyButtons">
-									<div class="qtyTitle">Adults</div>
-									<input type="text" name="qtyInput" value="1">
-								</div>
+					<!--			<div class="qtyButtons">-->
+					<!--				<div class="qtyTitle">Adults</div>-->
+					<!--				<input type="text" name="qtyInput" value="1">-->
+					<!--			</div>-->
 
-								<div class="qtyButtons">
-									<div class="qtyTitle">Childrens</div>
-									<input type="text" name="qtyInput" value="0">
-								</div>
+					<!--			<div class="qtyButtons">-->
+					<!--				<div class="qtyTitle">Childrens</div>-->
+					<!--				<input type="text" name="qtyInput" value="0">-->
+					<!--			</div>-->
 
-							</div>
-						</div>
-					</div>
+					<!--		</div>-->
+					<!--	</div>-->
+					<!--</div>-->
 					<!-- Panel Dropdown / End -->
 
 				</div>
@@ -454,20 +404,20 @@
 			<!-- Contact -->
 			<div class="boxed-widget margin-top-35">
 				<div class="hosted-by-title">
-					<h4><span>Hosted by</span> <a href="pages-user-profile.html">Tom Perrin</a></h4>
+					<h4><span>Hosted by</span> {{$host_name}}</h4>
 					<a href="pages-user-profile.html" class="hosted-by-avatar"><img src="images/dashboard-avatar.jpg" alt=""></a>
 				</div>
-				<ul class="listing-details-sidebar">
-					<li><i class="sl sl-icon-phone"></i> (123) 123-456</li>
+				<!--<ul class="listing-details-sidebar">-->
+				<!--	<li><i class="sl sl-icon-phone"></i> (123) 123-456</li>-->
 					<!-- <li><i class="sl sl-icon-globe"></i> <a href="#">https://example.com</a></li> -->
-					<li><i class="fa fa-envelope-o"></i> <a href="#">tom@example.com</a></li>
-				</ul>
+				<!--	<li><i class="fa fa-envelope-o"></i> <a href="#">tom@example.com</a></li>-->
+				<!--</ul>-->
 
-				<ul class="listing-details-sidebar social-profiles">
-					<li><a href="#" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-					<li><a href="#" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li>
+				<!--<ul class="listing-details-sidebar social-profiles">-->
+				<!--	<li><a href="#" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li>-->
+				<!--	<li><a href="#" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li>-->
 					<!-- <li><a href="#" class="gplus-profile"><i class="fa fa-google-plus"></i> Google Plus</a></li> -->
-				</ul>
+				<!--</ul>-->
 
 				<!-- Reply to review popup -->
 				<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
@@ -491,12 +441,12 @@
 				<span>159 people bookmarked this place</span>
 
 					<!-- Share Buttons -->
-					<ul class="share-buttons margin-top-40 margin-bottom-0">
-						<li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>
-						<li><a class="twitter-share" href="#"><i class="fa fa-twitter"></i> Tweet</a></li>
-						<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>
+					<!--<ul class="share-buttons margin-top-40 margin-bottom-0">-->
+					<!--	<li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>-->
+					<!--	<li><a class="twitter-share" href="#"><i class="fa fa-twitter"></i> Tweet</a></li>-->
+					<!--	<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>-->
 						<!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
-					</ul>
+					<!--</ul>-->
 					<div class="clearfix"></div>
 			</div>
 
@@ -622,15 +572,38 @@
 		});
 		
 	}
+</script>
+
+<script>
+	let gym_open_times = @json($gym_open_times);
 	
-	<!--const gym_equipment = '{{$gym_equipment}}';-->
+	$('#date-picker').on("change",function(){
+		
+		$("#opening-time-slot").empty();
 	
-	<!--for($i = 0; $i < $gym_equipment_count; $i++){-->
-	<!--	if(gym_equipment[$i] != ""){-->
-	<!--		$(document).ready(function(){-->
-	<!--		$('#equipment_weight_range').append(-->
-	<!--	}-->
-	<!--}-->
+		let date = $("#date-picker").val();
+		
+		let openingtimes = $.grep(gym_open_times, function(elem,index){
+			return (elem.date == date);
+		});
+		
+		<!--console.log(openingtime_of_the_day[0].from_time);-->
+		
+		$.each(openingtimes, function(index,openingtime){
+			$("#opening-time-slot").append(
+			`<div class="time-slot">
+						<input type="radio" name="time-slot" id="time-slot-1">
+						<label for="time-slot-1">
+							<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
+						</label>
+					</div>`);
+		});
+		
+		})
+	
+	
+           
+	
 	
 	
 </script>

@@ -422,7 +422,7 @@ var infoBox_ratingType = 'star-rating';
                             '<div class="marker-card">'+
                                '<div class="front face">' + self.markerIco + '</div>'+
                                '<div class="back face">' + self.markerIco + '</div>'+
-                               '<div class="marker-arrow"></div>'+
+                              // '<div class="marker-arrow"></div>'+
                             '</div>'+
                           '</div>'
 
