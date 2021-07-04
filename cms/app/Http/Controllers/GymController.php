@@ -26,8 +26,16 @@ class GymController extends Controller
     public function index(Request $request)
     {
         //
-        $gym_id = $request->gym_id;
+        $request->session()->put('gym_id', $request->gym_id);
+        // dd($request->session()->get('gym_id'));
+        $gym_id = $request->session()->get('gym_id');
+        // dd($gym_id);
+        
+        // session()-> put('gym_infos', Gym::where('id', $gym_id));
+        // $gym_infos = $req->session()->get('gym_infos');
         $gym_infos = Gym::where('id', $gym_id)->get();
+        // dd($gym_infos);
+        
         $gym_title = $gym_infos[0]->gym_title;
         $host_user_id  = $gym_infos[0]->user_id;
         // inner joinでホスト名を取得

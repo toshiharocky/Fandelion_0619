@@ -47,10 +47,14 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         //
+        $request->session()->all();
+        dd($request->session()->get('gym_id'));
+        
         $user_name =  Auth::user()->name;
             return view('booking',[
                 'user_name'=>$user_name,
                 ]);
+        
     }
 
     /**
