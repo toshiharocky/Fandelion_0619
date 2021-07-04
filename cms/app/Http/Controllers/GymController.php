@@ -40,6 +40,14 @@ class GymController extends Controller
         
         
         $cancel_policy_id  = $gym_infos[0]->cancel_policy_id;
+         // inner joinでキャンセルポリシーを取得
+        $cancel_policy = DB::table('cancel_policies')
+                    ->join('gyms', 'cancel_policies.id', '=', 'gyms.cancel_policy_id')
+                    ->select('policy_name', 'policy_desc')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        // 
+        
         $gymstatus_id  = $gym_infos[0]->gymstatus_id;
         $gym_desc  = $gym_infos[0]->gym_desc;
         $gymType_id  = $gym_infos[0]->gymType_id;
@@ -96,16 +104,22 @@ class GymController extends Controller
         // ジムのスケジュールを取得する
         $gym_schedule = DB::table('gyms')
                     ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
-                    ->select('gym_id','from_time', 'to_time', 'price', 'status', 'day')
-                    ->where('gym_id',$gym_id AND 'status',"1")
+                    ->select('gym_id','from_time', 'to_time', 'price', 'status', 'day', 'booking_id')
+                    ->where('gym_id',$gym_id)
                     ->get();
         $gym_schedule_count = count($gym_schedule);
         
         for($i=0; $i<$gym_schedule_count; $i++){
             $gym_from_times_str = [$gym_schedule[$i]->from_time][0];
             $gym_to_times_str = [$gym_schedule[$i]->to_time][0];
+            if([$gym_schedule[$i]->booking_id][0] == ""){
+                $gym_status = "○";
+            }else{
+                $gym_status = "×";
+            }
+            
             $gym_open_times[] = array('date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("H:i", strtotime($gym_from_times_str))
-            , 'to_time' => date("H:i", strtotime($gym_to_times_str)));
+            , 'to_time' => date("H:i", strtotime($gym_to_times_str)), 'status' => $gym_status);
         }
         // dd($gym_open_times);
         
@@ -173,7 +187,7 @@ class GymController extends Controller
                 'gym_title' => $gym_title,
                 'host_user_id,' => $host_user_id,
                 'host_name' => $host_name,
-                'cancel_policy_id' => $cancel_policy_id,
+                'cancel_policy' => $cancel_policy,
                 'gymstatus_id' => $gymstatus_id,
                 'gym_desc' => $gym_desc,
                 'gymType_id' => $gymType_id,
@@ -205,7 +219,7 @@ class GymController extends Controller
                 'gym_title' => $gym_title,
                 'host_user_id,' => $host_user_id,
                 'host_name' => $host_name,
-                'cancel_policy_id' => $cancel_policy_id,
+                'cancel_policy' => $cancel_policy,
                 'gymstatus_id' => $gymstatus_id,
                 'gym_desc' => $gym_desc,
                 'gymType_id' => $gymType_id,

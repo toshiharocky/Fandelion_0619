@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(GymAreaTableSeeder::class);
         $this->call(GuestGenderTableSeeder::class);
         $this->call(CancelPolicyTableSeeder::class);
+        $this->call(BookingStatusTableSeeder::class);
     }
 }

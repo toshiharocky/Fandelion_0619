@@ -57,8 +57,9 @@
 			<div id="listing-nav" class="listing-nav-container">
 				<ul class="listing-nav">
 					<li><a href="#listing-overview" class="active">ジムの概要</a></li>
-					<li><a href="#listing-pricing-list">設備</a></li>
+					<li><a href="#listing-equipment-list">設備</a></li>
 					<li><a href="#listing-location">場所</a></li>
+					<li><a href="#listing-cancel_policy">キャンセルポリシー</a></li>
 					<li><a href="#listing-reviews">レビュー</a></li>
 					<!--<li><a href="#add-review">Add Review</a></li>-->
 				</ul>
@@ -114,7 +115,7 @@
 
 
 			<!-- Food Menu -->
-			<div id="listing-pricing-list" class="listing-section">
+			<div id="listing-equipment-list" class="listing-section">
 				<h3 class="listing-desc-headline margin-top-70 margin-bottom-30">設備</h3>
 
 				<!--<div class="show-more">-->
@@ -152,6 +153,23 @@
 				</div>
 				<h5>具体的な所在地は予約後に表示されます。</h5>
 			</div>
+			
+			
+			<!-- Location -->
+			<div id="listing-cancel_policy" class="listing-section">
+				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">キャンセルポリシー</h3>
+
+				<!--<div class="show-more">-->
+					<div class="pricing-list-container">
+						<ul>
+							<li>
+								<h5>{{$cancel_policy[0]->policy_name}}</h5>
+								<p>{{$cancel_policy[0]->policy_desc}}</p>
+							</li>
+						</ul>
+					</div>
+			</div>
+			
 				
 			<!-- Reviews -->
 			<div id="listing-reviews" class="listing-section">
@@ -319,7 +337,7 @@
 					<div class="col-lg-12">
 						<div class="panel-dropdown time-slots-dropdown">
 							<a href="#">Time Slots</a>
-							<div class="panel-dropdown-content padding-reset">
+							<div class="panel-dropdown-content padding-reset" style="width:100%;">
 								<div class="panel-dropdown-scrollable">
 									
 									<div id="opening-time-slot"></div>
@@ -364,7 +382,7 @@
 				</div>
 				
 				<!-- Book Now -->
-				<a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Request To Book</a>
+				<a href="/gym_booking" class="button book-now fullwidth margin-top-5">Request To Book</a>
 			</div>
 			<!-- Book Now / End -->
 
@@ -576,6 +594,7 @@
 
 <script>
 	let gym_open_times = @json($gym_open_times);
+	console.log(gym_open_times);
 	
 	$('#date-picker').on("change",function(){
 		
@@ -592,12 +611,16 @@
 		$.each(openingtimes, function(index,openingtime){
 			$("#opening-time-slot").append(
 			`<div class="time-slot">
-						<input type="radio" name="time-slot" id="time-slot-1">
-						<label for="time-slot-1">
-							<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
-						</label>
-					</div>`);
+				<p id="time-slot-1" >
+				<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
+					<strong class="booking_status" style="font-size:25px; padding-right:15px;">${openingtime.status}</strong>
+					<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
+				</label>
+				</p>
+			</div>`);
 		});
+		
+		
 		
 		})
 	

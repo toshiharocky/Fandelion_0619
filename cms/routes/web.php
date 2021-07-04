@@ -41,3 +41,8 @@ Route::post('/add_gym','GymController@store');
 
 // ジム情報表示
 Route::post('/gym_introduction','GymController@index');
+
+// ログインユーザーのみ、ジム予約画面に遷移
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/gym_booking','BookingController@store');
+});
