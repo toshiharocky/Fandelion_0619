@@ -15,9 +15,7 @@
     		justify-content:space-around;
     	}
     	
-    	.booking_elements{
-    		width:30%;
-    	}
+    	
     	
     	.element_details{
     		text-align:right;
@@ -32,6 +30,15 @@
     		flex-direction:row;
     		justify-content:center;
     	}
+    	
+    	#submit_button	 {
+    		text-align:right;
+    		margin-top:15px;
+    	}
+    	.cursor {
+    		cursor: pointer !important;
+    	}
+    	
     </style>
 @endpush
 
@@ -61,17 +68,17 @@
 				<form method=post action="/booking_confirm">
 				@csrf
 					<div id="booking_overview">
-						<div id="time" class="booking_elements">
+						<div id="time" class="booking_elements" style="width:25%;">
 							<h4>時間：60分</h4>
 							<h5 class="element_details">10:00 〜 11:00</h5>
 						</div>
-						<div id="guest" class="booking_elements">
+						<div id="guest" class="booking_elements" style="width:20%;">
 							<h4>人数：2名</h4>
 							<h5 class="element_details">男性 1名</h5>
 							<h5 class="element_details">女性 1名</h5>
 							<h5 class="element_details">その他 1名</h5>
 						</div>
-						<div id="price" class="booking_elements">
+						<div id="price" class="booking_elements" style="width:30%;">
 							<h4>総計(目安)：726円</h4>
 							<h5 class="element_details">ジム使用料 600円</h5>
 							<h5 class="element_details">サービス料 60円</h5>
@@ -81,7 +88,9 @@
 					</div>
 					
 					<!-- Book Now -->
-					<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認">
+					<div id="submit_button">
+						<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="background-color:#dcdcdc; color:white;" disabled>
+					</div>
 				</form>
 			</div>
 			<!-- Book Now / End -->
@@ -209,13 +218,13 @@
 							</div>
 							<div class="col-lg-4">
 								<h4 style="text-align:center;">開始</h4>
-								<div id="opening-time-slot">
+								<div id="start-time-slot">
 									
 								</div>
 							</div>
 							<div class="col-lg-4">
 								<h4 style="text-align:center;">終了</h4>
-								<div id="opening-time-slot"></div>
+								<div id="end-time-slot"></div>
 							</div>
 						</div>	
 					</div>
@@ -427,10 +436,18 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 	let gym_open_times = @json($gym_open_times);
 	console.log(gym_open_times);
 	
+	let guest_gender_flg = {{$guest_gender_flg}};
+	let guest_gender = '{{$guest_gender}}';
+	console.log(guest_gender_flg);
+	console.log(guest_gender);
+	
+	
+	// date-pickerが変わったらslot-changer()を発火
 	$('#date-picker').on("change",function(){
 		
-		$("#time-slots").empty();
-		$("#opening-time-slot").empty();
+		$("#time-slots").empty();	
+		$("#start-time-slot").empty();
+		$("#end-time-slot").empty();
 		
 	
 		let date = $("#date-picker").val();
@@ -444,17 +461,11 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		});
 		
 		
-		console.log(openingtimes);
-		
-		<!--console.log(openingtimes[3].status);-->
-		
-		<!--console.log(openingtime_of_the_day[0].from_time);-->
 		
 		$.each(openingtimes, function(index,openingtime){
-			console.log(openingtime.to_time <= end_time);
 			if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){
 				if(openingtime.status == "○"){
-				
+					
 					$("#time-slots").append(
 						`<div class="time-slot">
 						<p id="time-slot-1" >
@@ -465,12 +476,12 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 					</div>`
 					)
 					
-					$("#opening-time-slot").append(
+					$("#start-time-slot").append(
 					`<div class="time-slot">
 						<p id="time-slot-1" >
-						<a href="#" id=>
-							<label for="time-slot-1" class="booking_price" style="background-color: #fff0c1;">
-								<strong >${openingtime.price}円</strong>
+						<a class="start_slot">
+							<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price booking_price_start" style="background-color:#fff0c1; cursor:pointer;">
+								<strong value="${openingtime.price}">${openingtime.price}円</strong>
 							</label>
 						</a>
 						</p>
@@ -486,16 +497,87 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 					</div>`
 					)
 					
-					$("#opening-time-slot").append(
+					$("#start-time-slot").append(
 					`<div class="time-slot">
 						<p id="time-slot-1" >
 						<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-							<strong class="booking_status" style="font-size:25px;">${openingtime.status}</strong>
+							<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>
 						</label>
 						</p>
 					</div>`);
 				}
 			}
+		});
+		
+		$(".start_slot").on("click",function(){
+			
+			console.log($(this).children('label').attr('id'));
+			console.log($(this).children('label').children('strong').attr('value'));
+			
+			// 開始時間を設定する
+			let start_time_set = $(this).children('label').attr('value');
+			
+			// 選択した箇所のみ背景色を変える
+			$(".booking_price_start").css('background-color', '#fff0c1');
+			$(this).children('label').css('background-color', 'red');
+			
+			
+			// 終了時刻のスロットを表示する
+			$("#end-time-slot").empty();
+			$.each(openingtimes, function(index,openingtime){
+				if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){
+					console.log(openingtime.from_time < start_time_set);
+					if(openingtime.status == "○"){
+						if(openingtime.from_time < start_time_set){
+						$("#end-time-slot").append(
+							`<div class="time-slot">
+								<p id="time-slot-1" >
+								<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
+									<strong class="booking_status" style="font-size:25px;"> - </strong>
+								</label>
+								</p>
+							</div>`);
+							
+						}else {
+							$("#end-time-slot").append(
+							`<div class="time-slot">
+								<p id="time-slot-1" >
+								<a class="end_slot">
+									<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price  booking_price_end" style="background-color:#fff0c1; cursor:pointer;">
+										<strong value="${openingtime.price}">${openingtime.price}円</strong>
+									</label>
+								</a>
+								</p>
+							</div>`);
+						}
+					} else {
+						$("#end-time-slot").append(
+						`<div class="time-slot">
+							<p id="time-slot-1" >
+							<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
+								<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>
+							</label>
+							</p>
+						</div>`);
+					}
+				}
+			});
+			
+			$(".end_slot").on("click",function(){
+			
+				console.log($(this).children('label').attr('id'));
+				console.log($(this).children('label').children('strong').attr('value'));
+				
+				// 開始時間を設定する
+				let start_time_set = $(this).children('label').attr('value');
+				
+				// 選択した箇所のみ背景色を変える
+				$(".booking_price_end").css('background-color', '#fff0c1');
+				$(this).children('label').css('background-color', 'red');
+			
+			});
+			
+			
 		});
 		
 		

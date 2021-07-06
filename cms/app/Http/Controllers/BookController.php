@@ -57,6 +57,18 @@ class BookController extends Controller
         $gym_infos = Gym::where('id', $gym_id)->get();
         // dd($gym_infos);
         
+        
+        // guest_genderの希望を表示
+        $guest_gender_flg  = $gym_infos[0]->guest_gender;
+        $guest_gender_title = DB::table('guest_genders')
+                        ->join('gyms', 'guest_genders.id', '=', 'gyms.guest_gender')
+                        ->select('guest_genders.guest_gender')
+                        ->where('gyms.id',$gym_id)
+                        ->get();
+        $guest_gender = $guest_gender_title[0]->guest_gender;
+        // dd($guest_gender);
+        
+        
         $gym_title = $gym_infos[0]->gym_title;
         $addr  = $gym_infos[0]->addr;
         
@@ -156,6 +168,8 @@ class BookController extends Controller
             'gym_title' => $gym_title,
             'gym_open_times' => $gym_open_times,
             'host_name' => $host_name,
+            'guest_gender_flg' => $guest_gender_flg,
+            'guest_gender' => $guest_gender,
             ]);
 
         
