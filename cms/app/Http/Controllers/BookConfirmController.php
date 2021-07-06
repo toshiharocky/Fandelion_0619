@@ -2,21 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use App\MemStatus;
 use Illuminate\Http\Request;
-use App\User;//この行を上に追加
-use Auth;//この行を上に追加
-use Validator;//この行を上に追加
-use App\GymStatus;
-use App\Gym;
-use App\GymImage;
-use App\Equipment;
-use App\GymSchedule;
-use Illuminate\Support\Str;
-use DateTime;
 
-class BookingController extends Controller
+class BookConfirmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -47,16 +35,15 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         //
-        
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Booking  $booking
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Booking $booking)
+    public function show($id)
     {
         //
     }
@@ -64,10 +51,10 @@ class BookingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Booking  $booking
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Booking $booking)
+    public function edit($id)
     {
         //
     }
@@ -76,10 +63,10 @@ class BookingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Booking  $booking
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Booking $booking)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,10 +74,10 @@ class BookingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Booking  $booking
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Booking $booking)
+    public function destroy($id)
     {
         //
     }

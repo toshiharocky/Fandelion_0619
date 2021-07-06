@@ -1100,7 +1100,7 @@
 										<div class="col-md-3">
 											<select type="text" name="monday_start_time" data-placeholder="Opening Time">
 												
-												<option>Closed</option>
+												<!--<option>Closed</option>-->
 												<option value="00:00">00:00</option>
 												<option value="01:00">01:00</option>
 												<option value="02:00">02:00</option>
@@ -1132,7 +1132,7 @@
 										<div class="col-md-3">
 											<select name="monday_end_time" data-placeholder="Closing Time">
 												
-												<option>Closed</option>
+												<!--<option>Closed</option>-->
 												<option value="00:00">00:00</option>
 												<option value="01:00">01:00</option>
 												<option value="02:00">02:00</option>

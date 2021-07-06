@@ -44,5 +44,16 @@ Route::post('/gym_introduction','GymController@index');
 
 // ログインユーザーのみ、ジム予約画面に遷移
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/gym_booking','BookingController@store');
+   Route::get('/gym_booking','BookController@store');
+});
+
+// ログインユーザーのみ、ジム予約確認画面に遷移
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/booking_confirm','BookConfirmController@store');
+});
+
+
+// ログインユーザーのみ、ジム予約を実行
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/booking_completed','BookingController@store');
 });
