@@ -69,8 +69,11 @@
 				@csrf
 					<div id="booking_overview">
 						<div id="time" class="booking_elements" style="width:25%;">
-							<h4>時間：60分</h4>
-							<h5 class="element_details">10:00 〜 11:00</h5>
+							<div id="total_time">
+								<h4>時間</h4>
+							</div>
+							<div id="selected_date"></div>
+							<div id="selected_slot"></div>
 						</div>
 						<div id="guest" class="booking_elements" style="width:20%;">
 							<h4>人数：2名</h4>
@@ -136,95 +139,99 @@
 			<h4 class="listing-desc-headline margin-top-0 margin-bottom-30">日程</h4>
 			<div class="row with-forms  margin-top-0">
 					<!-- Date Range Picker - docs: https://www.daterangepicker.com/ -->
-					<div class="col-lg-4">
-						<h4 style="text-align:center;">日付を選択</h4>
-						<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+					<div id="select_time_range">
+						<div class="col-lg-4">
+							<h4 style="text-align:center;">日付を選択</h4>
+							<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
+						
+						<h4 style="text-align:center;">カレンダー表示時間を選択</h4>
+							<div class="row" style="display:flex; justify-content:center; align-items:middle;">
+								<div class="col-md-6">
+									<select type="text" id="start_time" data-placeholder="Opening Time">
+										
+										<!--<option>Closed</option>-->
+										<option value="00:00">00:00</option>
+										<option value="01:00">01:00</option>
+										<option value="02:00">02:00</option>
+										<option value="03:00">03:00</option>
+										<option value="04:00">04:00</option>
+										<option value="05:00">05:00</option>
+										<option value="06:00">06:00</option>
+										<option value="07:00">07:00</option>
+										<option value="08:00">08:00</option>
+										<option value="09:00">09:00</option>
+										<option value="10:00" selected>10:00</option>
+										<option value="11:00">11:00</option>
+										<option value="12:00">12:00</option>	
+										<option value="13:00">13:00</option>
+										<option value="14:00">14:00</option>
+										<option value="15:00">15:00</option>
+										<option value="16:00">16:00</option>
+										<option value="17:00">17:00</option>
+										<option value="18:00">18:00</option>
+										<option value="19:00">19:00</option>
+										<option value="20:00">20:00</option>
+										<option value="21:00">21:00</option>
+										<option value="22:00">22:00</option>
+										<option value="23:00">23:00</option>
+										<option value="24:00">24:00</option>
+									</select>
+								</div>
+								<div class="col-md-2" style="text-align:center;"><h5> 〜 </h5></div>
+								<div class="col-md-6">
+									<select id="end_time" data-placeholder="Closing Time">
+										
+										<!--<option>Closed</option>-->
+										<option value="00:00">00:00</option>
+										<option value="01:00">01:00</option>
+										<option value="02:00">02:00</option>
+										<option value="03:00">03:00</option>
+										<option value="04:00">04:00</option>
+										<option value="05:00">05:00</option>
+										<option value="06:00">06:00</option>
+										<option value="07:00">07:00</option>
+										<option value="08:00">08:00</option>
+										<option value="09:00">09:00</option>
+										<option value="10:00">10:00</option>
+										<option value="11:00">11:00</option>
+										<option value="12:00">12:00</option>	
+										<option value="13:00">13:00</option>
+										<option value="14:00">14:00</option>
+										<option value="15:00">15:00</option>
+										<option value="16:00">16:00</option>
+										<option value="17:00">17:00</option>
+										<option value="18:00" selected>18:00</option>
+										<option value="19:00">19:00</option>
+										<option value="20:00">20:00</option>
+										<option value="21:00">21:00</option>
+										<option value="22:00">22:00</option>
+										<option value="23:00">23:00</option>
+										<option value="24:00">24:00</option>
+									</select>
+								</div>
+							</div>
+						</div>
 					</div>
 					<!-- Panel Dropdown -->
 					<div class="col-lg-8">
-						<h4 style="text-align:center;">カレンダー表示時間を選択</h4>
-						<div class="row" style="display:flex; justify-content:center; align-items:middle;">
-							<div class="col-md-3">
-								<select type="text" id="start_time" data-placeholder="Opening Time">
-									
-									<!--<option>Closed</option>-->
-									<option value="00:00">00:00</option>
-									<option value="01:00">01:00</option>
-									<option value="02:00">02:00</option>
-									<option value="03:00">03:00</option>
-									<option value="04:00">04:00</option>
-									<option value="05:00">05:00</option>
-									<option value="06:00">06:00</option>
-									<option value="07:00">07:00</option>
-									<option value="08:00">08:00</option>
-									<option value="09:00">09:00</option>
-									<option value="10:00" selected>10:00</option>
-									<option value="11:00">11:00</option>
-									<option value="12:00">12:00</option>	
-									<option value="13:00">13:00</option>
-									<option value="14:00">14:00</option>
-									<option value="15:00">15:00</option>
-									<option value="16:00">16:00</option>
-									<option value="17:00">17:00</option>
-									<option value="18:00">18:00</option>
-									<option value="19:00">19:00</option>
-									<option value="20:00">20:00</option>
-									<option value="21:00">21:00</option>
-									<option value="22:00">22:00</option>
-									<option value="23:00">23:00</option>
-									<option value="24:00">24:00</option>
-								</select>
-							</div>
-							<div class="col-md-2" style="text-align:center;"><h5> 〜 </h5></div>
-							<div class="col-md-3">
-								<select id="end_time" data-placeholder="Closing Time">
-									
-									<!--<option>Closed</option>-->
-									<option value="00:00">00:00</option>
-									<option value="01:00">01:00</option>
-									<option value="02:00">02:00</option>
-									<option value="03:00">03:00</option>
-									<option value="04:00">04:00</option>
-									<option value="05:00">05:00</option>
-									<option value="06:00">06:00</option>
-									<option value="07:00">07:00</option>
-									<option value="08:00">08:00</option>
-									<option value="09:00">09:00</option>
-									<option value="10:00">10:00</option>
-									<option value="11:00">11:00</option>
-									<option value="12:00">12:00</option>	
-									<option value="13:00">13:00</option>
-									<option value="14:00">14:00</option>
-									<option value="15:00">15:00</option>
-									<option value="16:00">16:00</option>
-									<option value="17:00">17:00</option>
-									<option value="18:00" selected>18:00</option>
-									<option value="19:00">19:00</option>
-									<option value="20:00">20:00</option>
-									<option value="21:00">21:00</option>
-									<option value="22:00">22:00</option>
-									<option value="23:00">23:00</option>
-									<option value="24:00">24:00</option>
-								</select>
-							</div>
+						
+						<div id="action_suggest" style="text-align:center;">
+							
+							<h4 style="text-align:center;">開始時間を選択してください</h4>
+							
 						</div>
 						<div class="row" style="display:flex; justify-content:center; align-items:middle;">
 							
-							<div class="col-lg-4">
-								<h4 style="text-align:center;">スロット</h4>
-								<div id="time-slots">
+							
+							<!--<div class="col-lg-4">-->
+							<!--	<div id="time-slots">-->
 									
-								</div>
-							</div>
-							<div class="col-lg-4">
-								<h4 style="text-align:center;">開始</h4>
+							<!--	</div>-->
+							<!--</div>-->
+							<div class="col-lg-6">
 								<div id="start-time-slot">
 									
 								</div>
-							</div>
-							<div class="col-lg-4">
-								<h4 style="text-align:center;">終了</h4>
-								<div id="end-time-slot"></div>
 							</div>
 						</div>	
 					</div>
@@ -449,12 +456,15 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		$("#start-time-slot").empty();
 		$("#end-time-slot").empty();
 		
-	
+		
 		let date = $("#date-picker").val();
+		let showing_date = $("#showing_date").attr("value");
+		
+		
+		
+		
 		let start_time = $("#start_time").val();
-		console.log(start_time);
 		let end_time = $("#end_time").val();
-		console.log(end_time);
 		
 		let openingtimes = $.grep(gym_open_times, function(elem,index){
 			return (elem.date == date);
@@ -465,103 +475,186 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		$.each(openingtimes, function(index,openingtime){
 			if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){
 				if(openingtime.status == "○"){
-					
-					$("#time-slots").append(
-						`<div class="time-slot">
-						<p id="time-slot-1" >
-						<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-							<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
-						</label>
-						</p>
-					</div>`
+				
+				$("#time-slots").append(
+						``
 					)
 					
 					$("#start-time-slot").append(
-					`<div class="time-slot">
+					`
+					
+					<div class="time-slot">
 						<p id="time-slot-1" >
 						<a class="start_slot">
 							<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price booking_price_start" style="background-color:#fff0c1; cursor:pointer;">
-								<strong value="${openingtime.price}">${openingtime.price}円</strong>
+								<strong value="${openingtime.price}"> ${openingtime.from_time} - ${openingtime.to_time} ：　${openingtime.price}円</strong>
 							</label>
+							<input type="hidden" value="${openingtime.to_time}" >
 						</a>
 						</p>
 					</div>`);
 				} else {
-					$("#time-slots").append(
-						`<div class="time-slot">
-						<p id="time-slot-1" >
-						<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-							<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>
-						</label>
-						</p>
-					</div>`
-					)
-					
 					$("#start-time-slot").append(
 					`<div class="time-slot">
 						<p id="time-slot-1" >
 						<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-							<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>
+							<strong class="booking_status" value="${openingtime.status}">${openingtime.from_time} - ${openingtime.to_time}　：　${openingtime.status}</strong>
 						</label>
 						</p>
 					</div>`);
+					
+				<!--	$("#time-slots").append(-->
+				<!--		`<div class="time-slot">-->
+				<!--		<p id="time-slot-1" >-->
+				<!--		<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
+				<!--			<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>-->
+				<!--		</label>-->
+				<!--		</p>-->
+				<!--	</div>`-->
+				<!--	)-->
+					
+				<!--	$("#start-time-slot").append(-->
+				<!--	`<div class="time-slot">-->
+				<!--		<p id="time-slot-1" >-->
+				<!--		<a class="start_slot">-->
+				<!--			<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price booking_price_start" style="background-color:#fff0c1; cursor:pointer;">-->
+				<!--				<strong value="${openingtime.price}">${openingtime.price}円</strong>-->
+				<!--			</label>-->
+				<!--		</a>-->
+				<!--		</p>-->
+				<!--	</div>`);-->
+				<!--} else {-->
+				<!--	$("#time-slots").append(-->
+				<!--		`<div class="time-slot">-->
+				<!--		<p id="time-slot-1" >-->
+				<!--		<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
+				<!--			<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>-->
+				<!--		</label>-->
+				<!--		</p>-->
+				<!--	</div>`-->
+				<!--	)-->
+					
+				<!--	$("#start-time-slot").append(-->
+				<!--	`<div class="time-slot">-->
+				<!--		<p id="time-slot-1" >-->
+				<!--		<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
+				<!--			<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>-->
+				<!--		</label>-->
+				<!--		</p>-->
+				<!--	</div>`);-->
 				}
 			}
 		});
 		
+		// 開始時刻のスロットをクリックした場合の処理
 		$(".start_slot").on("click",function(){
+			// #showing_dateとdateが一緒の場合は「日付が変わる場合、これまでの内容はクリアされます。よろしいですか？」というアラートをだす。
+			let date = $("#date-picker").val();
+			let showing_date = $("#showing_date").attr("value");
 			
-			console.log($(this).children('label').attr('id'));
-			console.log($(this).children('label').children('strong').attr('value'));
+			if($("#selected_slot > div").length != 0 && date != showing_date){
+				let date_check = window.confirm('日付が変わる場合、これまでの内容はクリアされます。よろしいですか？');
+				if(date_check){
+					$("#selected_date").empty();
+					$("#selected_slot").empty();
+				}else{
+					return;
+				}
+			}
 			
-			// 開始時間を設定する
+			if($(this).children('label').hasClass("active")){
+				// 当該箇所のlabelタグのactiveクラスを外す
+				$(this).children('label').removeClass("active");
+				
+				// 選択した箇所のみ背景色を元に戻す
+				$(this).children('label').css('background-color', '#fff0c1');
+				
+			
+			
+				
+				// 予約内容から削除するスケジュールIDを取得する
+				let schedule_id = $(this).children('label').attr('id');
+				console.log(schedule_id);
+				
+				<!--let parent = document.getElementById('selected_slot');-->
+				<!--let remove_child = document.getElementsByClassName('schedule_id');-->
+				<!--console.log(remove_child);-->
+				
+				// 指定したスケジュールIDの予約内容を表示画面から削除する
+				<!--parent.removeChild(remove_child);-->
+				$("."+schedule_id).remove();
+				
+				// labelの数を取得する
+				let labels = $("#selected_slot > div").length;
+				console.log(labels);
+			
+				
+			}else{
+			
+			// 当該箇所のlabelタグにactiveクラスをつける
+			$(this).children('label').addClass("active");
+			
+			// 開始時間を取得する
+			let schedule_id = $(this).children('label').attr('id');
 			let start_time_set = $(this).children('label').attr('value');
+			let to_time_set = $(this).children('input').attr('value');
 			
 			// 選択した箇所のみ背景色を変える
-			$(".booking_price_start").css('background-color', '#fff0c1');
 			$(this).children('label').css('background-color', 'red');
 			
 			
-			// 終了時刻のスロットを表示する
-			$("#end-time-slot").empty();
-			$.each(openingtimes, function(index,openingtime){
-				if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){
-					console.log(openingtime.from_time < start_time_set);
-					if(openingtime.status == "○"){
-						if(openingtime.from_time < start_time_set){
-						$("#end-time-slot").append(
-							`<div class="time-slot">
-								<p id="time-slot-1" >
-								<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-									<strong class="booking_status" style="font-size:25px;"> - </strong>
-								</label>
-								</p>
-							</div>`);
-							
-						}else {
-							$("#end-time-slot").append(
-							`<div class="time-slot">
-								<p id="time-slot-1" >
-								<a class="end_slot">
-									<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price  booking_price_end" style="background-color:#fff0c1; cursor:pointer;">
-										<strong value="${openingtime.price}">${openingtime.price}円</strong>
-									</label>
-								</a>
-								</p>
-							</div>`);
-						}
-					} else {
-						$("#end-time-slot").append(
-						`<div class="time-slot">
-							<p id="time-slot-1" >
-							<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-								<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>
-							</label>
-							</p>
-						</div>`);
-					}
-				}
-			});
+			// labelの数（表示されたスロットの数）から、総利用時間を計算する（15分×スロット数）
+			
+			
+			// スロットのpriceを取得し、サービス料・消費税・総計を
+			
+			
+			
+			// 
+			
+			
+			$("#total_time").empty();
+			$("#selected_date").empty();
+			$("#total_time").append(
+				`<h4>時間：60分</h4>`
+			);
+			$("#selected_date").append(
+				`<h4 id="showing_date" class="element_details" style="text-align:left; margin-bottom:0;" name="booking_from_time" value="${date}">${date}</h4>`
+			);
+			$("#selected_slot").append(
+				`
+				<div id="from_to" style="display:flex; justify-content:flex-end;" class="${schedule_id}">
+					<h5 class="element_details" name="booking_from_time" value="${start_time_set}">${start_time_set} 〜 ${to_time_set}</h5>
+					<!--<h5 class="element_details" style="margin:10px 5px"></h5>-->
+				</div>`
+			);
+			
+			
+			// labelの数を取得する
+			let labels = $("#selected_slot > div").length;
+			console.log(labels);
+			
+			
+			}
+			
+			<!--// action_suggestの文言を変更する-->
+			<!--$("#action_suggest").empty();-->
+			<!--$("#action_suggest").append(-->
+			<!--	`<h4 style="text-align:center;">終了時間を選択してください</h4>`-->
+			<!--	<button id="select_from_time_again" class="button" style="padding: 0 20px; margin-bottom:10px;">開始時間選択に戻る</button>-->
+			<!--);-->
+			
+			<!--// select_from_time_againを押すと時間選択が初期化-->
+			<!--$("#select_from_time_again").on("click",function(){-->
+			<!--	$(".booking_price_start").css('background-color', '#fff0c1');-->
+			<!--	$("#time").empty();-->
+			<!--	$("#action_suggest").empty();-->
+			<!--	$("#action_suggest").append(-->
+			<!--		`<h4 style="text-align:center;">開始時間を選択してください</h4>`-->
+			<!--	);-->
+			<!--});-->
+			
+			
 			
 			$(".end_slot").on("click",function(){
 			
@@ -587,3 +680,64 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 
 @endpush
 @endsection
+
+<!--<div id="time" class="booking_elements" style="width:25%;">-->
+<!--	<h4>時間：60分</h4>-->
+<!--	<div id="from_to" style="display:flex; justify-content:flex-end;">-->
+<!--		<h5 class="element_details" name="booking_from_time" value="${start_time_set}">${start_time_set}</h5>-->
+<!--		<h5 class="element_details" style="margin:10px 5px"> 〜 </h5>-->
+<!--	</div>-->
+<!--</div>-->
+<!--<div id="guest" class="booking_elements" style="width:20%;">-->
+<!--	<h4>人数：2名</h4>-->
+<!--	<h5 class="element_details">男性 1名</h5>-->
+<!--	<h5 class="element_details">女性 1名</h5>-->
+<!--	<h5 class="element_details">その他 1名</h5>-->
+<!--</div>-->
+<!--<div id="price" class="booking_elements" style="width:30%;">-->
+<!--	<h4>総計(目安)：726円</h4>-->
+<!--	<h5 class="element_details">ジム使用料 600円</h5>-->
+<!--	<h5 class="element_details">サービス料 60円</h5>-->
+<!--	<h5 class="element_details">消費税 66円</h5>-->
+<!--</div>-->
+
+<!--// 終了時刻のスロットを表示する-->
+<!--$("#end-time-slot").empty();-->
+<!--$.each(openingtimes, function(index,openingtime){-->
+<!--	if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){-->
+<!--		console.log(openingtime.from_time < start_time_set);-->
+<!--		if(openingtime.status == "○"){-->
+<!--			if(openingtime.from_time < start_time_set){-->
+<!--			$("#end-time-slot").append(-->
+<!--				`<div class="time-slot">-->
+<!--					<p id="time-slot-1" >-->
+<!--					<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
+<!--						<strong class="booking_status" style="font-size:25px;"> - </strong>-->
+<!--					</label>-->
+<!--					</p>-->
+<!--				</div>`);-->
+				
+<!--			}else {-->
+<!--				$("#end-time-slot").append(-->
+<!--				`<div class="time-slot">-->
+<!--					<p id="time-slot-1" >-->
+<!--					<a class="end_slot">-->
+<!--						<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price  booking_price_end" style="background-color:#fff0c1; cursor:pointer;">-->
+<!--							<strong value="${openingtime.price}">${openingtime.price}円</strong>-->
+<!--						</label>-->
+<!--					</a>-->
+<!--					</p>-->
+<!--				</div>`);-->
+<!--			}-->
+<!--		} else {-->
+<!--			$("#end-time-slot").append(-->
+<!--			`<div class="time-slot">-->
+<!--				<p id="time-slot-1" >-->
+<!--				<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
+<!--					<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>-->
+<!--				</label>-->
+<!--				</p>-->
+<!--			</div>`);-->
+<!--		}-->
+<!--	}-->
+<!--});-->
