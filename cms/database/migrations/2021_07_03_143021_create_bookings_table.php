@@ -21,7 +21,10 @@ class CreateBookingsTable extends Migration
             $table->datetime('booking_from_time');
             $table->datetime('booking_to_time');
             $table->integer('number_of_users');
-            $table->integer('price');
+            $table->integer('total_price');
+            $table->integer('gym_price');
+            $table->integer('service_price');
+            $table->integer('tax');
             $table->timestamps();
         });
     }

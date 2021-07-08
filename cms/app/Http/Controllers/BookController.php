@@ -57,6 +57,9 @@ class BookController extends Controller
         $gym_infos = Gym::where('id', $gym_id)->get();
         // dd($gym_infos);
         
+        // guest_limitを取得
+        $guest_limit  = $gym_infos[0]->guest_limit;
+        
         
         // guest_genderの希望を表示
         $guest_gender_flg  = $gym_infos[0]->guest_gender;
@@ -90,6 +93,24 @@ class BookController extends Controller
         
         
         // dd($gym_schedule[0]->id);
+        
+        
+        
+        $gymType_id  = $gym_infos[0]->gymType_id;
+        // ジムタイプを取得する
+        $gym_type = DB::table('gym_types')
+                    ->join('gyms', 'gym_types.id', '=', 'gyms.gymType_id')
+                    ->select('gym_type')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        
+        
+        // inner joinでarea情報を取得
+        $area = DB::table('gym_areas')
+                    ->join('gyms', 'gym_areas.id', '=', 'gyms.area')
+                    ->select('gym_area')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
         
         
         $gym_schedule_count = count($gym_schedule);
@@ -170,6 +191,9 @@ class BookController extends Controller
             'host_name' => $host_name,
             'guest_gender_flg' => $guest_gender_flg,
             'guest_gender' => $guest_gender,
+            'guest_limit' => $guest_limit,
+            'gym_type' => $gym_type,
+            'area' => $area,
             ]);
 
         

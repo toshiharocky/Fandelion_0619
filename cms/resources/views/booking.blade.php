@@ -74,18 +74,16 @@
 							</div>
 							<div id="selected_date"></div>
 							<div id="selected_slot"></div>
+							<div id="slot_caution"></div>
 						</div>
 						<div id="guest" class="booking_elements" style="width:20%;">
-							<h4>人数：2名</h4>
-							<h5 class="element_details">男性 1名</h5>
-							<h5 class="element_details">女性 1名</h5>
-							<h5 class="element_details">その他 1名</h5>
+							<div id="guest_details">
+								<h4>人数</h4>
+							</div>
+							<div id="guest_caution"></div>
 						</div>
 						<div id="price" class="booking_elements" style="width:30%;">
-							<h4>総計(目安)：726円</h4>
-							<h5 class="element_details">ジム使用料 600円</h5>
-							<h5 class="element_details">サービス料 60円</h5>
-							<h5 class="element_details">消費税 66円</h5>
+							<h4>総計</h4>
 						</div>
 						
 					</div>
@@ -119,7 +117,7 @@
         					<!-- Quantity Buttons -->
         					<div class="qtyButtons">
         						<div class="qtyTitle">Men</div>
-        						<input type="text" name="qtyInput" value="1">
+        						<input type="text" name="qtyInput" value="0">
         					</div>
         
         					<div class="qtyButtons">
@@ -144,7 +142,7 @@
 							<h4 style="text-align:center;">日付を選択</h4>
 							<input type="text" id="date-picker" placeholder="Date" readonly="readonly">
 						
-						<h4 style="text-align:center;">カレンダー表示時間を選択</h4>
+							<h4 style="text-align:center;">表示時間を選択</h4>
 							<div class="row" style="display:flex; justify-content:center; align-items:middle;">
 								<div class="col-md-6">
 									<select type="text" id="start_time" data-placeholder="Opening Time">
@@ -210,6 +208,9 @@
 									</select>
 								</div>
 							</div>
+							<div style="text-align:center;">
+								<button id="display_slots" class="button">時間を表示</button>
+							</div>
 						</div>
 					</div>
 					<!-- Panel Dropdown -->
@@ -217,17 +218,10 @@
 						
 						<div id="action_suggest" style="text-align:center;">
 							
-							<h4 style="text-align:center;">開始時間を選択してください</h4>
+							<h4 style="text-align:center;">利用時間を選択してください</h4>
 							
 						</div>
 						<div class="row" style="display:flex; justify-content:center; align-items:middle;">
-							
-							
-							<!--<div class="col-lg-4">-->
-							<!--	<div id="time-slots">-->
-									
-							<!--	</div>-->
-							<!--</div>-->
 							<div class="col-lg-6">
 								<div id="start-time-slot">
 									
@@ -440,19 +434,159 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 </script>
 
 <script>
+	let guest_gender = '{{$guest_gender}}';
+	if(guest_gender != ""){
+		$(document).ready(function(){
+			$('#gym_tags').append(
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">{{$gym_type[0]->gym_type}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">{{$area[0]->gym_area}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">〜{{$guest_limit}}名</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">${guest_gender}</span>`)
+		})
+		} else {
+		$(document).ready(function(){
+			$('#gym_tags').append(
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">{{$gym_type[0]->gym_type}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">{{$area[0]->gym_area}}</span>`,
+				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">〜{{$guest_limit}}名</span>`)
+		});
+		
+	}
+</script>
+
+
+<script>
+	
+	function submit(){
+		// console.log($("#guest_caution > h5").length);
+		// console.log($("#slot_caution > h5").length);
+		// console.log($("#selected_slot > div > h5").length);
+		// console.log($("#guest_details > h5").length);
+		
+		
+		
+		if($("#guest_caution > h5").length==0 && $("#slot_caution > h5").length==0 && 
+		$("#selected_slot > div > h5").length>0 && $("#guest_details > h5").length>0) {
+			$("#submit_button").empty();
+			$("#submit_button").append(
+				`<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="background-color:#f91942; color:white;">`
+			);
+		}else {
+			$("#submit_button").empty();
+			$("#submit_button").append(
+				`<input type="submit" class="button book-now fullwidth margin-top-5" value="予約内容の確認" style="background-color:#dcdcdc; color:white;" disabled>`
+			);
+		}
+	}
+</script>
+
+
+<script>
 	let gym_open_times = @json($gym_open_times);
 	console.log(gym_open_times);
 	
 	let guest_gender_flg = {{$guest_gender_flg}};
-	let guest_gender = '{{$guest_gender}}';
-	console.log(guest_gender_flg);
-	console.log(guest_gender);
+	let guest_limit = {{$guest_limit}};
 	
 	
-	// date-pickerが変わったらslot-changer()を発火
-	$('#date-picker').on("change",function(){
+	$(".qtyButtons").on("click",function(){
+		let men = parseInt($(".qtyButtons").eq(0).children('input').val());
+		let women = parseInt($(".qtyButtons").eq(1).children('input').val());
+		let others = parseInt($(".qtyButtons").eq(2).children('input').val());
+		let total_people = men + women + others;
 		
-		$("#time-slots").empty();	
+		let gender_check = "OK";
+		
+		switch(guest_gender_flg){
+			case 2:
+				if(men != 0){
+					gender_check = "NG";
+				}
+				break;
+			case 3:
+				if(women != 0){
+					gender_check = "NG";
+				}
+				break;
+			case 4:
+				if(men != 0 && women == 0){
+					gender_check = "NG";
+				}
+				break;
+			case 5:
+				if(women != 0 && men == 0){
+					gender_check = "NG";
+				}
+				break;
+		}
+		
+		// genderの希望と合っていない時にアラート
+		if(gender_check == "OK"){
+			$("#guest_details").empty();
+			$("#guest_caution").empty();
+			$("#guest_details").append(
+				`
+				<h4 name="number_of_users">人数：${total_people}名</h4>
+				<h5 name="number_of_men" class="element_details">男性 ${men}名</h5>
+				<h5 name="number_of_women" class="element_details">女性 ${women}名</h5>
+				<h5 name="number_of_others" class="element_details">その他 ${others}名</h5>
+				`
+			);
+		}else{
+			$("#guest_details").empty();
+			$("#guest_caution").empty();
+			$("#guest_caution").append(
+				`
+				<h4 name="number_of_users">人数</h4>
+				<h5 style="color:#f91942;">${guest_gender}です</h5>`
+			);
+		}
+		
+		// 定員超えした際にアラート
+		if(total_people > guest_limit){
+			$("#guest_details").empty();
+			$("#guest_caution").empty();
+			$("#guest_caution").append(
+				`
+				<h4 name="number_of_users">人数</h4>
+				<h5 style="color:#f91942;">定員は${guest_limit}名です</h5>`
+			);
+		}
+		
+		// total_peopleがゼロの場合にクリアする
+		if(total_people == 0){
+			$("#guest_details").empty();
+			$("#guest_caution").empty();
+			$("#guest_details").append(
+				`
+				<h4 name="number_of_users">人数</h4>
+				`
+			)
+			};
+		
+	submit();
+	})
+	
+</script>	
+	
+<script>
+	// date-pickerが変わったらslot-changer()を発火
+	$('#display_slots').on("click",function(){
+		
+		if($("#selected_slot > div > h5").length>0){
+			let date_check = window.confirm('これまでの内容はクリアされます。よろしいですか？');
+				if(date_check){
+					$("#selected_date").empty();
+					$("#selected_slot").empty();
+					$("#total_time").empty();
+					$("#total_time").append(
+						`<h4>時間</h4>`
+					);
+				}else{
+					return;
+				}
+		}
+		
 		$("#start-time-slot").empty();
 		$("#end-time-slot").empty();
 		
@@ -475,14 +609,8 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		$.each(openingtimes, function(index,openingtime){
 			if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){
 				if(openingtime.status == "○"){
-				
-				$("#time-slots").append(
-						``
-					)
-					
-					$("#start-time-slot").append(
+				$("#start-time-slot").append(
 					`
-					
 					<div class="time-slot">
 						<p id="time-slot-1" >
 						<a class="start_slot">
@@ -502,46 +630,6 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 						</label>
 						</p>
 					</div>`);
-					
-				<!--	$("#time-slots").append(-->
-				<!--		`<div class="time-slot">-->
-				<!--		<p id="time-slot-1" >-->
-				<!--		<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
-				<!--			<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>-->
-				<!--		</label>-->
-				<!--		</p>-->
-				<!--	</div>`-->
-				<!--	)-->
-					
-				<!--	$("#start-time-slot").append(-->
-				<!--	`<div class="time-slot">-->
-				<!--		<p id="time-slot-1" >-->
-				<!--		<a class="start_slot">-->
-				<!--			<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price booking_price_start" style="background-color:#fff0c1; cursor:pointer;">-->
-				<!--				<strong value="${openingtime.price}">${openingtime.price}円</strong>-->
-				<!--			</label>-->
-				<!--		</a>-->
-				<!--		</p>-->
-				<!--	</div>`);-->
-				<!--} else {-->
-				<!--	$("#time-slots").append(-->
-				<!--		`<div class="time-slot">-->
-				<!--		<p id="time-slot-1" >-->
-				<!--		<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
-				<!--			<strong>${openingtime.from_time} - ${openingtime.to_time}</strong>-->
-				<!--		</label>-->
-				<!--		</p>-->
-				<!--	</div>`-->
-				<!--	)-->
-					
-				<!--	$("#start-time-slot").append(-->
-				<!--	`<div class="time-slot">-->
-				<!--		<p id="time-slot-1" >-->
-				<!--		<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
-				<!--			<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>-->
-				<!--		</label>-->
-				<!--		</p>-->
-				<!--	</div>`);-->
 				}
 			}
 		});
@@ -552,15 +640,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			let date = $("#date-picker").val();
 			let showing_date = $("#showing_date").attr("value");
 			
-			if($("#selected_slot > div").length != 0 && date != showing_date){
-				let date_check = window.confirm('日付が変わる場合、これまでの内容はクリアされます。よろしいですか？');
-				if(date_check){
-					$("#selected_date").empty();
-					$("#selected_slot").empty();
-				}else{
-					return;
-				}
-			}
+			
 			
 			if($(this).children('label').hasClass("active")){
 				// 当該箇所のlabelタグのactiveクラスを外す
@@ -568,25 +648,16 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 				
 				// 選択した箇所のみ背景色を元に戻す
 				$(this).children('label').css('background-color', '#fff0c1');
-				
-			
-			
+				// 選択した箇所のみ文字色を元に戻す
+				$(this).children('label').css('color', '#333333');
 				
 				// 予約内容から削除するスケジュールIDを取得する
 				let schedule_id = $(this).children('label').attr('id');
-				console.log(schedule_id);
-				
-				<!--let parent = document.getElementById('selected_slot');-->
-				<!--let remove_child = document.getElementsByClassName('schedule_id');-->
-				<!--console.log(remove_child);-->
 				
 				// 指定したスケジュールIDの予約内容を表示画面から削除する
-				<!--parent.removeChild(remove_child);-->
 				$("."+schedule_id).remove();
 				
-				// labelの数を取得する
-				let labels = $("#selected_slot > div").length;
-				console.log(labels);
+				
 			
 				
 			}else{
@@ -594,86 +665,135 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			// 当該箇所のlabelタグにactiveクラスをつける
 			$(this).children('label').addClass("active");
 			
-			// 開始時間を取得する
-			let schedule_id = $(this).children('label').attr('id');
-			let start_time_set = $(this).children('label').attr('value');
-			let to_time_set = $(this).children('input').attr('value');
+			
 			
 			// 選択した箇所のみ背景色を変える
-			$(this).children('label').css('background-color', 'red');
+			$(this).children('label').css('background-color', '#f91942');
+			// 選択した箇所のみ文字色を変える
+			$(this).children('label').css('color', 'white');
 			
 			
-			// labelの数（表示されたスロットの数）から、総利用時間を計算する（15分×スロット数）
+			let id_labels = $("#selected_slot > div").length;
 			
 			
-			// スロットのpriceを取得し、サービス料・消費税・総計を
-			
-			
-			
-			// 
-			
-			
-			$("#total_time").empty();
 			$("#selected_date").empty();
-			$("#total_time").append(
-				`<h4>時間：60分</h4>`
-			);
 			$("#selected_date").append(
 				`<h4 id="showing_date" class="element_details" style="text-align:left; margin-bottom:0;" name="booking_from_time" value="${date}">${date}</h4>`
 			);
-			$("#selected_slot").append(
-				`
-				<div id="from_to" style="display:flex; justify-content:flex-end;" class="${schedule_id}">
-					<h5 class="element_details" name="booking_from_time" value="${start_time_set}">${start_time_set} 〜 ${to_time_set}</h5>
-					<!--<h5 class="element_details" style="margin:10px 5px"></h5>-->
-				</div>`
-			);
-			
-			
-			// labelの数を取得する
-			let labels = $("#selected_slot > div").length;
-			console.log(labels);
 			
 			
 			}
 			
-			<!--// action_suggestの文言を変更する-->
-			<!--$("#action_suggest").empty();-->
-			<!--$("#action_suggest").append(-->
-			<!--	`<h4 style="text-align:center;">終了時間を選択してください</h4>`-->
-			<!--	<button id="select_from_time_again" class="button" style="padding: 0 20px; margin-bottom:10px;">開始時間選択に戻る</button>-->
-			<!--);-->
-			
-			<!--// select_from_time_againを押すと時間選択が初期化-->
-			<!--$("#select_from_time_again").on("click",function(){-->
-			<!--	$(".booking_price_start").css('background-color', '#fff0c1');-->
-			<!--	$("#time").empty();-->
-			<!--	$("#action_suggest").empty();-->
-			<!--	$("#action_suggest").append(-->
-			<!--		`<h4 style="text-align:center;">開始時間を選択してください</h4>`-->
-			<!--	);-->
-			<!--});-->
+			// #selected_dateと#slot_cautionをいったん空にする
+			$("#selected_slot").empty();
+			$("#slot_caution").empty();
 			
 			
+			// activeクラスがついているstart-slotタグを取得
+			// activeクラスがついているstart-slotタグのstart_timeとto_timeを#selected_dateにappendする。
+			let startSlots = $("#start-time-slot > div").length;
 			
-			$(".end_slot").on("click",function(){
-			
-				console.log($(this).children('label').attr('id'));
-				console.log($(this).children('label').children('strong').attr('value'));
+			for($i=0; $i<startSlots; $i++){
+				let activeCheck = $(".time-slot").eq($i).children('p').children('a').children('label').hasClass("active");
+				let num = $i + 1;
 				
-				// 開始時間を設定する
-				let start_time_set = $(this).children('label').attr('value');
+				// 開始時間を取得する
+				let schedule_id = $(".time-slot").eq($i).children('p').children('a').children('label').attr("id");
+				let from_time_set = $(".time-slot").eq($i).children('p').children('a').children('label').attr("value");
+				let to_time_set = $(".time-slot").eq($i).children('p').children('a').children('input').attr("value");
 				
-				// 選択した箇所のみ背景色を変える
-				$(".booking_price_end").css('background-color', '#fff0c1');
-				$(this).children('label').css('background-color', 'red');
+				
+				if(activeCheck){
+					$("#selected_slot").append(
+						`
+						<div name="from_time_${num}" style="display:flex; justify-content:flex-end;" class="${schedule_id}">
+							<h5 hidden class="element_details" name="booking_from_time_${num}" value="${from_time_set}">${from_time_set} 〜 ${to_time_set}</h5>
+							<p hidden value="${to_time_set}"></p>
+						</div>`
+					);
+				};
+			}
 			
-			});
 			
 			
+			
+			
+			// labelの数を取得する
+			let labels = parseInt($("#selected_slot > div").length);
+			
+			// selected_slot内の最後のdevのclassの値と、最初ののdevのclassの値の差と、labelsの値を比較して、飛び石でスロットを選択しているかどうかを判断する。
+			let first_dev_class = $("#selected_slot").children("div").eq(0).attr("class");
+			let last_dev_class = $("#selected_slot").children("div").eq(-1).attr("class");
+			let dev_class_amount = last_dev_class - first_dev_class + 1;
+			
+			// 最初の値と最後の値を入手する
+			let first_from_time = $("#selected_slot").children("div").eq(0).children("h5").attr("value");
+			let last_to_time = $("#selected_slot").children("div").eq(-1).children("p").attr("value");
+			
+			// 飛び石で選択している場合は、#slot_cautionに「連続したスロットを選択してください」と表示する。
+			if(labels != dev_class_amount){
+				if($("#selected_slot > div > h5").length){
+					$("#slot_caution").append(
+						`<h5 style="color:#f91942;">連続したスロットを選択してください</h5>`
+						
+					)
+					}
+			}else {
+				$("#selected_slot").append(
+						`
+						<div style="display:flex; justify-content:flex-end;" >
+							<h5 class="element_details" name="from_to" value="${first_from_time} 〜 ${last_to_time}">${first_from_time} 〜 ${last_to_time}</h5>
+						</div>`
+					);
+			}
+			;
+			
+			
+			
+			
+			
+			// labelの数（表示されたスロットの数）から、総利用時間を計算する（15分×スロット数）
+			let total_time = labels * 15;
+			
+			$("#total_time").empty();
+			$("#total_time").append(
+				`<h4>時間：${total_time}分</h4>`
+			);
+			
+			// スロットのpriceを取得し、サービス料・消費税・総計を算出する
+			let gym_price = 0;
+			let price_before_tax = 0;
+			let tax = 0;
+			let total_price = 0;
+			
+			for($i=0; $i<labels; $i++){
+				let getScheduleId = $("#selected_slot").children('div').eq($i).attr('class');
+				let slot_price = $.grep(gym_open_times, function(elem,index){
+						return (elem.gym_schedule_id == getScheduleId);
+					});
+				let price_plus = parseInt(slot_price[0].price, 10);
+				gym_price += price_plus;
+				service_price = gym_price*0.1;
+				price_before_tax = gym_price + service_price;
+				tax = parseInt(price_before_tax * 0.1, 10);
+				total_price = price_before_tax + tax;
+				
+			}
+			$("#price").empty();
+			$("#price").append(
+				`
+				<h4 name="total_price" value="${total_price}" >総計：${total_price}円</h4>
+				<h5 name="gym_price"  value="gym_price" class="element_details">ジム使用料 ${gym_price}円</h5>
+				<h5 name="service_price"  value="service_price" class="element_details">サービス料 ${service_price}円</h5>
+				<h5 name="tax"  value="tax" class="element_details">VAT ${tax}円</h5>
+				`
+			);
+			
+			submit();
 		});
 		
-		
+	
+	
 		
 		})
 </script>
@@ -681,63 +801,3 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 @endpush
 @endsection
 
-<!--<div id="time" class="booking_elements" style="width:25%;">-->
-<!--	<h4>時間：60分</h4>-->
-<!--	<div id="from_to" style="display:flex; justify-content:flex-end;">-->
-<!--		<h5 class="element_details" name="booking_from_time" value="${start_time_set}">${start_time_set}</h5>-->
-<!--		<h5 class="element_details" style="margin:10px 5px"> 〜 </h5>-->
-<!--	</div>-->
-<!--</div>-->
-<!--<div id="guest" class="booking_elements" style="width:20%;">-->
-<!--	<h4>人数：2名</h4>-->
-<!--	<h5 class="element_details">男性 1名</h5>-->
-<!--	<h5 class="element_details">女性 1名</h5>-->
-<!--	<h5 class="element_details">その他 1名</h5>-->
-<!--</div>-->
-<!--<div id="price" class="booking_elements" style="width:30%;">-->
-<!--	<h4>総計(目安)：726円</h4>-->
-<!--	<h5 class="element_details">ジム使用料 600円</h5>-->
-<!--	<h5 class="element_details">サービス料 60円</h5>-->
-<!--	<h5 class="element_details">消費税 66円</h5>-->
-<!--</div>-->
-
-<!--// 終了時刻のスロットを表示する-->
-<!--$("#end-time-slot").empty();-->
-<!--$.each(openingtimes, function(index,openingtime){-->
-<!--	if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){-->
-<!--		console.log(openingtime.from_time < start_time_set);-->
-<!--		if(openingtime.status == "○"){-->
-<!--			if(openingtime.from_time < start_time_set){-->
-<!--			$("#end-time-slot").append(-->
-<!--				`<div class="time-slot">-->
-<!--					<p id="time-slot-1" >-->
-<!--					<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
-<!--						<strong class="booking_status" style="font-size:25px;"> - </strong>-->
-<!--					</label>-->
-<!--					</p>-->
-<!--				</div>`);-->
-				
-<!--			}else {-->
-<!--				$("#end-time-slot").append(-->
-<!--				`<div class="time-slot">-->
-<!--					<p id="time-slot-1" >-->
-<!--					<a class="end_slot">-->
-<!--						<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price  booking_price_end" style="background-color:#fff0c1; cursor:pointer;">-->
-<!--							<strong value="${openingtime.price}">${openingtime.price}円</strong>-->
-<!--						</label>-->
-<!--					</a>-->
-<!--					</p>-->
-<!--				</div>`);-->
-<!--			}-->
-<!--		} else {-->
-<!--			$("#end-time-slot").append(-->
-<!--			`<div class="time-slot">-->
-<!--				<p id="time-slot-1" >-->
-<!--				<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">-->
-<!--					<strong class="booking_status" style="font-size:25px;" value="${openingtime.status}">${openingtime.status}</strong>-->
-<!--				</label>-->
-<!--				</p>-->
-<!--			</div>`);-->
-<!--		}-->
-<!--	}-->
-<!--});-->
