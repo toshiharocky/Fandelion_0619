@@ -65,7 +65,7 @@
 			<!-- Book Now -->
 			<div id="booking-widget-anchor" class="boxed-widget booking-widget margin-top-35" style="width:50%; margin-bottom:10px;">
 				<h3><i class="fa fa-calendar-check-o "></i>現在の予約内容</h3>
-				<form method=post action="/booking_confirm">
+				<form method=post action='booking_confirm'>
 				@csrf
 					<div id="booking_overview">
 						<div id="time" class="booking_elements" style="width:25%;">
@@ -699,22 +699,27 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			// activeクラスがついているstart-slotタグを取得
 			// activeクラスがついているstart-slotタグのstart_timeとto_timeを#selected_dateにappendする。
 			let startSlots = $("#start-time-slot > div").length;
+			let schedule_id_array = [];
 			
 			for($i=0; $i<startSlots; $i++){
 				let activeCheck = $(".time-slot").eq($i).children('p').children('a').children('label').hasClass("active");
 				let num = $i + 1;
+				let id_array = $i
 				
 				// 開始時間を取得する
 				let schedule_id = $(".time-slot").eq($i).children('p').children('a').children('label').attr("id");
 				let from_time_set = $(".time-slot").eq($i).children('p').children('a').children('label').attr("value");
 				let to_time_set = $(".time-slot").eq($i).children('p').children('a').children('input').attr("value");
 				
+				// schedule_id_arrayにschedule_idを追加する
+				schedule_id_array.push(schedule_id);
 				
 				if(activeCheck){
 					$("#selected_slot").append(
 						`
 						<div style="display:flex; justify-content:flex-end;" class="${schedule_id}">
-							<input type="hidden" name="schedule_id_${num}"  value="${schedule_id}">
+							<input type="hidden" name="schedule_id[${id_array}]"  value="${schedule_id}">
+							<!--<input type="hidden" name="schedule_id_array"  value="${schedule_id_array}">-->
 							<h5 hidden class="element_details" name="booking_from_time_${num}" value="${from_time_set}">${from_time_set} 〜 ${to_time_set}</h5>
 							<p hidden value="${to_time_set}"></p>
 						</div>`
@@ -734,6 +739,10 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			let last_dev_class = $("#selected_slot").children("div").eq(-1).attr("class");
 			let dev_class_amount = last_dev_class - first_dev_class + 1;
 			
+			
+			
+			
+			
 			// 最初の値と最後の値を入手する
 			let first_from_time = $("#selected_slot").children("div").eq(0).children("h5").attr("value");
 			let last_to_time = $("#selected_slot").children("div").eq(-1).children("p").attr("value");
@@ -752,6 +761,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 						<div style="display:flex; justify-content:flex-end;" >
 							<h5 class="element_details">${first_from_time} 〜 ${last_to_time}</h5>
 							<input type="hidden" name="from_to" value="${first_from_time} 〜 ${last_to_time}">
+							<input type="hidden" name="slots" value="${labels}">
 						</div>`
 					);
 			}
