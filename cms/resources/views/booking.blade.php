@@ -217,9 +217,7 @@
 					<div class="col-lg-8">
 						
 						<div id="action_suggest" style="text-align:center;">
-							
-							<h4 style="text-align:center;">利用時間を選択してください</h4>
-							
+						
 						</div>
 						<div class="row" style="display:flex; justify-content:center; align-items:middle;">
 							<div class="col-lg-6">
@@ -527,9 +525,13 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			$("#guest_details").append(
 				`
 				<h4 name="number_of_users">人数：${total_people}名</h4>
+				<input name="number_of_users" type="hidden" value="${total_people}">
 				<h5 name="number_of_men" class="element_details">男性 ${men}名</h5>
+				<input name="number_of_men"  type="hidden" value="${men}">
 				<h5 name="number_of_women" class="element_details">女性 ${women}名</h5>
+				<input name="number_of_women" type="hidden" value="${women}">
 				<h5 name="number_of_others" class="element_details">その他 ${others}名</h5>
+				<input name="number_of_others" type="hidden" value="${others}">
 				`
 			);
 		}else{
@@ -604,6 +606,11 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			return (elem.date == date);
 		});
 		
+		$("#action_suggest").empty();
+		$("#action_suggest").append(
+			`<h4 style="text-align:center;">利用時間を選択してください</h4>
+			<h4 style="text-align:center;">${date}</h4>`
+		)
 		
 		
 		$.each(openingtimes, function(index,openingtime){
@@ -706,7 +713,8 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 				if(activeCheck){
 					$("#selected_slot").append(
 						`
-						<div name="from_time_${num}" style="display:flex; justify-content:flex-end;" class="${schedule_id}">
+						<div style="display:flex; justify-content:flex-end;" class="${schedule_id}">
+							<input type="hidden" name="schedule_id_${num}"  value="${schedule_id}">
 							<h5 hidden class="element_details" name="booking_from_time_${num}" value="${from_time_set}">${from_time_set} 〜 ${to_time_set}</h5>
 							<p hidden value="${to_time_set}"></p>
 						</div>`
@@ -742,7 +750,8 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 				$("#selected_slot").append(
 						`
 						<div style="display:flex; justify-content:flex-end;" >
-							<h5 class="element_details" name="from_to" value="${first_from_time} 〜 ${last_to_time}">${first_from_time} 〜 ${last_to_time}</h5>
+							<h5 class="element_details">${first_from_time} 〜 ${last_to_time}</h5>
+							<input type="hidden" name="from_to" value="${first_from_time} 〜 ${last_to_time}">
 						</div>`
 					);
 			}
@@ -757,7 +766,8 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			$("#total_time").empty();
 			$("#total_time").append(
-				`<h4>時間：${total_time}分</h4>`
+				`<h4>時間：${total_time}分</h4>
+				<input type="hidden"  name="total_time" value="${total_time}">`
 			);
 			
 			// スロットのpriceを取得し、サービス料・消費税・総計を算出する
@@ -783,9 +793,13 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			$("#price").append(
 				`
 				<h4 name="total_price" value="${total_price}" >総計：${total_price}円</h4>
+				<input name="total_price" type="hidden" value="${total_price}">
 				<h5 name="gym_price"  value="gym_price" class="element_details">ジム使用料 ${gym_price}円</h5>
+				<input name="gym_price" type="hidden" value="${gym_price}">
 				<h5 name="service_price"  value="service_price" class="element_details">サービス料 ${service_price}円</h5>
+				<input name="service_price" type="hidden" value="${service_price}">
 				<h5 name="tax"  value="tax" class="element_details">VAT ${tax}円</h5>
+				<input name="tax" type="hidden" value="${tax}">
 				`
 			);
 			

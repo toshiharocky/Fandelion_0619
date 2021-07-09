@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 // ログインユーザーのみ、ジム予約確認画面に遷移
 Route::group(['middleware' => 'auth'], function() {
-   Route::get('/booking_confirm','BookConfirmController@store');
+   Route::post('/booking_confirm','BookConfirmController@store');
 });
 
 
