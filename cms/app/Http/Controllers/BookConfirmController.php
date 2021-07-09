@@ -57,9 +57,35 @@ class BookConfirmController extends Controller
         
         $gym_infos = Gym::where('id', $gym_id)->get();
         // dd($gym_infos);
+        $gym_title = $gym_infos[0]->gym_title;
+        $addr  = $gym_infos[0]->addr;
+        
+        $host_user_id  = $gym_infos[0]->user_id;
+        // inner joinでホスト名を取得
+        $host_name_array = DB::table('gyms')
+                    ->join('users', 'gyms.user_id', '=', 'users.id')
+                    ->select('users.name')
+                    ->where('gyms.id',$gym_id)
+                    ->get();
+        $host_name = $host_name_array[0]->name;
+        
+        $gym_image_url = DB::table('gyms')
+                    ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                    ->select('img_url')
+                    ->where('gym_id',$gym_id)
+                    ->get();
         
         $all = $request->all();
         // dd($all);
+        
+        
+        $booking_from_time_array = $request->booking_from_times;
+        $booking_from_time = array_values($booking_from_time_array)[0];
+        $booking_to_time_array = $request->booking_to_times;
+        $booking_to_time = end($booking_to_time_array);
+        
+        // dd($booking_from_time);
+        
         
         $request->session()->put('total_time', $request->total_time);
         $request->session()->put('from_to', $request->from_to);
@@ -72,8 +98,11 @@ class BookConfirmController extends Controller
         $request->session()->put('tax', $request->tax);
         $request->session()->put('total_price', $request->total_price);
         $request->session()->put('slots', $request->slots);
-        $request->session()->put('schedule_id', $request->schedule_id);
-        // $request->session()->put('', $request->);
+        $request->session()->put('schedule_ids', $request->schedule_ids);
+        $request->session()->put('booking_from_time', $request->booking_from_time);
+        $request->session()->put('date', $request->date);
+        $request->session()->put('booking_from_time', $booking_from_time);
+        $request->session()->put('booking_to_time', $booking_to_time);
         $total_time = $request->session()->get('total_time');
         $from_to = $request->session()->get('from_to');
         $number_of_users = $request->session()->get('number_of_users');
@@ -85,45 +114,35 @@ class BookConfirmController extends Controller
         $service_price = $request->session()->get('service_price');
         $tax = $request->session()->get('tax');
         $slots = $request->session()->get('slots');
-        $schedule_id = $request->session()->get('schedule_id');
-        dd($schedule_id[0]);
-        
-        // for($i=1; $i>$slots; $i++)
-        // {
-        //     $request->session()->put('schedule_id_'.$i, $request->schedule_id_.$i);
-        //     $schedule_id_.$i = $request->session()->get('schedule_id_'.$i);
-        // };
-        
-        // dd($schedule_id_1);
+        $schedule_ids = $request->session()->get('schedule_ids');
+        $date = $request->session()->get('date');
         
         
-//   "schedule_id_1" => "233"
-//   "schedule_id_2" => "234"
-//   "schedule_id_3" => "235"
-//   "from_to" => "14:00 〜 14:45"
-//   "number_of_users" => "2"
-//   "number_of_men" => "1"
-//   "number_of_women" => "1"
-//   "number_of_others" => "0"
-//   "total_price" => "907"
-//   "gym_price" => "750"
-//   "service_price" => "75"
-//   "tax" => "82"
+        
         
         
         return view('booking_confirm',[
             'user_name'=>$user_name,
-        //     'gym_id' => $gym_id,
-        //     'addr' => $addr,
-        //     'gym_infos' => $gym_infos,
-        //     'gym_title' => $gym_title,
-        //     'gym_open_times' => $gym_open_times,
-        //     'host_name' => $host_name,
-        //     'guest_gender_flg' => $guest_gender_flg,
-        //     'guest_gender' => $guest_gender,
-        //     'guest_limit' => $guest_limit,
-        //     'gym_type' => $gym_type,
-        //     'area' => $area,
+            'gym_id' => $gym_id,
+            'addr' => $addr,
+            'gym_title' => $gym_title,
+            'host_name' => $host_name,
+            'total_time' => $total_time,
+            'from_to' => $from_to,
+            'number_of_users' => $number_of_users,
+            'number_of_men' => $number_of_men,
+            'number_of_women' => $number_of_women,
+            'number_of_others' => $number_of_others,
+            'total_price' => $total_price,
+            'gym_price' => $gym_price,
+            'service_price' => $service_price,
+            'tax' => $tax,
+            'slots' => $slots,
+            'schedule_ids' => $schedule_ids,
+            'gym_image_url' => $gym_image_url,
+            'date' => $date,
+            'booking_from_time' => $booking_from_time,
+            'booking_from_time' => $booking_to_time,
             ]);
     }
 

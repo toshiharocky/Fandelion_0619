@@ -685,7 +685,9 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			
 			$("#selected_date").empty();
 			$("#selected_date").append(
-				`<h4 id="showing_date" class="element_details" style="text-align:left; margin-bottom:0;" name="booking_from_time" value="${date}">${date}</h4>`
+				`<h4 id="showing_date" class="element_details" style="text-align:left; margin-bottom:0;" name="booking_from_time" >${date}</h4>
+				<input type="hidden" name="date" value="${date}">
+				`
 			);
 			
 			
@@ -701,10 +703,13 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 			let startSlots = $("#start-time-slot > div").length;
 			let schedule_id_array = [];
 			
+			
+			let id_array = 0;
+			let num = 0;
+			
 			for($i=0; $i<startSlots; $i++){
 				let activeCheck = $(".time-slot").eq($i).children('p').children('a').children('label').hasClass("active");
-				let num = $i + 1;
-				let id_array = $i
+				
 				
 				// 開始時間を取得する
 				let schedule_id = $(".time-slot").eq($i).children('p').children('a').children('label').attr("id");
@@ -714,17 +719,24 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 				// schedule_id_arrayにschedule_idを追加する
 				schedule_id_array.push(schedule_id);
 				
+				
+				
+				
 				if(activeCheck){
 					$("#selected_slot").append(
 						`
 						<div style="display:flex; justify-content:flex-end;" class="${schedule_id}">
-							<input type="hidden" name="schedule_id[${id_array}]"  value="${schedule_id}">
-							<!--<input type="hidden" name="schedule_id_array"  value="${schedule_id_array}">-->
+							<input type="hidden" name="schedule_ids[${id_array}]"  value="${schedule_id}">
 							<h5 hidden class="element_details" name="booking_from_time_${num}" value="${from_time_set}">${from_time_set} 〜 ${to_time_set}</h5>
 							<p hidden value="${to_time_set}"></p>
+							<input type="hidden" name="booking_from_times[${num}]" value="${from_time_set}">
+							<input type="hidden" name="booking_to_times[${num}]" value="${to_time_set}">
 						</div>`
 					);
+					num ++;
+					id_array ++;
 				};
+				
 			}
 			
 			
