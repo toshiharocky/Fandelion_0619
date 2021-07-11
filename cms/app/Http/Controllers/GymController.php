@@ -26,11 +26,14 @@ class GymController extends Controller
     public function index(Request $request)
     {
         //
+        // dd($request->gym_id);
         $request->session()->put('gym_id', $request->gym_id);
         // dd($request->session()->get('gym_id'));
         $gym_id = $request->session()->get('gym_id');
         // dd($gym_id);
-        
+        $booking_id = $request->booking_id;
+        // dd($booking_id);
+        // dd(isset($booking_id));
         // session()-> put('gym_infos', Gym::where('id', $gym_id));
         // $gym_infos = $req->session()->get('gym_infos');
         $gym_infos = Gym::where('id', $gym_id)->get();
@@ -59,7 +62,9 @@ class GymController extends Controller
         $gymstatus_id  = $gym_infos[0]->gymstatus_id;
         $gym_desc  = $gym_infos[0]->gym_desc;
         $gymType_id  = $gym_infos[0]->gymType_id;
+        $pref = $gym_infos[0]->pref;
         $addr  = $gym_infos[0]->addr;
+        $strt = $gym_infos[0]->strt;
         $longitude  = $gym_infos[0]->longitude; //緯度
         $random_lon = rand(-100000, 100000);
         $random_lon_float = $random_lon / 100000000;
@@ -187,39 +192,84 @@ class GymController extends Controller
             
             // dd($status_name);
             
-            return view('gym_introduction',[
-                'user_name'=>$user_name,
-                'status_name'=>$status_name,
-                'gym_id'=>$gym_id,
-                'gym_infos'=>$gym_infos,
-                'gym_title' => $gym_title,
-                'host_user_id,' => $host_user_id,
-                'host_name' => $host_name,
-                'cancel_policy' => $cancel_policy,
-                'gymstatus_id' => $gymstatus_id,
-                'gym_desc' => $gym_desc,
-                'gymType_id' => $gymType_id,
-                'addr' => $addr,
-                'longitude' =>$longitude, //緯度
-                'longitude' => $longitude_privacy,
-                'latitude' => $latitude, //緯度
-                'latitude_privacy' => $latitude_privacy, //表示する緯度
-                'area' => $area,
-                'guest_gender' => $guest_gender,
-                'superHost_flg' => $superHost_flg,
-                'review_amount' => $review_amount,
-                'review_average' => $review_average,
-                'guest_limit' => $guest_limit,
-                'gym_image_url' => $gym_image_url,
-                'gym_images_count' => $gym_images_count,
-                'gym_type' => $gym_type,
-                'gym_schedule' => $gym_schedule,
-                'price_range' => $price_range,
-                'gym_equipment' => $gym_equipment,
-                'gym_equipment_count' => $gym_equipment_count,
-                'gym_open_times' => $gym_open_times,
-                ]);
-            } else{
+            // //$booking_idが存在しない（＝予約がゼロ）場合はgym_introduction(緯度経度はprivacy)、ある場合はbooked_gym_introduction(緯度経度は本当の値、住所も記載)に渡す値を変える
+            if(isset($booking_id)){
+                
+                return view('booked_gym_introduction',[
+                    'user_name'=>$user_name,
+                    'status_name'=>$status_name,
+                    'gym_id'=>$gym_id,
+                    'gym_infos'=>$gym_infos,
+                    'gym_title' => $gym_title,
+                    'host_user_id,' => $host_user_id,
+                    'host_name' => $host_name,
+                    'cancel_policy' => $cancel_policy,
+                    'gymstatus_id' => $gymstatus_id,
+                    'gym_desc' => $gym_desc,
+                    'gymType_id' => $gymType_id,
+                    'pref' => $pref,
+                    'addr' => $addr,
+                    'strt' => $strt,
+                    'longitude' =>$longitude, //緯度
+                    // 'longitude' => $longitude_privacy,
+                    'latitude' => $latitude, //緯度
+                    // 'latitude_privacy' => $latitude_privacy, //表示する緯度
+                    'area' => $area,
+                    'guest_gender' => $guest_gender,
+                    'superHost_flg' => $superHost_flg,
+                    'review_amount' => $review_amount,
+                    'review_average' => $review_average,
+                    'guest_limit' => $guest_limit,
+                    'gym_image_url' => $gym_image_url,
+                    'gym_images_count' => $gym_images_count,
+                    'gym_type' => $gym_type,
+                    'gym_schedule' => $gym_schedule,
+                    'price_range' => $price_range,
+                    'gym_equipment' => $gym_equipment,
+                    'gym_equipment_count' => $gym_equipment_count,
+                    'gym_open_times' => $gym_open_times,
+                    ]);
+            }else{
+                
+                
+                
+                return view('gym_introduction',[
+                    'user_name'=>$user_name,
+                    'status_name'=>$status_name,
+                    'gym_id'=>$gym_id,
+                    'gym_infos'=>$gym_infos,
+                    'gym_title' => $gym_title,
+                    'host_user_id,' => $host_user_id,
+                    'host_name' => $host_name,
+                    'cancel_policy' => $cancel_policy,
+                    'gymstatus_id' => $gymstatus_id,
+                    'gym_desc' => $gym_desc,
+                    'gymType_id' => $gymType_id,
+                    'addr' => $addr,
+                    // 'longitude' =>$longitude, //緯度
+                    'longitude_privacy' => $longitude_privacy,
+                    // 'latitude' => $latitude, //緯度
+                    'latitude_privacy' => $latitude_privacy, //表示する緯度
+                    'area' => $area,
+                    'guest_gender' => $guest_gender,
+                    'superHost_flg' => $superHost_flg,
+                    'review_amount' => $review_amount,
+                    'review_average' => $review_average,
+                    'guest_limit' => $guest_limit,
+                    'gym_image_url' => $gym_image_url,
+                    'gym_images_count' => $gym_images_count,
+                    'gym_type' => $gym_type,
+                    'gym_schedule' => $gym_schedule,
+                    'price_range' => $price_range,
+                    'gym_equipment' => $gym_equipment,
+                    'gym_equipment_count' => $gym_equipment_count,
+                    'gym_open_times' => $gym_open_times,
+                    ]);
+                
+            }
+    }
+            
+            else{
             
             return view('gym_introduction',[
                 'gym_id'=>$gym_id,
@@ -233,9 +283,9 @@ class GymController extends Controller
                 'gymType_id' => $gymType_id,
                 'addr' => $addr,
                 'longitude' =>$longitude, //緯度
-                'longitude' => $longitude_privacy,
+                // 'longitude' => $longitude_privacy,
                 'latitude' => $latitude, //緯度
-                'latitude_privacy' => $latitude_privacy, //表示する緯度
+                // 'latitude_privacy' => $latitude_privacy, //表示する緯度
                 'area' => $area,
                 'guest_gender' => $guest_gender,
                 'superHost_flg' => $superHost_flg,

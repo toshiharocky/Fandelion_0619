@@ -27,6 +27,89 @@ class BookingController extends Controller
     public function index()
     {
         //
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        
+        $user_name =  Auth::user()->name;
+        
+        
+        // Bookingsテーブルから$userの予約を抽出する
+        // 当該予約の日時情報（booking_from_timeとbooking_to time）とgym_id、bookingstatus_idを抽出する
+        $user_histories = DB::table('bookings')
+                    ->join('users', 'bookings.user_id', '=','users.id')
+                    // $userの予約に表示されているgym_idから、cancel_policy_id、gym_title、img_url[1]を抽出する
+                    ->join('gyms', 'bookings.gym_id', '=','gyms.id')
+                    // ->join('gym_images', 'bookings.gym_id', '=','gym_images.gym_id')
+                    ->select('bookings.id','bookings.user_id','gym_title','addr','booking_from_time', 'booking_to_time', 'bookings.gym_id', 'bookingstatus_id', 'cancel_policy_id')
+                    ->where('users.id',$user)
+                    ->orderBy('booking_from_time', 'asc')
+                    ->get();
+        
+        
+        
+        
+        
+        foreach($user_histories as $user_history){
+                $booking_id[] = $user_history->id;
+                $booking_from_time[] = $user_history->booking_from_time;
+                $booking_to_time[] = $user_history->booking_to_time;
+                $gym_id[] = $user_history->gym_id;
+                $gym_title[] = $user_history->gym_title;
+                $addr[] = $user_history->addr;
+                $bookingstatus_id[] = $user_history->bookingstatus_id;
+                $cancel_policy_id[] = $user_history->cancel_policy_id;
+                $cancel_policy = DB::table('cancel_policies')
+                            ->join('gyms', 'cancel_policies.id', '=', 'gyms.cancel_policy_id')
+                            ->select('policy_name', 'policy_desc')
+                            ->where('gyms.id',$user_history->gym_id)
+                            ->get();
+                $gym_image_url[] = DB::table('gyms')
+                            ->join('gym_images', 'gyms.id', '=', 'gym_id')
+                            ->select('img_url')
+                            ->where('gym_id',$user_history->gym_id)
+                            ->get()[0]->img_url;
+                            
+            }
+        
+        
+        
+        //$booking_idが存在しない（＝予約がゼロ）かどうかによって、history.blade.phpに渡す値を変える
+        if(isset($booking_id)){
+        return view('history',[
+                'booking_check'=>0,
+                'user_id'=>$user,
+                'user_name'=>$user_name,
+                'booking_id'=>$booking_id,
+                'gym_title'=>$gym_title,
+                'addr'=>$addr,
+                'booking_from_time'=>$booking_from_time,
+                'booking_to_time'=>$booking_to_time,
+                'gym_id'=>$gym_id,
+                'bookingstatus_id'=>$bookingstatus_id,
+                'cancel_policy_id'=>$cancel_policy_id,
+                'cancel_policy'=>$cancel_policy,
+                'gym_image_url'=>$gym_image_url,
+                
+                ]
+                );
+        } else {
+         return view('history',[
+                'booking_check'=>1,
+                'user_id'=>$user,
+                'user_name'=>$user_name,
+                'gym_title'=>"none",
+                'addr'=>"none",
+                'booking_id'=>"none",
+                'booking_from_time'=>"none",
+                'booking_to_time'=>"none",
+                'gym_id'=>"none",
+                'bookingstatus_id'=>"none",
+                'cancel_policy_id'=>"none",
+                'cancel_policy'=>"none",
+                'gym_image_url'=>"none",
+                ]
+                );   
+        }
     }
 
     /**
@@ -116,7 +199,6 @@ class BookingController extends Controller
                 $schedule_id_int = (int)$schedule_ids[$i];
                 $gym_schedule = GymSchedule::find($schedule_ids[$i]);
                 $gym_schedule->booking_id = $booking_id;
-                $gym_schedule->price = $total_price;
                 $gym_schedule->status = 2;
                 $gym_schedule->save();
             }
@@ -169,5 +251,39 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         //
+    }
+    
+    public function check_in(Request $request){
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        
+        $user_name =  Auth::user()->name;
+        
+        // bookingsテーブルのbookingstatus_idを「20」に変更する（ルーティングが必要
+        $booking_id = $request->booking_id;
+        $booking = Booking::find($booking_id);
+        $booking->bookingstatus_id = 20;
+        $booking->save();   
+        
+        return view('check_in',[
+                'user_name'=>$user_name,]
+                );
+    }
+    
+    public function check_out(Request $request){
+        // ログインユーザー取得
+        $user = Auth::user()->id;
+        
+        $user_name =  Auth::user()->name;
+        
+        // bookingsテーブルのbookingstatus_idを「25」に変更する（ルーティングが必要
+        $booking_id = $request->booking_id;
+        $booking = Booking::find($booking_id);
+        $booking->bookingstatus_id = 25;
+        $booking->save();   
+        
+        return view('check_out',[
+                'user_name'=>$user_name,]
+                );
     }
 }

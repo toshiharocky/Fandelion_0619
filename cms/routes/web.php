@@ -57,3 +57,29 @@ Route::group(['middleware' => 'auth'], function() {
 Route::group(['middleware' => 'auth'], function() {
    Route::get('/booking_completed','BookingController@store');
 });
+
+// ログインユーザーのみ、履歴画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/history','BookingController@index');
+});
+
+// ログインユーザーのみ、お気に入り画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/bookmarks','BookmarksController@index'); // コントローラー未作成
+});
+
+// ログインユーザーのみ、お気に入り画面を表示する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/booked_gym_introduction','GymController@index'); // コントローラー未作成
+});
+
+
+// ログインユーザーのみ、チェックインを実行する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/check_in','BookingController@check_in'); // コントローラー未作成
+});
+
+// ログインユーザーのみ、チェックアウトを実行する
+Route::group(['middleware' => 'auth'], function() {
+   Route::get('/check_out','BookingController@check_out'); // コントローラー未作成
+});

@@ -186,7 +186,8 @@
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
-								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i> Add Gym</a></li>
+								<li><a href="/history"><i class="fas fa-dumbbell"></i> 履歴</a></li>
+								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i> ジムの追加</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">

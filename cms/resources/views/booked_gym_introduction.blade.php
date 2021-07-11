@@ -41,29 +41,49 @@
 						<div class="rating-counter"><a href="#listing-reviews">({{$review_amount}} reviews)</a></div>
 					</div>
 				</div>
-				<div class="listing-titlebar-title" style="text-align:right;">
-					<h2>{{$price_range}} 
-						<!--<span class="listing-tag">Eat & Drink</span>-->
-					</h2>
-					<span>
-						<a href="#listing-location" class="listing-address">
-							(15分あたり)
-						</a>
-					</span>
-				</div>
 			</div>
+
+
 
 			<!-- Listing Nav -->
 			<div id="listing-nav" class="listing-nav-container">
 				<ul class="listing-nav">
-					<li><a href="#listing-overview" class="active">ジムの概要</a></li>
-					<li><a href="#listing-equipment-list">設備</a></li>
-					<li><a href="#listing-location">場所</a></li>
+					<li><a href="#listing-location" class="active">場所</a></li>
 					<li><a href="#listing-cancel_policy">キャンセルポリシー</a></li>
-					<li><a href="#listing-reviews">レビュー</a></li>
-					<!--<li><a href="#add-review">Add Review</a></li>-->
+					<li><a href="#listing-overview">ジムの概要</a></li>
+					<li><a href="#listing-equipment-list">設備</a></li>
+					
 				</ul>
 			</div>
+			
+			
+			<!-- Location -->
+			<div id="listing-location" class="listing-section">
+				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">場所</h3>
+				<h4>{{$pref}}{{$addr}}{{$strt}}</h4>
+				<h5>住所や位置情報の第三者への開示は固く禁じます。</h5>
+				<div id="singleListingMap-container">
+					<div id="singleListingMap" data-latitude="{{$latitude}}" data-longitude="{{$longitude}}" data-map-icon="im im-icon-Home"></div>
+					<!--<a href="#" id="streetView">Street View</a>-->
+				</div>
+			</div>
+			
+			
+			<!-- Location -->
+			<div id="listing-cancel_policy" class="listing-section">
+				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">キャンセルポリシー</h3>
+
+				<!--<div class="show-more">-->
+					<div class="pricing-list-container">
+						<ul>
+							<li>
+								<h5>{{$cancel_policy[0]->policy_name}}</h5>
+								<p>{{$cancel_policy[0]->policy_desc}}</p>
+							</li>
+						</ul>
+					</div>
+			</div>
+			
 			
 			<!-- Overview -->
 			<div id="listing-overview" class="listing-section">
@@ -78,39 +98,6 @@
 				
 				
 				
-				<!-- Listing Contacts -->
-				<!--<div class="listing-links-container">-->
-
-				<!--	<ul class="listing-links contact-links">-->
-				<!--		<li><a href="tel:12-345-678" class="listing-links"><i class="fa fa-phone"></i> +12 345 6578</a></li>-->
-				<!--		<li><a href="mailto:mail@example.com" class="listing-links"><i class="fa fa-envelope-o"></i> mail@example.com</a>-->
-				<!--		</li>-->
-				<!--		<li><a href="#" target="_blank"  class="listing-links"><i class="fa fa-link"></i> www.example.com</a></li>-->
-				<!--	</ul>-->
-				<!--	<div class="clearfix"></div>-->
-
-				<!--	<ul class="listing-links">-->
-				<!--		<li><a href="#" target="_blank" class="listing-links-fb"><i class="fa fa-facebook-square"></i> Facebook</a></li>-->
-				<!--		<li><a href="#" target="_blank" class="listing-links-yt"><i class="fa fa-youtube-play"></i> YouTube</a></li>-->
-				<!--		<li><a href="#" target="_blank" class="listing-links-ig"><i class="fa fa-instagram"></i> Instagram</a></li>-->
-				<!--		<li><a href="#" target="_blank" class="listing-links-tt"><i class="fa fa-twitter"></i> Twitter</a></li>-->
-				<!--	</ul>-->
-				<!--	<div class="clearfix"></div>-->
-
-				<!--</div>-->
-				<!--<div class="clearfix"></div>-->
-
-
-				<!-- Amenities -->
-				<!--<h3 class="listing-desc-headline">Amenities</h3>-->
-				<!--<ul class="listing-features checkboxes margin-top-0">-->
-				<!--	<li>Elevator in building</li>-->
-				<!--	<li>Friendly workspace</li>-->
-				<!--	<li>Instant Book</li>-->
-				<!--	<li>Wireless Internet</li>-->
-				<!--	<li>Free parking on premises</li>-->
-				<!--	<li>Free parking on street</li>-->
-				<!--</ul>-->
 			</div>
 
 
@@ -143,168 +130,10 @@
 			<!-- Food Menu / End -->
 
 		
-			<!-- Location -->
-			<div id="listing-location" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">場所</h3>
 
-				<div id="singleListingMap-container">
-					<div id="singleListingMap" data-latitude="{{$latitude_privacy}}" data-longitude="{{$longitude_privacy}}" data-map-icon="im im-icon-Home"></div>
-					<!--<a href="#" id="streetView">Street View</a>-->
-				</div>
-				<h5>具体的な所在地は予約後に表示されます。</h5>
-			</div>
-			
-			
-			<!-- Location -->
-			<div id="listing-cancel_policy" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-60 margin-bottom-30">キャンセルポリシー</h3>
-
-				<!--<div class="show-more">-->
-					<div class="pricing-list-container">
-						<ul>
-							<li>
-								<h5>{{$cancel_policy[0]->policy_name}}</h5>
-								<p>{{$cancel_policy[0]->policy_desc}}</p>
-							</li>
-						</ul>
-					</div>
-			</div>
 			
 				
-			<!-- Reviews -->
-			<div id="listing-reviews" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>({{$review_amount}})</span></h3>
-
-				<!-- Rating Overview -->
-				<div class="rating-overview">
-					<div class="rating-overview-box">
-						<span class="rating-overview-box-total">4.2</span>
-						<span class="rating-overview-box-percent">out of 5.0</span>
-						<div class="star-rating" data-rating="5"></div>
-					</div>
-
-					<div class="rating-bars">
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.2">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.2</strong>
-								</span>
-							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.8">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.8</strong>
-								</span>
-							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="3.7">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>3.7</strong>
-								</span>
-							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.0">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.0</strong>
-								</span>
-							</div>
-					</div>
-				</div>
-				<!-- Rating Overview / End -->
-
-
-				<div class="clearfix"></div>
-
-				<!-- Reviews -->
-				<section class="comments listing-reviews">
-					<ul>
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">Kathy Brown <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">June 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-								
-								<div class="review-images mfp-gallery-container">
-									<a href="images/review-image-01.jpg" class="mfp-gallery"><img src="images/review-image-01.jpg" alt=""></a>
-								</div>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>12</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">John Doe<span class="date">May 2019</span>
-									<div class="star-rating" data-rating="4"></div>
-								</div>
-								<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>2</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">Kathy Brown<span class="date">June 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
-								
-								<div class="review-images mfp-gallery-container">
-									<a href="images/review-image-02.jpg" class="mfp-gallery"><img src="images/review-image-02.jpg" alt=""></a>
-									<a href="images/review-image-03.jpg" class="mfp-gallery"><img src="images/review-image-03.jpg" alt=""></a>
-								</div>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>4</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">John Doe<span class="date">May 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review</a>
-							</div>
-
-						</li>
-					 </ul>
-				</section>
-
-				<!-- Pagination -->
-				<div class="clearfix"></div>
-				<div class="row">
-					<div class="col-md-12">
-						<!-- Pagination -->
-						<div class="pagination-container margin-top-30">
-							<nav class="pagination">
-								<ul>
-									<li><a href="#" class="current-page">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
-								</ul>
-							</nav>
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-				<!-- Pagination / End -->
-			</div>
+			
 
 
 			
