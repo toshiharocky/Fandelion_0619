@@ -407,7 +407,7 @@
 
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
-
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&language=ja"></script>
 
 
 @endpush

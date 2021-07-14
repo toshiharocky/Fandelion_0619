@@ -15,6 +15,13 @@ class SearchController extends Controller
     {
         //
         dd($request->all());
+        
+        // $city2 = $request->city2;
+        // $cityLat = $request->cityLat;
+        // $cityLng = $request->cityLng;
+        // $ = $request->;
+        // $ = $request->;
+        // $ = $request->;
     }
 
     /**

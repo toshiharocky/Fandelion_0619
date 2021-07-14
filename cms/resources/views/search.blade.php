@@ -53,7 +53,7 @@
 										<!-- Quantity Buttons -->
 										<div class="qtyButtons">
 											<div class="qtyTitle">Men</div>
-											<input type="text" name="qtyInput" value="1">
+											<input type="text" name="qtyInput" value="0">
 										</div>
 	
 										<div class="qtyButtons">
@@ -65,14 +65,20 @@
 											<div class="qtyTitle">Others</div>
 											<input type="text" name="qtyInput" value="0">
 										</div>
-										<div id="people"></div>
+										<div id="people">
+											<input type="hidden" name="men" value=0>
+											<input type="hidden" name="women" value=0>
+											<input type="hidden" name="others" value=0>
+											<input type="hidden" name="total_people" value="0">
+										</div>
 									</div>
 								</div>
-								<div style="width:15%;">
-									<input type="button" onclick="submit();" class="button search-button" value="Search">
+								<div style="width:15%;" id="search" >
+									<input type="button" onclick="submit();" class="button search-button" value="Search" style="background-color:#dcdcdc; color:white;" disabled>
 								</div>
 							</form>
-					</div>
+						</div>
+					<div id="place-alert"></div>
 				</div>
 			</div>
 		</div>
@@ -381,11 +387,52 @@
 	// </script>
 	
 	<script>
+		
+		let total_people = 0;
+		
+		
+		
+		function submit(){
+			let cityLat = $('#cityLat').val();
+			let cityLng = $('#cityLng').val();
+			let city2 =  $('#city2').val();
+			let autocomplete_input = $("#autocomplete-input").val();
+	    	console.log(cityLat);
+	    	console.log(cityLng);
+	    	console.log(city2);
+	    	console.log(autocomplete_input);
+	    	
+			  $("#place-alert").empty();
+			  console.log(cityLat=="" && cityLng=="" && autocomplete_input!="" );
+			    	
+			  
+			  if(cityLat=="" && cityLng=="" && autocomplete_input!="" ){
+					$("#place-alert").append(
+					`<h5 style="color:#f91942;">地名を選択してください</h5>`
+					)
+				}
+				
+				
+				if(cityLat!="" && cityLng!="" && total_people != 0){
+					$("#search").empty();
+					$("#search").append(
+						`<input type="button" onclick="submit();" class="button search-button" value="Search">`
+					);
+				}else{
+					$("#search").empty();
+					$("#search").append(
+						`<input type="button" onclick="submit();" class="button search-button" value="Search" style="background-color:#dcdcdc; color:white;" disabled>`
+					);
+				}
+		}
+		
+		
+		
 		$(".qtyButtons").on("click",function(){
 			let men = parseInt($(".qtyButtons").eq(0).children('input').val());
 			let women = parseInt($(".qtyButtons").eq(1).children('input').val());
 			let others = parseInt($(".qtyButtons").eq(2).children('input').val());
-			let total_people = men + women + others;
+			total_people = men + women + others;
 			<!--console.log(total_people);-->
 			$("#people").empty();
 			$("#people").append(
@@ -395,9 +442,25 @@
 				<input type="hidden" name="total_people" value=${total_people}>
 				
 				`
-			)
+			);
+			submit();
 			
 		});
+		
+		
+		
+	    $("#autocomplete-input").on("change",function(){
+	    	$('#autocomplete-input').delay(1000).queue(function(){
+	        	submit();
+	        });
+	    });
+	    
+	    $('#cityLat').on("change",function(){
+	    	$('#cityLat').delay(1000).queue(function(){
+	        	submit();
+	        });
+	    });
+	    
 	</script>
 	
 	<script type="text/javascript">
@@ -412,7 +475,7 @@
 	            <!--alert("This function is working!");-->
 	            <!--alert(place.name);-->
 	            <!--alert(place.address_components[0].long_name);-->
-	
+				
 	        });
 	    }
 	    
