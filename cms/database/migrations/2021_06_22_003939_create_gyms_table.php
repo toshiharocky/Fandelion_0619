@@ -17,7 +17,7 @@ class CreateGymsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('cancel_policy_id');
-            $table->integer('gymstatus_id')->default(1);
+            $table->integer('gymstatus_id'); //->default(1);
             $table->string('gym_title');
             $table->text('gym_desc');
             $table->integer('gymType_id');
@@ -29,9 +29,9 @@ class CreateGymsTable extends Migration
             $table->double('latitude'); //経度
             $table->integer('area');
             $table->integer('guest_gender');
-            $table->integer('superHost_flg')->default(0);
-            $table->integer('review_amount')->default(0);
-            $table->float('review_average')->default(0);
+            $table->integer('superHost_flg'); //->default(0);
+            // $table->integer('review_amount')->default(0);
+            // $table->float('review_average')->default(0);
             $table->integer('guest_limit');
             $table->timestamps();
         });

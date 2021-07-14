@@ -69,7 +69,7 @@
 											<input type="hidden" name="men" value=0>
 											<input type="hidden" name="women" value=0>
 											<input type="hidden" name="others" value=0>
-											<input type="hidden" name="total_people" value="0">
+											<input type="hidden" name="total_guest" value="0">
 										</div>
 									</div>
 								</div>
@@ -78,7 +78,7 @@
 								</div>
 							</form>
 						</div>
-					<div id="place-alert"></div>
+					<!--<div id="place-alert"></div>-->
 				</div>
 			</div>
 		</div>
@@ -388,32 +388,32 @@
 	
 	<script>
 		
-		let total_people = 0;
+		let total_guest = 0;
 		
 		
 		
 		function submit(){
+			// console.log('呼ばれたよ');
 			let cityLat = $('#cityLat').val();
 			let cityLng = $('#cityLng').val();
 			let city2 =  $('#city2').val();
-			let autocomplete_input = $("#autocomplete-input").val();
-	    	console.log(cityLat);
-	    	console.log(cityLng);
-	    	console.log(city2);
-	    	console.log(autocomplete_input);
+			// let autocomplete_input = $("#autocomplete-input").val();
+	  //  	console.log(cityLat);
+	  //  	console.log(cityLng);
+	  //  	console.log(city2);
+	  //  	console.log(autocomplete_input);
 	    	
-			  $("#place-alert").empty();
-			  console.log(cityLat=="" && cityLng=="" && autocomplete_input!="" );
-			    	
+			 <!-- $("#place-alert").empty();-->
+			 <!-- console.log(cityLat=="" && cityLng=="" && autocomplete_input!="" );-->
 			  
-			  if(cityLat=="" && cityLng=="" && autocomplete_input!="" ){
-					$("#place-alert").append(
-					`<h5 style="color:#f91942;">地名を選択してください</h5>`
-					)
-				}
+			 <!-- if(cityLat=="" && cityLng=="" && autocomplete_input!="" ){-->
+				<!--	$("#place-alert").append(-->
+				<!--	`<h5 style="color:#f91942;">地名を選択してください</h5>`-->
+				<!--	)-->
+				<!--}-->
 				
 				
-				if(cityLat!="" && cityLng!="" && total_people != 0){
+				if(cityLat!="" && cityLng!="" && total_guest != 0){
 					$("#search").empty();
 					$("#search").append(
 						`<input type="button" onclick="submit();" class="button search-button" value="Search">`
@@ -432,14 +432,14 @@
 			let men = parseInt($(".qtyButtons").eq(0).children('input').val());
 			let women = parseInt($(".qtyButtons").eq(1).children('input').val());
 			let others = parseInt($(".qtyButtons").eq(2).children('input').val());
-			total_people = men + women + others;
-			<!--console.log(total_people);-->
+			total_guest = men + women + others;
+			<!--console.log(total_guest);-->
 			$("#people").empty();
 			$("#people").append(
 				`<input type="hidden" name="men" value=${men}>
 				<input type="hidden" name="women" value=${women}>
 				<input type="hidden" name="others" value=${others}>
-				<input type="hidden" name="total_people" value=${total_people}>
+				<input type="hidden" name="total_guest" value=${total_guest}>
 				
 				`
 			);
@@ -448,18 +448,9 @@
 		});
 		
 		
-		
-	    $("#autocomplete-input").on("change",function(){
-	    	$('#autocomplete-input').delay(1000).queue(function(){
-	        	submit();
-	        });
-	    });
 	    
-	    $('#cityLat').on("change",function(){
-	    	$('#cityLat').delay(1000).queue(function(){
-	        	submit();
-	        });
-	    });
+	    
+		
 	    
 	</script>
 	
@@ -472,12 +463,37 @@
 	            document.getElementById('city2').value = place.name;
 	            document.getElementById('cityLat').value = place.geometry.location.lat();
 	            document.getElementById('cityLng').value = place.geometry.location.lng();
-	            <!--alert("This function is working!");-->
-	            <!--alert(place.name);-->
-	            <!--alert(place.address_components[0].long_name);-->
-				
+				submit();
 	        });
+	        
 	    }
+	    
+	    
+	   <!-- $("#autocomplete-input").on("focusout",function(){-->
+	   <!-- 	initAutocomplete();-->
+	   <!-- }-->
+	    
+	    
+	   <!-- $("#autocomplete-input").on("focusout",function(){-->
+	   <!-- 	if($("#autocomplete-input").val() == ""){-->
+	   <!-- 		$("#autocomplete-container").empty();-->
+	   <!-- 		$("#autocomplete-container").append(-->
+				<!--	`<input id="autocomplete-input" type="text" placeholder="Location" required>-->
+				<!--	<input type="hidden" id="city2" name="city2" />-->
+				<!--	<input type="hidden" id="cityLat" name="cityLat" />-->
+				<!--	<input type="hidden" id="cityLng" name="cityLng" />  `-->
+				<!--);-->
+	   <!-- 	}-->
+	    	
+	   <!-- 	console.log("外れたよ");-->
+    <!--    	submit();-->
+	   <!-- });-->
+	    
+	    // $('#cityLat').on("change",function(){
+	    // 	$('#cityLat').delay(1000).queue(function(){
+	    //     	submit();
+	    //     });
+	    // });
 	    
 	</script>
 	
