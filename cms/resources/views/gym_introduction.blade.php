@@ -24,7 +24,15 @@
 <div class="container">
 	<div class="row sticky-wrapper">
 		<div class="col-lg-8 col-md-8 padding-right-30">
-		
+			
+			<!-- Share / Like -->
+			
+			<!--	<div class="listing-share margin-top-20 no-border" style="text-align:right;">-->
+			<!--		<a href="/bookmark" class="button" style="line-height:30px; bottom:1px; width:30px; height:30px; background-color:#f3103c;">-->
+			<!--			<i class="fas fa-heart"></i>-->
+			<!--		</a>-->
+			<!--		<div class="clearfix"></div>-->
+			<!--	</div>-->
 			<!-- Titlebar -->
 			<div id="titlebar" class="listing-titlebar" style="display:flex; flex-direction:row; justify-content:space-between;">
 				<div class="listing-titlebar-title" style="max-width:70%;">
@@ -52,6 +60,8 @@
 					</span>
 				</div>
 			</div>
+			
+			
 
 			<!-- Listing Nav -->
 			<div id="listing-nav" class="listing-nav-container">
@@ -388,36 +398,21 @@
 
 
 			<!-- Coupon Widget -->
-			<div class="coupon-widget" style="background-image: url(https://localhost/listeo_html/images/single-listing-01.jpg);">
-				<a href="#" class="coupon-top">
-					<span class="coupon-link-icon"></span>
-					<h3>Order 1 burger and get 50% off on second!</h3>
-					<div class="coupon-valid-untill">Expires 25/10/2019</div>
-					<div class="coupon-how-to-use"><strong>How to use?</strong> Just show us this coupon on a screen of your smartphone!</div>
-				</a>
-				<div class="coupon-bottom">
-					<div class="coupon-scissors-icon"></div>
-					<div class="coupon-code">L1ST30</div>
-				</div>
-			</div>
+			<!--<div class="coupon-widget" style="background-image: url(https://localhost/listeo_html/images/single-listing-01.jpg);">-->
+			<!--	<a href="#" class="coupon-top">-->
+			<!--		<span class="coupon-link-icon"></span>-->
+			<!--		<h3>Order 1 burger and get 50% off on second!</h3>-->
+			<!--		<div class="coupon-valid-untill">Expires 25/10/2019</div>-->
+			<!--		<div class="coupon-how-to-use"><strong>How to use?</strong> Just show us this coupon on a screen of your smartphone!</div>-->
+			<!--	</a>-->
+			<!--	<div class="coupon-bottom">-->
+			<!--		<div class="coupon-scissors-icon"></div>-->
+			<!--		<div class="coupon-code">L1ST30</div>-->
+			<!--	</div>-->
+			<!--</div>-->
 
 		
-			<!-- Opening Hours -->
-			<div class="boxed-widget opening-hours margin-top-35">
-				<div class="listing-badge now-open">Now Open</div>
-				<h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>
-				<ul>
-					<li>Monday <span>9 AM - 5 PM</span></li>
-					<li>Tuesday <span>9 AM - 5 PM</span></li>
-					<li>Wednesday <span>9 AM - 5 PM</span></li>
-					<li>Thursday <span>9 AM - 5 PM</span></li>
-					<li>Friday <span>9 AM - 5 PM</span></li>
-					<li>Saturday <span>9 AM - 3 PM</span></li>
-					<li>Sunday <span>Closed</span></li>
-				</ul>
-			</div>
-			<!-- Opening Hours / End -->
-
+			
 
 			<!-- Contact -->
 			<div class="boxed-widget margin-top-35">
@@ -453,20 +448,7 @@
 			<!-- Contact / End-->
 
 
-			<!-- Share / Like -->
-			<div class="listing-share margin-top-40 margin-bottom-40 no-border">
-				<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> 
-				<span>159 people bookmarked this place</span>
-
-					<!-- Share Buttons -->
-					<!--<ul class="share-buttons margin-top-40 margin-bottom-0">-->
-					<!--	<li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>-->
-					<!--	<li><a class="twitter-share" href="#"><i class="fa fa-twitter"></i> Tweet</a></li>-->
-					<!--	<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>-->
-						<!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
-					<!--</ul>-->
-					<div class="clearfix"></div>
-			</div>
+			
 
 		</div>
 		<!-- Sidebar / End -->

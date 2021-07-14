@@ -72,6 +72,7 @@ class GymController extends Controller
         $latitude  = $gym_infos[0]->latitude; //緯度
         $random_lat = rand(-100000, 100000);
         $random_lat_float = $random_lat / 100000000;
+        $latitude_privacy = $latitude + $random_lat_float;//表示する緯度
         
         // inner joinでarea情報を取得
         $area = DB::table('gym_areas')
@@ -81,7 +82,7 @@ class GymController extends Controller
                     ->get();
         
         
-        $latitude_privacy = $latitude + $random_lat_float;//表示する緯度
+        // $latitude_privacy = $latitude + $random_lat_float;
         
         // guest_genderの希望を表示
         $guest_gender_flg  = $gym_infos[0]->guest_gender;
@@ -95,7 +96,6 @@ class GymController extends Controller
                         ->where('gyms.id',$gym_id)
                         ->get();
             $guest_gender = $guest_gender_title[0]->guest_gender;
-            // dd($guest_gender);
         }
         
         
@@ -211,9 +211,9 @@ class GymController extends Controller
                     'addr' => $addr,
                     'strt' => $strt,
                     'longitude' =>$longitude, //緯度
-                    // 'longitude' => $longitude_privacy,
+                    'longitude_privacy' => $longitude_privacy,
                     'latitude' => $latitude, //緯度
-                    // 'latitude_privacy' => $latitude_privacy, //表示する緯度
+                    'latitude_privacy' => $latitude_privacy, //表示する緯度
                     'area' => $area,
                     'guest_gender' => $guest_gender,
                     'superHost_flg' => $superHost_flg,
@@ -246,9 +246,9 @@ class GymController extends Controller
                     'gym_desc' => $gym_desc,
                     'gymType_id' => $gymType_id,
                     'addr' => $addr,
-                    // 'longitude' =>$longitude, //緯度
+                    'longitude' =>$longitude, //緯度
                     'longitude_privacy' => $longitude_privacy,
-                    // 'latitude' => $latitude, //緯度
+                    'latitude' => $latitude, //緯度
                     'latitude_privacy' => $latitude_privacy, //表示する緯度
                     'area' => $area,
                     'guest_gender' => $guest_gender,
@@ -283,9 +283,9 @@ class GymController extends Controller
                 'gymType_id' => $gymType_id,
                 'addr' => $addr,
                 'longitude' =>$longitude, //緯度
-                // 'longitude' => $longitude_privacy,
+                'longitude_privacy' => $longitude_privacy,
                 'latitude' => $latitude, //緯度
-                // 'latitude_privacy' => $latitude_privacy, //表示する緯度
+                'latitude_privacy' => $latitude_privacy, //表示する緯度
                 'area' => $area,
                 'guest_gender' => $guest_gender,
                 'superHost_flg' => $superHost_flg,

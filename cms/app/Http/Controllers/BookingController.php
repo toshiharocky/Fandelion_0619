@@ -76,6 +76,7 @@ class BookingController extends Controller
         //$booking_idが存在しない（＝予約がゼロ）かどうかによって、history.blade.phpに渡す値を変える
         if(isset($booking_id)){
         return view('history',[
+            
                 'booking_check'=>0,
                 'user_id'=>$user,
                 'user_name'=>$user_name,
@@ -171,7 +172,7 @@ class BookingController extends Controller
         // dd($schedule_ids);   
         
         $from_time = date("Y-m-d H:i", strtotime($date." ".$booking_from_time));
-        $to_time = date("Y-m-d H:i", strtotime($date." ".$booking_to_time));
+        $to_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
         // dd($from_time);
         
         // Bookingテーブルに作成

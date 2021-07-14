@@ -14,6 +14,7 @@
 @stack('css')
 <script src="{{ asset('/js/all.js') }}"></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons%7CMaterial+Icons+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 <link rel="stylesheet" href="https://use.typekit.net/wau6xrc.css">
 
 </head>
@@ -186,8 +187,8 @@
 							<ul>
 								<!--<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>-->
 								<!--<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>-->
-								<li><a href="/history"><i class="fas fa-dumbbell"></i> 履歴</a></li>
-								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i> ジムの追加</a></li>
+								<li><a href="/history"><i class="fas fa-dumbbell"></i>予約一覧</a></li>
+								<li><a href="/add_gym"><i class="fa fa-calendar-check-o"></i>ジムの追加</a></li>
 								<li><a href="{{ route('logout') }}"
 	                                   onclick="event.preventDefault();
 	                                                 document.getElementById('logout-form').submit();">
@@ -419,9 +420,9 @@
 <!-- Header Container / End -->
 
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-        @stack('js')
+<main class="py-4">
+    @yield('content')
+</main>
+@stack('js')
 </body>
 </html>

@@ -144,7 +144,9 @@ class BookController extends Controller
             // $from_timeが配列$gym_from_time_listの'from_time'に含まれている場合は、$gym_from_times_str、$gym_to_times_str、$gym_status 、$priceを記入する
             if(in_array($from_time, array_column($gym_from_time_list, 'from_time'))){
                 $gym_from_times_str = $from_time;
-                $gym_to_times_str = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));
+                $gym_to_times_str = date("H:i", strtotime('+15 minute',strtotime($from_time)));
+                
+                
                 $i = (array_search($from_time, $array));
                 // dd($i);
                 // $gym_from_times_str = [$gym_schedule[$i]->from_time][0];
@@ -170,8 +172,8 @@ class BookController extends Controller
             
             
             
-            $gym_open_times[] = array('gym_id' => $gym_id, 'gym_schedule_id' => $gym_schedule_id, 'date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("H:i", strtotime($gym_from_times_str))
-            , 'to_time' => date("H:i", strtotime($gym_to_times_str)), 'status' => $gym_status,  'price' => $price);
+            $gym_open_times[] = array('gym_id' => $gym_id, 'gym_schedule_id' => $gym_schedule_id, 'date' => date("m/d/Y", strtotime($gym_from_times_str)), 'from_time' => date("m/d/Y H:i", strtotime($gym_from_times_str))
+            , 'to_time' => date("m/d/Y H:i", strtotime('+15 minute',strtotime($gym_from_times_str))), 'status' => $gym_status,  'price' => $price);
             
             
             $from_time = date("Y-m-d H:i", strtotime('+15 minute',strtotime($from_time)));

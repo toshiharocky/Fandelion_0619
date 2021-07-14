@@ -87,6 +87,9 @@ function future(){
                     let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
                     let booking_date_to = new Date(Date.parse(booking_to_time[$i]));
                     
+                    console.log(booking_date_from);
+                    console.log(booking_date_to);
+                    
                     // cancel_policy_idに応じて、キャンセル期限を設定する（時間単位）。
                     let cancel_limit_time = "";
                     switch(cancel_policy_id[$i]){
@@ -177,7 +180,7 @@ function future(){
                     		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                     		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                     		        <h5>現在トレーニング中です<h5>
-                    			    <input type="submit" class="button gray" style="width:100%;" value="トレーニング終了">
+                    			    <input type="submit" class="button gray" style="width:100%; height:35px;" value="トレーニング終了">
                 			    </form>
                     			`
                 		    );
@@ -190,12 +193,12 @@ function future(){
                     		        <form method="put" action="booking_update">
                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
-                        		        <input type="submit" class="button gray" style="width:100%;" value="予約の修正">
+                        		        <input type="submit" class="button gray" style="width:100%; height:35px;" value="予約の修正">
                     		        </from>
                     		        <form method="put" action="booked_gym_introduction">
                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
-                            			<input type="submit" class="button gray" style="width:100%;" value="予約のキャンセル">
+                            			<input type="submit" class="button gray" style="width:100%; height:35px;" value="予約のキャンセル">
                         			</from>
                         			<h5>予約の修正・キャンセルは${cancel_date} ${cancel_time}までです。<h5>
                         			`
@@ -227,7 +230,7 @@ function future(){
                                         			<form id="check_out" method="put" action="check_out">
                                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
-                                        			    <input type="submit" class="button gray" style="width:100%;" value="トレーニング終了">
+                                        			    <input type="submit" class="button gray" style="width:100%; height:35px;" value="トレーニング終了">
                                     			    </form>
                                         			`
                                     		    )
@@ -245,7 +248,7 @@ function future(){
                                 			<form id="check_in" method="put" action="check_in">
                                 		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                                 		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
-                                			    <input type="submit" class="button gray" style="width:100%;" value="トレーニング開始">
+                                			    <input type="submit" class="button gray" style="width:100%; height:35px;" value="トレーニング開始">
                             			    </form>
                                 			`
                             		    )
@@ -354,7 +357,7 @@ function past(){
                         if(bookingstatus_id[$i]=='25'){
                 		    $(".history_buttons").eq(eq_num).children('div').eq(0).append(
                     			`
-                    			<form id="review" method="put" action="review">
+                    			<form id="review" method="put" action="review_to_host">
                     		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
                     		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                     		        <h5>レビューをしてください<h5>

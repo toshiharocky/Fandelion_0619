@@ -7,5 +7,11 @@
     "/js/infobox.min.js": "/js/infobox.min.js",
     "/js/markerclusterer.js": "/js/markerclusterer.js",
     "/js/maps.js": "/js/maps.js",
+    "/js/leaflet.min.js": "/js/leaflet.min.js",
+    "/js/leaflet-markercluster.min.js": "/js/leaflet-markercluster.min.js",
+    "/js/leaflet-gesture-handling.min.js": "/js/leaflet-gesture-handling.min.js",
+    "/js/leaflet-listeo.js": "/js/leaflet-listeo.js",
+    "/js/leaflet-autocomplete.js": "/js/leaflet-autocomplete.js",
+    "/js/leaflet-control-geocoder.js": "/js/leaflet-control-geocoder.js",
     "/css/all.css": "/css/all.css"
 }

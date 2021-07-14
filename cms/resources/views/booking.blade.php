@@ -129,6 +129,7 @@
         						<div class="qtyTitle">Others</div>
         						<input type="text" name="qtyInput" value="0">
         					</div>
+    					
         			</div>
     			</div>
 			</div>
@@ -433,7 +434,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 
 <script>
 	let guest_gender = '{{$guest_gender}}';
-	if(guest_gender != ""){
+	if(guest_gender != "特になし"){
 		$(document).ready(function(){
 			$('#gym_tags').append(
 				`<span class="listing-tag" style="margin:10px 10px 0 0; font-size:14px;">{{$gym_type[0]->gym_type}}</span>`,
@@ -602,6 +603,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		let start_time = $("#start_time").val();
 		let end_time = $("#end_time").val();
 		
+		
 		let openingtimes = $.grep(gym_open_times, function(elem,index){
 			return (elem.date == date);
 		});
@@ -613,18 +615,25 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 		)
 		
 		
+		
 		$.each(openingtimes, function(index,openingtime){
-			if(openingtime.from_time >= start_time && openingtime.from_time < end_time ){
+			let from_time_h = ("0"+new Date(openingtime.from_time).getHours()).slice(-2);
+			let from_time_i = ("0"+new Date(openingtime.from_time).getMinutes()).slice(-2);
+			let from_time_hi = from_time_h + ":" + from_time_i;
+			let to_time_h = ("0"+new Date(openingtime.to_time).getHours()).slice(-2);
+			let to_time_i = ("0"+new Date(openingtime.to_time).getMinutes()).slice(-2);
+			let to_time_hi = to_time_h + ":" + to_time_i;
+			if(from_time_hi >= start_time && from_time_hi < end_time ){
 				if(openingtime.status == "○"){
 				$("#start-time-slot").append(
 					`
 					<div class="time-slot">
 						<p id="time-slot-1" >
 						<a class="start_slot">
-							<label id="${openingtime.gym_schedule_id}" value="${openingtime.from_time}" for="time-slot-1" class="booking_price booking_price_start" style="background-color:#fff0c1; cursor:pointer;">
-								<strong value="${openingtime.price}"> ${openingtime.from_time} - ${openingtime.to_time} ：　${openingtime.price}円</strong>
+							<label id="${openingtime.gym_schedule_id}" value="${from_time_hi}" for="time-slot-1" class="booking_price booking_price_start" style="background-color:#fff0c1; cursor:pointer;">
+								<strong value="${openingtime.price}"> ${from_time_hi} - ${to_time_hi} ：　${openingtime.price}円</strong>
 							</label>
-							<input type="hidden" value="${openingtime.to_time}" >
+							<input type="hidden" value="${to_time_hi}" >
 						</a>
 						</p>
 					</div>`);
@@ -633,7 +642,7 @@ $('#date-picker').on('hide.daterangepicker', function(ev, picker) {
 					`<div class="time-slot">
 						<p id="time-slot-1" >
 						<label for="time-slot-1" style="text-align:center; padding:5px; display:flex; flex-direction:row; justify-content:center;">
-							<strong class="booking_status" value="${openingtime.status}">${openingtime.from_time} - ${openingtime.to_time}　：　${openingtime.status}</strong>
+							<strong class="booking_status" value="${openingtime.status}">${from_time_hi} - ${to_time_hi}　：　${openingtime.status}</strong>
 						</label>
 						</p>
 					</div>`);

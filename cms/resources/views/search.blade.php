@@ -26,21 +26,27 @@
 						<h2>ジムを探す</h2>
 						<h4>あなたに合ったフィットネス環境をみつけましょう</h4>
 	
-						<div class="main-search-input">
-	
-							<!-- <div class="main-search-input-item">
-								<input type="text" placeholder="What are you looking for?" value=""/>
-							</div> -->
-	
-							<div class="main-search-input-item location">
-								<div id="autocomplete-container">
-									<input id="autocomplete-input" type="text" placeholder="Location">
+						<form method="post" action="search_results">
+						@csrf	
+							<div class="main-search-input" style="width:60%;">
+		
+								<!-- <div class="main-search-input-item">
+									<input type="text" placeholder="What are you looking for?" value=""/>
+								</div> -->
+		
+								
+								<div class="main-search-input-item location">
+									<div id="autocomplete-container">
+										<input id="autocomplete-input" type="text" placeholder="Location" required>
+										<input type="hidden" id="city2" name="city2" />
+										<input type="hidden" id="cityLat" name="cityLat" />
+										<input type="hidden" id="cityLng" name="cityLng" />  
+									</div>
+									<!--<a href="#"><i class="fa fa-map-marker"></i></a>-->
 								</div>
-								<a href="#"><i class="fa fa-map-marker"></i></a>
-							</div>
-	
-							<div class="main-search-input-item">
-								<div class="panel-dropdown">
+		
+							<!--<div class="main-search-input-item" >-->
+								<div class="panel-dropdown" style="width:20%;">
 									<a href="#"  style="width:100%; text-align:center;">Guests <span class="qtyTotal" name="qtyTotal" style="background-color:#f91942">1</span></a>
 									<div class="panel-dropdown-content">
 	
@@ -59,16 +65,17 @@
 											<div class="qtyTitle">Others</div>
 											<input type="text" name="qtyInput" value="0">
 										</div>
+										<div id="people"></div>
 									</div>
 								</div>
-							</div>
-	
-							<button class="button search-button" onclick="window.location.href='listings-half-screen-map-list.html'">Search</button>
-	
-						</div>
+								<div style="width:15%;">
+									<input type="button" onclick="submit();" class="button search-button" value="Search">
+								</div>
+							</form>
 					</div>
 				</div>
 			</div>
+		</div>
 	
 		</div>
 		
@@ -83,74 +90,7 @@
 	
 	
 	
-	<!-- Content
-	================================================== -->
-	<!-- <div class="container">
-		<div class="row">
 	
-			<div class="col-md-12">
-				<h3 class="headline centered margin-top-75">
-					Browse Categories
-				</h3>
-			</div>
-	
-		</div>
-	</div> -->
-	
-	
-	<!-- Category Boxes -->
-	<!-- <div class="container">
-	<!--	<div class="row">-->
-	<!--		<div class="col-md-12">-->
-	<!--			<div class="categories-boxes-container margin-top-5 margin-bottom-30"> -->-->
-					
-					<!-- Box -->
-					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
-	<!--					<i class="im im-icon-Hamburger"></i>-->
-	<!--					<h4>Eat & Drink</h4>-->
-	<!--					<span class="category-box-counter">12</span>-->
-	<!--				</a> -->
-	
-					<!-- Box -->
-					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
-	<!--					<i class="im  im-icon-Sleeping"></i>-->
-	<!--					<h4>Hotels</h4>-->
-	<!--					<span class="category-box-counter">32</span>-->
-	<!--				</a> -->
-	
-					<!-- Box -->
-					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
-	<!--					<i class="im im-icon-Shopping-Bag"></i>-->
-	<!--					<h4>Shops</h4>-->
-	<!--					<span class="category-box-counter">11</span>-->
-	<!--				</a> -->
-	
-					<!-- Box -->
-					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
-	<!--					<i class="im im-icon-Cocktail"></i>-->
-	<!--					<h4>Nightlife</h4>-->
-	<!--					<span class="category-box-counter">15</span>-->
-	<!--				</a> -->
-	
-					<!-- Box -->
-					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
-	<!--					<i class="im im-icon-Electric-Guitar"></i>-->
-	<!--					<h4>Events</h4>-->
-	<!--					<span class="category-box-counter">21</span>-->
-	<!--				</a> -->
-	
-					<!-- Box -->
-					<!-- <a href="listings-list-with-sidebar.html" class="category-small-box">
-	<!--					<i class="im im-icon-Dumbbell"></i>-->
-	<!--					<h4>Fitness</h4>-->
-	<!--					<span class="category-box-counter">28</span>-->
-	<!--				</a>-->
-	
-	<!--			</div>-->
-	<!--		</div>-->
-	<!--	</div>-->
-	<!--</div> -->-->
-	<!-- Category Boxes / End -->
 	
 	
 	<!-- Fullwidth Section -->
@@ -177,7 +117,7 @@
 				<form method="post" name="gym_select" action="gym_introduction">
 				@csrf
 					
-					<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact">
+					<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container compact" >
 						<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
 						<div class="listing-item">
 							<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
@@ -194,7 +134,7 @@
 								<h3 class="gym_title_select">{{$gym_titles[$i]}}</h3>
 								<span>{{$gym_addr[$i]}}</span>
 							</div>
-							<span class="like-icon"></span>
+							<!--<span class="like-icon"></span>-->
 						</div>
 					</a>
 				</form>
@@ -407,29 +347,82 @@
 @push('js')
 	<!-- Booking Widget - Quantity Buttons -->
 	<script src="{{ asset('/js/quantityButtons.js') }}"></script>
+	<!-- Leaflet // Docs: https://leafletjs.com/ -->
+	<!--<script src="{{ asset('/js/leaflet.min.js') }}"></script>-->
 	
+	<!-- Leaflet Maps Scripts -->
+	<!--<script src="{{ asset('/js/leaflet-markercluster.min.js') }}"></script>-->
+	<!--<script src="{{ asset('/js/leaflet-gesture-handling.min.js') }}"></script>-->
+	<!--<script src="{{ asset('/js/leaflet-listeo.js') }}"></script>-->
+	
+	<!-- Leaflet Geocoder + Search Autocomplete // Docs: https://github.com/perliedman/leaflet-control-geocoder -->
+	<!--<script src="{{ asset('/js/leaflet-autocomplete.js') }}"></script>-->
+	<!--<script src="{{ asset('/js/leaflet-control-geocoder.js') }}"></script>-->
 	
 	<!-- Google Autocomplete -->
+	// <script>
+	//   function initAutocomplete() {
+	//     var input = document.getElementById('autocomplete-input');
+	//     var autocomplete = new google.maps.places.Autocomplete(input);
+	
+	//     autocomplete.addListener('place_changed', function() {
+	//       var place = autocomplete.getPlace();
+	//       if (!place.geometry) {
+	//         return;
+	//       }
+	//     });
+	
+	// 	if ($('.main-search-input-item')[0]) {
+	// 	    setTimeout(function(){ 
+	// 	        $(".pac-container").prependTo("#autocomplete-container");
+	// 	    }, 300);
+	// 	}
+	// }
+	// </script>
+	
 	<script>
-	  function initAutocomplete() {
-	    var input = document.getElementById('autocomplete-input');
-	    var autocomplete = new google.maps.places.Autocomplete(input);
-	
-	    autocomplete.addListener('place_changed', function() {
-	      var place = autocomplete.getPlace();
-	      if (!place.geometry) {
-	        return;
-	      }
-	    });
-	
-		if ($('.main-search-input-item')[0]) {
-		    setTimeout(function(){ 
-		        $(".pac-container").prependTo("#autocomplete-container");
-		    }, 300);
-		}
-	}
+		$(".qtyButtons").on("click",function(){
+			let men = parseInt($(".qtyButtons").eq(0).children('input').val());
+			let women = parseInt($(".qtyButtons").eq(1).children('input').val());
+			let others = parseInt($(".qtyButtons").eq(2).children('input').val());
+			let total_people = men + women + others;
+			<!--console.log(total_people);-->
+			$("#people").empty();
+			$("#people").append(
+				`<input type="hidden" name="men" value=${men}>
+				<input type="hidden" name="women" value=${women}>
+				<input type="hidden" name="others" value=${others}>
+				<input type="hidden" name="total_people" value=${total_people}>
+				
+				`
+			)
+			
+		});
 	</script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7PmDmzo3mhY4fj8-BJKvNtI4eyidWRio&callback=initAutocomplete"></script>
+	
+	<script type="text/javascript">
+	    function initAutocomplete() {
+	        var input = document.getElementById('autocomplete-input');
+	        var autocomplete = new google.maps.places.Autocomplete(input);
+	        google.maps.event.addListener(autocomplete, 'place_changed', function () {
+	            var place = autocomplete.getPlace();
+	            document.getElementById('city2').value = place.name;
+	            document.getElementById('cityLat').value = place.geometry.location.lat();
+	            document.getElementById('cityLng').value = place.geometry.location.lng();
+	            <!--alert("This function is working!");-->
+	            <!--alert(place.name);-->
+	            <!--alert(place.address_components[0].long_name);-->
+	
+	        });
+	    }
+	    
+	</script>
+	
+	<!--<script src="https://maps.google.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&language=ja"></script>-->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&libraries=places&callback=initAutocomplete" async defer">
+	</script>
+	
+	
 	
 	<!-- Style Switcher
 	================================================== -->
