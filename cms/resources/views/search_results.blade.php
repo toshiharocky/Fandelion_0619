@@ -174,8 +174,8 @@
 				<!-- Listings -->
 				<form method="post" name="gym_select" action="gym_introduction">
 				@csrf
-					<div class="col-lg-6 col-md-12">
-						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container" data-marker-id={{$i}}>
+					<div class="col-md-12">
+						<a id={{$i}}_gym onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container" data-marker-id={{$i}}>
 							<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
 							<div class="listing-item">
 								<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
@@ -299,6 +299,90 @@
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&language=ja"></script>
 
+<script>
+		
+	let map;
+	  let mainMarker;
+	  let marker =[];
+	  let infoWindow = [];
+	
+	
+    let cityLat = {{$cityLat}};
+    let cityLng = {{$cityLng}};
+	let search_amount = {{$search_amount}};
+	// let gym_titles = {{$gym_titles[0]}};
+	let gym_latitude =  @json($gym_latitude);
+	let gym_longitude =  @json($gym_longitude);
+	let gym_titles = @json($gym_titles);
+	
+	
+	
+	function initMap(){
+	  //let markerData = gon.places;
+	  let latlng = {lat: cityLat, lng: cityLng};
+	  // 初期位置の指定
+	  map = new google.maps.Map(document.getElementById('map'), {
+	  center: latlng,
+	  zoom: 16
+	  });
+	
+	  // 初期位置にマーカーを立てる
+	  mainMarker = new google.maps.Marker({
+	    map: map,
+	    position: latlng
+	  });
+	
+	  // 近隣店舗にマーカーを立てる
+	  for ($i = 0; $i < search_amount; $i++) {
+	    const image = "https://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+	    // 緯度経度のデータを作成
+	    let markerLatLng = new google.maps.LatLng({lat: gym_latitude[$i], lng: gym_longitude[$i]});
+	    let id = "#"+$i+"_gym";
+	    console.log(id);
+	    // マーカーの追加
+	    marker[$i] = new google.maps.Marker({
+	      position: markerLatLng,
+	      map: map,
+	      icon: image,
+	    });
+	
+	    // 吹き出しの追加
+	    infoWindow[$i] = new google.maps.InfoWindow({
+	    // 吹き出しに店舗詳細ページへのリンクを追加
+	    content: `<a href=${id}>${gym_titles[$i]}</a>`
+	    });
+	
+	    markerEvent($i); 
+	  }
+	
+	  // マーカークリック時に吹き出しを表示する
+	  function markerEvent($i) {
+	    marker[$i].addListener('click', function() {
+	      infoWindow[$i].open(map, marker[$i]);
+	    });
+	  }
+	}
+	
+	initMap();
+	
+	<!--document.addEventListener('turbolinks:load', function(){-->
+	<!--  initMap();-->
+	<!--});-->
+    
+	<!--var LatLng = new google.maps.LatLng(cityLat, cityLng);-->
+	<!--var mapOptions = {-->
+	<!-- zoom: 16,      //地図の縮尺値-->
+	<!-- center: LatLng,    //地図の中心座標-->
+	<!-- mapTypeId: 'roadmap'   //地図の種類-->
+	<!--};-->
+ <!--   map = new google.maps.Map(document.getElementById('map'), mapOptions);-->
+	
+	
+	
+	
+	  
+	  
+</script>
 
 
 @endpush

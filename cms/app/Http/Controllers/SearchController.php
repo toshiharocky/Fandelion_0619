@@ -82,6 +82,8 @@ class SearchController extends Controller
                 $gym_id[] = $gym->id;
                 $gym_titles[] = $gym->gym_title;
                 $gym_addr[] = $gym->addr;
+                $gym_latitude[] = $gym->latitude;
+                $gym_longitude[] = $gym->longitude;
                 $guest_gender[] = DB::table('gyms')
                             ->join('guest_genders', 'guest_genders.id', '=', 'gyms.guest_gender')
                             ->select('guest_genders.guest_gender', 'gyms.id')
@@ -149,6 +151,10 @@ class SearchController extends Controller
                 'gym_image_url'=>$gym_image_url,
                 'search_amount' => $search_amount,
                 'guest_gender' => $guest_gender,
+                'cityLat' => $cityLat,
+                'cityLng' => $cityLng,
+                'gym_latitude' => $gym_latitude,
+                'gym_longitude' => $gym_longitude,
                 // 'gym_schedule'=>$gym_schedule,
                 // 'price_range'=>$price_range,
                 ]);
@@ -161,6 +167,10 @@ class SearchController extends Controller
                 'gym_image_url'=>$gym_image_url,
                 'search_amount' => $search_amount,
                 'guest_gender' => $guest_gender,
+                'cityLat' => $cityLat,
+                'cityLng' => $cityLng,
+                'gym_latitude' => $gym_latitude,
+                'gym_longitude' => $gym_longitude,
                 // 'gym_schedule'=>$gym_schedule,
                 // 'price_range'=>$price_range,
                 ]);
