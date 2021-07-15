@@ -12,5 +12,6 @@ class EquipmentTableSeeder extends Seeder
     public function run()
     {
         //
+        $equipment = factory(App\Equipment::class, 200)->create();
     }
 }

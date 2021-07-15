@@ -53,14 +53,14 @@ class SearchController extends Controller
         // $menなし、$womenなし⇨guest_genderはすべて
         if($men != 0){
             if($women == 0){
-                $guest_gender = [1, 3, 5];
+                $guest_gender_select = [1, 3, 5];
             }else{
-                $guest_gender = [1, 4, 5];
+                $guest_gender_select = [1, 4, 5];
             }
         }else if($women != 0){
-                $guest_gender = [1, 2, 4];
+                $guest_gender_select = [1, 2, 4];
             }else{
-                $guest_gender = [1, 2, 3, 4, 5];
+                $guest_gender_select = [1, 2, 3, 4, 5];
             }
         
         // dd($guest_gender);
@@ -68,29 +68,37 @@ class SearchController extends Controller
         // LatitudeとLongitudeがcityLatとcityLngの±0.1した範囲内にあるジムをピックアップする
         // 定員がtotal_guest以下のジムをピックアップする
         $gyms = Gym::where('guest_limit', '>=', $total_guest)
-            ->whereIn('guest_gender',$guest_gender)
+            ->whereIn('guest_gender',$guest_gender_select)
             ->where('latitude', '>', $latitude_from)
             ->where('latitude', '<', $latitude_to)
             ->where('longitude', '>', $longitude_from)
             ->where('longitude', '<', $longitude_to)
             ->get();
-            
+        
+        $search_amount = count($gyms);
+        // dd($search_amount);
         
         foreach($gyms as $gym){
                 $gym_id[] = $gym->id;
                 $gym_titles[] = $gym->gym_title;
                 $gym_addr[] = $gym->addr;
+                $guest_gender[] = DB::table('gyms')
+                            ->join('guest_genders', 'guest_genders.id', '=', 'gyms.guest_gender')
+                            ->select('guest_genders.guest_gender', 'gyms.id')
+                            ->where('gyms.id',$gym->id)
+                            ->get()[0]->guest_gender;
+                
                 $review_average[] = $gym->review_average;
                 $gym_image_url[] = DB::table('gyms')
                             ->join('gym_images', 'gyms.id', '=', 'gym_id')
                             ->select('img_url')
-                            ->where('gym_id',$gym->id)
+                            ->where('gyms.id',$gym->id)
                             ->get()[0]->img_url;
                 // ジムのスケジュールを取得する
                 $gym_schedule = DB::table('gyms')
                             ->join('gym_schedules', 'gyms.id', '=', 'gym_id')
                             ->select('gym_id','from_time', 'to_time', 'price', 'status', 'day', 'booking_id')
-                            ->where('gym_id',$gym->id)
+                            ->where('gyms.id',$gym->id)
                             ->get();
                 // ジムの最低価格と最高価格を取得する
                 $max_price = $gym_schedule   -> max('price');
@@ -105,8 +113,62 @@ class SearchController extends Controller
                 
             }
         
-        // dd(count($gym_id));
-        dd($gym_titles);
+        // dd($guest_gender);
+        // dd($gym_id);
+        
+        
+        
+        if (Auth::check()){
+            $user = Auth::user()->id;
+            // dd($user);
+            // $gym_title = Gym::where('user_id',$user)->first()->title;
+            // $gym_title = DB::table('gyms')
+            //                 ->join('users', 'gyms.user_id', '=', 'users.id')
+            //                 // ->select('user_id','email','title', 'gym_desc')
+            //                 ->where('user_id', $user)
+            //                 ->first()->email;
+            // dd($gym_title);
+            $user_name =  Auth::user()->name;
+            // $user_memstatus_id = Auth::user()->memstatus_id;
+            $status_names = DB::table('users')
+                                ->join('mem_statuses', 'users.memstatus_id', '=', 'mem_statuses.id')
+                                ->select('name', 'status_name')
+                                ->get();
+            $status_name = $status_names[1]->status_name;
+            
+            // dd($status_name);
+            
+            
+            return view('search_results',[
+                'user_name'=>$user_name,
+                'status_name'=>$status_name,
+                'gym_id'=>$gym_id,
+                'gym_titles'=>$gym_titles,
+                'gym_addr'=>$gym_addr,
+                'review_average'=>$review_average,
+                'gym_image_url'=>$gym_image_url,
+                'search_amount' => $search_amount,
+                'guest_gender' => $guest_gender,
+                // 'gym_schedule'=>$gym_schedule,
+                // 'price_range'=>$price_range,
+                ]);
+            } else{
+            return view('search_results',[
+                'gym_id'=>$gym_id,
+                'gym_titles'=>$gym_titles,
+                'gym_addr'=>$gym_addr,
+                'review_average'=>$review_average,
+                'gym_image_url'=>$gym_image_url,
+                'search_amount' => $search_amount,
+                'guest_gender' => $guest_gender,
+                // 'gym_schedule'=>$gym_schedule,
+                // 'price_range'=>$price_range,
+                ]);
+            }
+            
+        
+        
+        
     }
 
     /**

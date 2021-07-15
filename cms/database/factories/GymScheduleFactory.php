@@ -4,8 +4,10 @@
 
 use App\Model;
 use Faker\Generator as Faker;
+use App\Gym;
+use App\GymSchedule;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(App\GymSchedule::class, function (Faker $faker) {
     return [
         //
     ];

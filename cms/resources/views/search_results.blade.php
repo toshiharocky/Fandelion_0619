@@ -163,151 +163,41 @@
 
 				<div class="col-md-6">
 					<!-- Showing Results -->
-					<p class="showing-results">14 Results Found </p>
+					<p class="showing-results">{{$search_amount}} Results Found </p>
 				</div>
 
 			</div>
 
 
-			<!-- Listings -->
-			<div class="row fs-listings">
+			
+			@for($i=0; $i<$search_amount; $i++)
+				<!-- Listings -->
+				<form method="post" name="gym_select" action="gym_introduction">
+				@csrf
+					<div class="col-lg-6 col-md-12">
+						<a onclick="document:gym_select[{{$i}}].submit(); return false;" class="listing-item-container" data-marker-id={{$i}}>
+							<input type="hidden" name="gym_id" value="{{$gym_id[$i]}}">
+							<div class="listing-item">
+								<img src="images/gym_images/{{$gym_image_url[$i]}}" alt="">
+								<div class="listing-item-content">
+									<!--<div id="guest_gender_{{$i}}" value="{{$guest_gender[$i]}}"></div>-->
+									<h3>{{$gym_titles[$i]}} <i class="verified-icon"></i></h3>
+									<span>{{$gym_addr[$i]}}</span>
+								</div>
+								<!--<span class="like-icon"></span>-->
+							</div>
+							<div class="star-rating" data-rating="5"> 
+								<div class="rating-counter">(10 reviews)</div> 
+							</div>
+						</a>
+					</div>
+				</form>
 				
-				<!-- Listing Item -->
-				<div class="col-lg-6 col-md-12">
-					<a href="listings-single-page.html" class="listing-item-container" data-marker-id="1">
-						<div class="listing-item">
-							<img src="images/listing-item-01.jpg" alt="">
-
-							<div class="listing-badge now-open">Now Open</div>
-							
-							<div class="listing-item-content">
-								<span class="tag">Eat & Drink</span>
-								<h3>Tom's Restaurant <i class="verified-icon"></i></h3>
-								<span>964 School Street, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="3.5">
-							<div class="rating-counter">(12 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-lg-6 col-md-12">
-					<a href="listings-single-page.html" class="listing-item-container" data-marker-id="2">
-						<div class="listing-item">
-							<img src="images/listing-item-02.jpg" alt="">
-							<div class="listing-item-details">
-								<ul>
-									<li>Friday, August 10</li>
-								</ul>
-							</div>
-							<div class="listing-item-content">
-								<span class="tag">Events</span>
-								<h3>Sticky Band</h3>
-								<span>Bishop Avenue, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="5.0">
-							<div class="rating-counter">(23 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->		
-
-				<!-- Listing Item -->
-				<div class="col-lg-6 col-md-12">
-					<a href="listings-single-page.html" class="listing-item-container" data-marker-id="3">
-						<div class="listing-item">
-							<img src="images/listing-item-03.jpg" alt="">
-							<div class="listing-item-details">
-								<ul>
-									<li>Starting from $59 per night</li>
-								</ul>
-							</div>
-							<div class="listing-item-content">
-								<span class="tag">Hotels</span>
-								<h3>Hotel Govendor</h3>
-								<span>778 Country Street, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="2.0">
-							<div class="rating-counter">(17 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-lg-6 col-md-12">
-					<a href="listings-single-page.html" class="listing-item-container" data-marker-id="4">
-						<div class="listing-item">
-							<img src="images/listing-item-04.jpg" alt="">
-
-							<div class="listing-badge now-open">Now Open</div>
-
-							<div class="listing-item-content">
-								<span class="tag">Eat & Drink</span>
-								<h3>Burger House <i class="verified-icon"></i></h3>
-								<span>2726 Shinn Street, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="5.0">
-							<div class="rating-counter">(31 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-lg-6 col-md-12">
-					<a href="listings-single-page.html" class="listing-item-container" data-marker-id="5">
-						<div class="listing-item">
-							<img src="images/listing-item-05.jpg" alt="">
-							<div class="listing-item-content">
-								<span class="tag">Other</span>
-								<h3>Airport</h3>
-								<span>1512 Duncan Avenue, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="3.5">
-							<div class="rating-counter">(46 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-				<!-- Listing Item -->
-				<div class="col-lg-6 col-md-12">
-					<a href="listings-single-page.html" class="listing-item-container" data-marker-id="6">
-						<div class="listing-item">
-							<img src="images/listing-item-06.jpg" alt="">
-
-							<div class="listing-badge now-closed">Now Closed</div>
-
-							<div class="listing-item-content">
-								<span class="tag">Eat & Drink</span>
-								<h3>Think Coffee</h3>
-								<span>215 Terry Lane, New York</span>
-							</div>
-							<span class="like-icon"></span>
-						</div>
-						<div class="star-rating" data-rating="4.5">
-							<div class="rating-counter">(15 reviews)</div>
-						</div>
-					</a>
-				</div>
-				<!-- Listing Item / End -->
-
-
-			</div>
-			<!-- Listings Container / End -->
+				
+				
+				<!--
+				<!-- Listings Container / End -->
+			@endfor
 
 
 			<!-- Pagination Container -->
@@ -408,6 +298,7 @@
 @push('js')
 <!--<script src="{{ asset('js/〇〇.js') }}"></script>-->
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyBI-9n6pQ1Vqktbyg8LGjLW-NCPsa6SQ5g&language=ja"></script>
+
 
 
 @endpush

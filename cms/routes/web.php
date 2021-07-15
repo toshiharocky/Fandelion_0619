@@ -43,7 +43,7 @@ Route::post('/add_gym','GymController@store');
 Route::post('/gym_introduction','GymController@index');
 
 // 検索結果の表示
-Route::post('/search_results','SearchController@index');
+Route::get('/search_results','SearchController@index');
 
 
 // ログインユーザーのみ、ジム予約画面に遷移

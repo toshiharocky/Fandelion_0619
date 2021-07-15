@@ -29,7 +29,7 @@ $factory->define(App\Gym::class, function (Faker $faker) {
         'pref' => $faker->prefecture(),
         'addr' => $faker->city(),
         'strt' => $faker->streetAddress(),
-        'longitude' => $faker->longitude(139.5, 139.8) ,
+        'longitude' => $faker->longitude(139.6, 139.75) ,
         'latitude' => $faker->latitude(35.5, 35.7) ,
         'area' => function() {
             return rand(1,5);

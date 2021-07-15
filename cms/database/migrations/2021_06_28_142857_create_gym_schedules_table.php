@@ -16,7 +16,7 @@ class CreateGymSchedulesTable extends Migration
         Schema::create('gym_schedules', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('gym_id');
-            $table->integer('day'); //1(月曜) から 7(日曜)
+            $table->integer('day') ->nullable(); //1(月曜) から 7(日曜)
             $table->integer('booking_id') ->nullable();
             $table->datetime('from_time');
             $table->datetime('to_time');

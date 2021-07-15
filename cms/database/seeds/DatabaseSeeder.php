@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(BookingStatusTableSeeder::class);
         $this->call(GymTableSeeder::class);
         $this->call(GymImageTableSeeder::class);
+        $this->call(EquipmentTableSeeder::class);
+        $this->call(GymScheduleTableSeeder::class);
     }
 }

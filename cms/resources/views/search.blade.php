@@ -26,8 +26,9 @@
 						<h2>ジムを探す</h2>
 						<h4>あなたに合ったフィットネス環境をみつけましょう</h4>
 	
-						<form method="post" action="search_results">
+						<form method="get" action="search_results">
 						@csrf	
+						{{method_field('get')}}
 							<div class="main-search-input" style="width:60%;">
 		
 								<!-- <div class="main-search-input-item">
