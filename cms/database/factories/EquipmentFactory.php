@@ -24,9 +24,9 @@ $factory->define(App\Equipment::class, function (Faker $faker) {
                 return $min_weight_array[$r];
             },
         'max_weight' => function() {
-                $min_weight_array = array(50, 100, 150, 200);
-                $r = array_rand($min_weight_array);
-                return $min_weight_array[$r];
+                $max_weight_array = array(50, 100, 150, 200);
+                $r = array_rand($max_weight_array);
+                return $max_weight_array[$r];
             },
         'note' => $faker->realText(20),
     ];

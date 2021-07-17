@@ -17,7 +17,7 @@ class CreateBookingsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->integer('gym_id');
-            $table->string('bookingstatus_id')->default(1);
+            $table->string('bookingstatus_id');
             $table->datetime('booking_from_time');
             $table->datetime('booking_to_time');
             $table->integer('number_of_users');

@@ -2,6 +2,11 @@
 
 @push('css')
     <!--<link href="{{ asset('css/〇〇.css') }}" rel="stylesheet">-->
+    <style>
+        .button.gray{
+            margin-top:10px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -87,6 +92,16 @@ function future(){
                     let booking_date_from = new Date(Date.parse(booking_from_time[$i]));
                     let booking_date_to = new Date(Date.parse(booking_to_time[$i]));
                     
+                    let id = $i;
+                    let history_buttons = "history_buttons_"+$i;
+                    let check_in_out = "check_in_out_"+$i;
+                    let cancel = "cancel_"+$i;
+                    
+                    let history_buttons_id = "#"+"history_buttons_"+$i;
+                    let check_in_out_id = "#"+"check_in_out_"+$i;
+                    let cancel_id = "#"+"cancel_"+$i;
+                    
+                    
                     console.log(booking_date_from);
                     console.log(booking_date_to);
                     
@@ -151,9 +166,9 @@ function future(){
                     				</div>
                     			</div>
                     		</div>
-                		    <div class="buttons-to-right history_buttons" style="width:30%; text-align:center;">
-                    		    <div class="check_in_out_"></div>
-                    			<div class="cancel"></div>
+                		    <div id=${history_buttons} class="buttons-to-right" style="width:30%; text-align:center;">
+                    		    <div id=${check_in_out}></div>
+                    			<div id=${cancel}></div>
                     		</div>
                 		</li>
                 		`)
@@ -173,8 +188,8 @@ function future(){
                 		<!--// nowがキャンセル期間よりも前の場合、#cancelに「予約の修正」「予約のキャンセル」ボタンを表示し、-->
                 		<!--//「予約の修正・キャンセルはyyyy/mm/dd H:iまでです」と表示-->
                 		<!--// nowがキャンセル期間を超過した場合、#cancelに「予約の修正・キャンセル期間は終了しました」と表示-->let cancel_id = "cancel_"+$i;
-                        if(bookingstatus_id[$i]=='20'){
-                		    $(".history_buttons").eq(eq_num).children('div').eq(0).append(
+                         if(bookingstatus_id[$i]=='20'){
+                		    $(check_in_out_id).append(
                     			`
                     			<form id="check_out" method="put" action="check_out">
                     		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
@@ -184,11 +199,10 @@ function future(){
                 			    </form>
                     			`
                 		    );
-                		    eq_num ++;
                         }else{
                 		
                     		if(now < cancel_limit){
-                    		    $(".history_buttons").eq(eq_num).children('div').eq(1).append(
+                    		    $(cancel_id).append(
                     		        `
                     		        <form method="put" action="booking_update">
                         		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>
@@ -200,16 +214,22 @@ function future(){
                         		        <input type="hidden" name="booking_id" value=${booking_id[$i]}>
                             			<input type="submit" class="button gray" style="width:100%; height:35px;" value="予約のキャンセル">
                         			</from>
-                        			<h5>予約の修正・キャンセルは${cancel_date} ${cancel_time}までです。<h5>
+                        			<h5>予約の修正・キャンセルは<br>${cancel_date} ${cancel_time}までです。<h5>
                         			`
                     		    )
                     		}else{
-                    		    $(".history_buttons").eq(eq_num).children('div').eq(1).append(
+                    		    $(cancel_id).append(
                     		        `
+                    		        <h5>チェックインは<br>開始時間15分前から可能です。<h5>
+                        			<form id="check_in" method="put" action="check_in">
+                        			    <input type="submit" class="button gray" style="width:100%; height:35px; background-color:#dcdcdc; color:white;" value="トレーニング開始" disabled>
+                    			    </form>
                         			<h5>予約の修正・キャンセル期間は<br>終了しました。<h5>
                         			`
                     		    )
                     		}
+                    		
+                          
                     		
                     		　
                     		<!--予約の修正ボタンを押すと、修正画面へ移る-->
@@ -224,7 +244,7 @@ function future(){
                         		if(now > booking_date_from){
                         		    if(bookingstatus_id[$i] == "1" || bookingstatus_id[$i] == "5"){
                     		                if(now < booking_date_to){
-                                    		    $(".history_buttons").eq(eq_num).children('div').eq(0).append(
+                                    		    $(check_in_out_id).append(
                                         			`
                                         			<h5>トレーニング開始時間を超過しています。<h5>
                                         			<form id="check_out" method="put" action="check_out">
@@ -235,7 +255,7 @@ function future(){
                                         			`
                                     		    )
                                 		    }else {
-                                		        $(".history_buttons").eq(eq_num).children('div').eq(0).append(
+                                		        $(check_in_out_id).append(
                                         			`
                                         			<h5>トレーニング時間は終了しました。<h5>
                                         			`
@@ -243,7 +263,7 @@ function future(){
                                 		    }
                             		    }
                             		}else{
-                            		    $(".history_buttons").eq(eq_num).children('div').eq(0).append(
+                            		    $(check_in_out_id).append(
                                 			`
                                 			<form id="check_in" method="put" action="check_in">
                                 		        <input type="hidden" name="gym_id" value=${gym_id[$i]}>

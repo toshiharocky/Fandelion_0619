@@ -179,6 +179,7 @@ class BookingController extends Controller
         $booking = new Booking;
         $booking->user_id  = $user;
         $booking->gym_id  = $gym_id;
+        $booking->bookingstatus_id = 1;
         $booking->booking_from_time  = $from_time;
         $booking->booking_to_time  = $to_time;
         $booking->number_of_users  = $number_of_users;

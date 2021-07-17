@@ -37,10 +37,10 @@ class SearchController extends Controller
         $total_guest = $request->total_guest;
         $others = $request->others;
         
-        $latitude_from = $cityLat - 0.1;
-        $latitude_to = $cityLat + 0.1;
-        $longitude_from = $cityLng  - 0.1;
-        $longitude_to = $cityLng  + 0.1;
+        $latitude_from = $cityLat - 0.03;
+        $latitude_to = $cityLat + 0.03;
+        $longitude_from = $cityLng  - 0.03;
+        $longitude_to = $cityLng  + 0.03;
         
         // dd($latitude_to);
         
@@ -75,6 +75,8 @@ class SearchController extends Controller
             ->where('longitude', '<', $longitude_to)
             ->get();
         
+        // dd($gyms);
+        
         $search_amount = count($gyms);
         // dd($search_amount);
         
@@ -90,7 +92,30 @@ class SearchController extends Controller
                             ->where('gyms.id',$gym->id)
                             ->get()[0]->guest_gender;
                 
-                $review_average[] = $gym->review_average;
+                
+                
+                // innerjoinでbooking_id経由でtotal_starsを取得する
+                $reviews[] =  DB::table('bookings')
+                                ->join('gyms', 'gyms.id', '=', 'bookings.gym_id')
+                                ->join('guest_to_host_reviews', 'booking_id', '=', 'bookings.id')
+                                ->select('total_stars')
+                                ->where('gyms.id',$gym->id)
+                                ->get();
+                
+                
+                // dd($reviews[0][0]->total_stars);
+                
+                
+                
+                $review_counts = count($reviews[0]);
+                
+                
+                
+                
+                
+                
+                
+                
                 $gym_image_url[] = DB::table('gyms')
                             ->join('gym_images', 'gyms.id', '=', 'gym_id')
                             ->select('img_url')
@@ -114,7 +139,31 @@ class SearchController extends Controller
                 }
                 
             }
-        
+            
+            
+            // 各ジムのレビュー数をカウントする
+                $gym_count = count($gym_id);
+                
+                for($i=0; $i<$gym_count; $i++){
+                    $review_count[] = count($reviews[$i]);
+                    $review_counts = count($reviews[$i]);
+                    $total_review = 0;
+                    for($j=0; $j<$review_counts; $j++){
+                        $total_review += $reviews[$i][$j]->total_stars;
+                    }
+                    if($review_counts != 0){
+                        $review_average[] = round($total_review / $review_counts, 1);
+                    }else{
+                        $review_average[] = "-";
+                    }
+                }
+                // dd($review_count);
+                // dd($review_average);
+            
+            
+                
+                
+            
         // dd($guest_gender);
         // dd($gym_id);
         
@@ -147,6 +196,7 @@ class SearchController extends Controller
                 'gym_id'=>$gym_id,
                 'gym_titles'=>$gym_titles,
                 'gym_addr'=>$gym_addr,
+                'review_amount' => $review_count,
                 'review_average'=>$review_average,
                 'gym_image_url'=>$gym_image_url,
                 'search_amount' => $search_amount,
@@ -163,6 +213,7 @@ class SearchController extends Controller
                 'gym_id'=>$gym_id,
                 'gym_titles'=>$gym_titles,
                 'gym_addr'=>$gym_addr,
+                'review_amount' => $review_count,
                 'review_average'=>$review_average,
                 'gym_image_url'=>$gym_image_url,
                 'search_amount' => $search_amount,

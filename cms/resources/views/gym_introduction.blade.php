@@ -181,58 +181,15 @@
 			</div>
 			
 				
+				
+				
 			<!-- Reviews -->
 			<div id="listing-reviews" class="listing-section">
-				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">Reviews <span>({{$review_amount}})</span></h3>
+				<h3 class="listing-desc-headline margin-top-75 margin-bottom-20">レビュー <span>({{$review_amount}})</span></h3>
 
-				<!-- Rating Overview -->
-				<div class="rating-overview">
-					<div class="rating-overview-box">
-						<span class="rating-overview-box-total">4.2</span>
-						<span class="rating-overview-box-percent">out of 5.0</span>
-						<div class="star-rating" data-rating="5"></div>
-					</div>
-
-					<div class="rating-bars">
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Service <i class="tip" data-tip-content="Quality of customer service and attitude to work with you"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.2">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.2</strong>
-								</span>
-							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Value for Money <i class="tip" data-tip-content="Overall experience received for the amount spent"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.8">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.8</strong>
-								</span>
-							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Location <i class="tip" data-tip-content="Visibility, commute or nearby parking spots"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="3.7">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>3.7</strong>
-								</span>
-							</div>
-							<div class="rating-bars-item">
-								<span class="rating-bars-name">Cleanliness <i class="tip" data-tip-content="The physical condition of the business"></i></span>
-								<span class="rating-bars-inner">
-									<span class="rating-bars-rating" data-rating="4.0">
-										<span class="rating-bars-rating-inner"></span>
-									</span>
-									<strong>4.0</strong>
-								</span>
-							</div>
-					</div>
+				<div id="rating">
+					
 				</div>
-				<!-- Rating Overview / End -->
 
 
 				<div class="clearfix"></div>
@@ -240,59 +197,26 @@
 				<!-- Reviews -->
 				<section class="comments listing-reviews">
 					<ul>
+						@for($i=0; $i<$review_amount; $i++)
 						<li>
 							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
 							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">Kathy Brown <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">June 2019</span>
-									<div class="star-rating" data-rating="5"></div>
+								<div class="comment-by">{{$review_user_name[$i]}} <i class="tip" data-tip-content="Person who left this review actually was a customer"></i> <span class="date">{{$book_year_month[$i]}}</span>
+									<div class="star-rating" data-rating={{$user_total_stars[$i]}}>
+										<strong><i class="fas fa-star"></i> {{$user_total_stars[$i]}}</strong>
+									</div>
 								</div>
-								<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
+								<p style="overflow-wrap:break-word;">{{$review_note[$i]}}</p>
 								
-								<div class="review-images mfp-gallery-container">
-									<a href="images/review-image-01.jpg" class="mfp-gallery"><img src="images/review-image-01.jpg" alt=""></a>
-								</div>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>12</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">John Doe<span class="date">May 2019</span>
-									<div class="star-rating" data-rating="4"></div>
-								</div>
-								<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>2</span></a>
-							</div>
-						</li>
-
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">Kathy Brown<span class="date">June 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Morbi velit eros, sagittis in facilisis non, rhoncus et erat. Nam posuere tristique sem, eu ultricies tortor imperdiet vitae. Curabitur lacinia neque non metus</p>
 								
-								<div class="review-images mfp-gallery-container">
-									<a href="images/review-image-02.jpg" class="mfp-gallery"><img src="images/review-image-02.jpg" alt=""></a>
-									<a href="images/review-image-03.jpg" class="mfp-gallery"><img src="images/review-image-03.jpg" alt=""></a>
-								</div>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>4</span></a>
+								<!--<div class="review-images mfp-gallery-container">-->
+								<!--	<a href="images/review-image-01.jpg" class="mfp-gallery"><img src="images/review-image-01.jpg" alt=""></a>-->
+								<!--</div>-->
+								<!--<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review <span>12</span></a>-->
 							</div>
 						</li>
+						@endfor
 
-						<li>
-							<div class="avatar"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /> </div>
-							<div class="comment-content"><div class="arrow-comment"></div>
-								<div class="comment-by">John Doe<span class="date">May 2019</span>
-									<div class="star-rating" data-rating="5"></div>
-								</div>
-								<p>Commodo est luctus eget. Proin in nunc laoreet justo volutpat blandit enim. Sem felis, ullamcorper vel aliquam non, varius eget justo. Duis quis nunc tellus sollicitudin mauris.</p>
-								<a href="#" class="rate-review"><i class="sl sl-icon-like"></i> Helpful Review</a>
-							</div>
-
-						</li>
 					 </ul>
 				</section>
 
@@ -575,8 +499,79 @@
 </script>
 
 <script>
+	let review_check = @json($review_check);
+	<!--console.log(review_check);-->
+	let review_average_0 = {{$review_average}};
+	let review_average = review_average_0.toFixed(1);
+	let equipment_stars_average_0 = {{$equipment_stars_average}};
+	let equipment_stars_average = equipment_stars_average_0.toFixed(1);
+	let cleanliness_stars_average_0 = {{$cleanliness_stars_average}};
+	let cleanliness_stars_average = cleanliness_stars_average_0.toFixed(1);
+	let accuracy_stars_average_0 = {{$accuracy_stars_average}};
+	let accuracy_stars_average = accuracy_stars_average_0.toFixed(1);
+	let communication_stars_average_0 = {{$communication_stars_average}};
+	let communication_stars_average = communication_stars_average_0.toFixed(1);
+	
+	
+	$("#rating").append(
+		`
+		<!-- Rating Overview -->
+			<div class="rating-overview">
+				<div class="rating-overview-box">
+					<span class="rating-overview-box-total">${review_average}</span>
+					<span class="rating-overview-box-percent">out of 5.0</span>
+					<div class="star-rating" data-rating="5"></div>
+				</div>
+
+				<div class="rating-bars">
+						<div class="rating-bars-item">
+							<span class="rating-bars-name">Equipment <i class="tip" data-tip-content="掲載されている設備の質に関する評価です"></i></span>
+							<span class="rating-bars-inner">
+								<span class="rating-bars-rating" data-rating=${equipment_stars_average}>
+									<span class="rating-bars-rating-inner"></span>
+								</span>
+								<strong>${equipment_stars_average}</strong>
+							</span>
+						</div>
+						<div class="rating-bars-item">
+							<span class="rating-bars-name">Cleanliness <i class="tip" data-tip-content="清潔さに関する評価です"></i></span>
+							<span class="rating-bars-inner">
+								<span class="rating-bars-rating" data-rating=${cleanliness_stars_average}>
+									<span class="rating-bars-rating-inner"></span>
+								</span>
+								<strong>${cleanliness_stars_average}</strong>
+							</span>
+						</div>
+						<div class="rating-bars-item">
+							<span class="rating-bars-name">Accuracy <i class="tip" data-tip-content="情報の正確さに関する評価です"></i></span>
+							<span class="rating-bars-inner">
+								<span class="rating-bars-rating" data-rating=${accuracy_stars_average}>
+									<span class="rating-bars-rating-inner"></span>
+								</span>
+								<strong>${accuracy_stars_average}</strong>
+							</span>
+						</div>
+						<div class="rating-bars-item">
+							<span class="rating-bars-name">Communication <i class="tip" data-tip-content="ホストとのコミュニケーションに関する評価です"></i></span>
+							<span class="rating-bars-inner">
+								<span class="rating-bars-rating" data-rating=${communication_stars_average}>
+									<span class="rating-bars-rating-inner"></span>
+								</span>
+								<strong>${communication_stars_average}</strong>
+							</span>
+						</div>
+				</div>
+			</div>
+			<!-- Rating Overview / End -->
+		`
+	)
+	
+</script>
+
+
+<script>
 	let gym_open_times = @json($gym_open_times);
-	console.log(gym_open_times);
+	// console.log(gym_open_times);
 	
 	$('#date-picker').on("change",function(){
 		

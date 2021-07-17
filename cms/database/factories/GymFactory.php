@@ -20,13 +20,17 @@ $factory->define(App\Gym::class, function (Faker $faker) {
             $r = array_rand($gymstatus_id);
             return $gymstatus_id[$r];
         },
-        'gym_title' => $faker->realText(30),
+        'gym_title' => function(){
+            $gym_title_id = array("初心者におすすめ","充実した設備でトレーニングを！","リラックスできる空間で楽しくフィットネス！","駅から徒歩3分！","仕事帰りにフラッと立ち寄れます");
+            $r = array_rand($gym_title_id);
+            return $gym_title_id[$r];
+        },
         'gym_desc' => $faker->realText(400),
         'gymType_id' => function() {
             return rand(1,3);
         },
         'zip_code' => $faker->postcode(7),
-        'pref' => $faker->prefecture(),
+        'pref' => "東京都",
         'addr' => $faker->city(),
         'strt' => $faker->streetAddress(),
         'longitude' => $faker->longitude(139.6, 139.75) ,

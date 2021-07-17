@@ -118,7 +118,7 @@
 		<!-- Carousel / Start -->
 		<div class="simple-fw-slick-carousel dots-nav">
 			@for ($i = 0; $i < $gyms_count; $i++)
-			    
+			
 			<!-- Listing Item -->
 			<div class="fw-carousel-item">
 				<form method="post" name="gym_select" action="gym_introduction">

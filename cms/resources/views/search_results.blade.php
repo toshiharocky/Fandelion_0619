@@ -10,7 +10,7 @@
 ================================================== -->
 <div class="fs-container">
 
-	<div class="fs-inner-container content">
+	<div class="fs-inner-container content" style="padding-top: 0px;">
 		<div class="fs-content">
 
 			<!-- Search -->
@@ -186,8 +186,11 @@
 								</div>
 								<!--<span class="like-icon"></span>-->
 							</div>
-							<div class="star-rating" data-rating="5"> 
-								<div class="rating-counter">(10 reviews)</div> 
+							<div class="star-rating" data-rating={{$review_average[$i]}}> 
+								<div class="rating-counter">({{$review_amount[$i]}} reviews)</div> 
+								
+								<strong><i class="fas fa-star"></i> {{$review_average[$i]}}</strong>
+								
 							</div>
 						</a>
 					</div>
@@ -234,7 +237,7 @@
 
 		</div>
 	</div>
-	<div class="fs-inner-container map-fixed">
+	<div class="fs-inner-container map-fixed" style="padding-top: 0px;">
 
 		<!-- Map -->
 		<div id="map-container">

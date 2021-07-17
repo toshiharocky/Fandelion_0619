@@ -99,9 +99,68 @@ class GymController extends Controller
         }
         
         
+        // innerjoinでbooking_id経由でtotal_starsを取得する
+        $reviews[] =  DB::table('bookings')
+                        ->join('gyms', 'gyms.id', '=', 'bookings.gym_id')
+                        ->join('guest_to_host_reviews', 'booking_id', '=', 'bookings.id')
+                        ->join('users', 'users.id', '=', 'bookings.user_id')
+                        ->select('booking_id', 'total_stars', 'equipment_stars', 'cleanliness_stars', 'accuracy_stars', 'communication_stars', 'note', 'booking_from_time', 'bookings.user_id', 'users.name')
+                        ->where('gyms.id',$gym_id)
+                        ->get();
+        
+        // dd($reviews[0][0]->total_stars);
+        // dd($reviews);
+        
+        // レビュー数をカウントする
+        $review_count = count($reviews[0]);
+        
+        // レビューユーザーとノートのの配列を取得する
+        for($i=0; $i<$review_count; $i++){
+            $review_user[] = $reviews[0][$i]->user_id;
+            $user_name[] = $reviews[0][$i]->name;
+            $booking_from_time = $reviews[0][$i]->booking_from_time;
+            $book_year_month[] = date("M Y", strtotime($booking_from_time));
+            $review_note[] = $reviews[0][$i]->note;
+            $user_total_stars[] = $reviews[0][$i]->total_stars;
+        }
+        // dd($review_user);
+        // dd($review_note);
+        // dd($reviews);
+        
+        
+        // レビューの年月を取得する
+        
+        
+        
+        // レビュー実績を取得する
+        $total_review = 0;
+        $equipment_stars = 0;
+        $cleanliness_stars = 0;
+        $accuracy_stars = 0;
+        $communication_stars = 0;
+        
+        for($i=0; $i<$review_count; $i++){
+         $total_review += $reviews[0][$i]->total_stars;
+         $equipment_stars += $reviews[0][$i]->equipment_stars;
+         $cleanliness_stars += $reviews[0][$i]->cleanliness_stars;
+         $accuracy_stars += $reviews[0][$i]->accuracy_stars;
+         $communication_stars += $reviews[0][$i]->communication_stars;
+        }
+        
+        $review_average  = round($total_review / $review_count, 3);
+        $equipment_stars_average  = round($equipment_stars / $review_count, 3);
+        $cleanliness_stars_average  = round($cleanliness_stars / $review_count, 3);
+        $accuracy_stars_average  = round($accuracy_stars / $review_count, 3);
+        $communication_stars_average  = round($communication_stars / $review_count, 3);
+        $review_check = array($review_average, $equipment_stars_average, $cleanliness_stars_average, $accuracy_stars_average, $communication_stars_average);
+        // dd($total_review);
+        // dd($review_average);
+        // dd($review_check);
+        
+        
         $superHost_flg  = $gym_infos[0]->superHost_flg;
-        $review_amount  = $gym_infos[0]->review_amount;
-        $review_average  = $gym_infos[0]->review_average;
+        $review_amount  = $review_count;
+        // $review_average  = $gym_infos[0]->review_average;
         $guest_limit  = $gym_infos[0]->guest_limit;
         
         // inner joinで写真のURLを呼び出す
@@ -217,8 +276,19 @@ class GymController extends Controller
                     'area' => $area,
                     'guest_gender' => $guest_gender,
                     'superHost_flg' => $superHost_flg,
+                    'review_user_id' => $review_user,
+                    'review_user_name' => $user_name,
+                    'user_total_stars' => $user_total_stars,
+                    'booking_from_time' => $booking_from_time,
+                    'book_year_month' => $book_year_month,
+                    'review_note' => $review_note,
+                    'review_check' => $review_check,
                     'review_amount' => $review_amount,
                     'review_average' => $review_average,
+                    'equipment_stars_average' => $equipment_stars_average,
+                    'cleanliness_stars_average' => $cleanliness_stars_average,
+                    'accuracy_stars_average' => $accuracy_stars_average,
+                    'communication_stars_average' => $communication_stars_average,
                     'guest_limit' => $guest_limit,
                     'gym_image_url' => $gym_image_url,
                     'gym_images_count' => $gym_images_count,
@@ -253,8 +323,19 @@ class GymController extends Controller
                     'area' => $area,
                     'guest_gender' => $guest_gender,
                     'superHost_flg' => $superHost_flg,
+                    'review_user_id' => $review_user,
+                    'review_user_name' => $user_name,
+                    'user_total_stars' => $user_total_stars,
+                    'booking_from_time' => $booking_from_time,
+                    'book_year_month' => $book_year_month,
+                    'review_note' => $review_note,
+                    'review_check' => $review_check,
                     'review_amount' => $review_amount,
                     'review_average' => $review_average,
+                    'equipment_stars_average' => $equipment_stars_average,
+                    'cleanliness_stars_average' => $cleanliness_stars_average,
+                    'accuracy_stars_average' => $accuracy_stars_average,
+                    'communication_stars_average' => $communication_stars_average,
                     'guest_limit' => $guest_limit,
                     'gym_image_url' => $gym_image_url,
                     'gym_images_count' => $gym_images_count,
@@ -289,8 +370,19 @@ class GymController extends Controller
                 'area' => $area,
                 'guest_gender' => $guest_gender,
                 'superHost_flg' => $superHost_flg,
+                'review_user_id' => $review_user,
+                'review_user_name' => $user_name,
+                'user_total_stars' => $user_total_stars,
+                'booking_from_time' => $booking_from_time,
+                'book_year_month' => $book_year_month,
+                'review_note' => $review_note,
+                'review_check' => $review_check,
                 'review_amount' => $review_amount,
                 'review_average' => $review_average,
+                'equipment_stars_average' => $equipment_stars_average,
+                'cleanliness_stars_average' => $cleanliness_stars_average,
+                'accuracy_stars_average' => $accuracy_stars_average,
+                'communication_stars_average' => $communication_stars_average,
                 'guest_limit' => $guest_limit,
                 'gym_image_url' => $gym_image_url,
                 'gym_images_count' => $gym_images_count,
